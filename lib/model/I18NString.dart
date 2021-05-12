@@ -10,7 +10,7 @@ class I18NString {
   /// If no match is found for `lang` the fallback language will be used
   /// to return a value. If the fallback language also does not exist,
   /// then the empty string is returned
-  String get(Lang lang) => _map[lang] ?? _map[fallback] ?? '';
+  String? get(Lang lang) => _map[lang] ?? _map[fallback] ?? null;
 }
 
 enum Lang { DE, EN }
