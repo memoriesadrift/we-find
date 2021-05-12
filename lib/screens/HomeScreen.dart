@@ -15,10 +15,7 @@ class HomeScreen extends StatelessWidget {
           Align(
             child: Text(
               WEFIND_TITLE,
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 72,
-                  color: Theme.Colors.titleColor),
+              style: Theme.Text.titleStyle,
             ),
             alignment: Alignment.center,
           ),
@@ -58,12 +55,11 @@ class HomeScreen extends StatelessWidget {
                         ),
                         alignment: Alignment.center,
                       ),
+                      Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
                       Align(
                         child: Text(
                           'Course Directory',
-                          style: TextStyle(
-                            color: Theme.Colors.accentColor,
-                          ),
+                          style: Theme.Text.buttonAccentTextStyle,
                         ),
                         alignment: Alignment.center,
                       )
