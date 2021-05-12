@@ -1,6 +1,8 @@
 import 'package:test/test.dart';
 import 'package:we_find/model/I18NString.dart';
 
+import 'model_matchers.dart';
+
 void main() {
   test(
       "When a String is available in multiple languages, "
@@ -10,6 +12,7 @@ void main() {
     final iString = new I18NString({Lang.DE: longNameDe, Lang.EN: longNameEn});
     expect(iString.get(Lang.DE), longNameDe);
     expect(iString.get(Lang.EN), longNameEn);
+    expect(iString, NumberOfLanguages(equals(2)));
   });
 
   test(
@@ -19,6 +22,7 @@ void main() {
     final longNameDe = 'Programmierung 1';
     final iString = new I18NString({Lang.DE: longNameDe});
     expect(iString.get(Lang.EN), longNameDe);
+    expect(iString, NumberOfLanguages(equals(1)));
   });
 
   test(
@@ -26,5 +30,6 @@ void main() {
       "for all languages.", () {
     final iString = new I18NString({});
     Lang.values.forEach((lang) => expect(iString.get(lang), null));
+    expect(iString, NumberOfLanguages(equals(0)));
   });
 }
