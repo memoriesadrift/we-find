@@ -2,6 +2,27 @@ import 'package:we_find/extensions/xml_extensions.dart';
 import 'package:we_find/model/I18NString.dart';
 import 'package:xml/xml.dart';
 
+class Exam {
+  final I18NString? title;
+  final Schedule? schedule;
+  final List<Lecturer>? examiners;
+  final Registrations? registrations;
+  final List<Label>? labels;
+
+  Exam.fromXmlElement(XmlElement tag)
+      : title = tag.toI18NString("title"),
+        schedule =
+            tag.mapDescendant("wwlong", (e) => Schedule.fromXmlElement(e)),
+        examiners = tag
+            .getElement("examiners")
+            ?.mapDescendants("examiner", (e) => Lecturer.fromXmlElement(e)),
+        registrations = tag.mapDescendant(
+            "registrations", (e) => Registrations.fromXmlElement(e)),
+        labels = tag
+            .getElement("labels")
+            ?.mapDescendants("label", (e) => Label.fromXmlElement(e));
+}
+
 class Course {
   final String? id; // 6-digit course-code, e.g.: 050000
   final String? when; // Semester of course, e.g.: 2021S
@@ -56,7 +77,7 @@ class Group {
   final bool? liveStream;
   final int? maxParticipants;
   final List<Language>? languages;
-  final GroupContent? groupContent;
+  final Schedule? schedule;
   final List<Lecturer>? lecturers;
   final Registrations? registrations;
   final GeneralInformation? generalInformation;
@@ -71,8 +92,8 @@ class Group {
         languages = tag
             .getElement("languages")
             ?.mapDescendants("language", (e) => Language.fromXmlElement(e)),
-        groupContent =
-            tag.mapDescendant("wwlong", (e) => GroupContent.fromXmlElement(e)),
+        schedule =
+            tag.mapDescendant("wwlong", (e) => Schedule.fromXmlElement(e)),
         lecturers = tag
             .getElement("lecturers")
             ?.mapDescendants("lecturer", (e) => Lecturer.fromXmlElement(e)),
@@ -125,11 +146,11 @@ class Event {
             tag.mapDescendant("location", (e) => Location.fromXmlElement(e));
 }
 
-class GroupContent {
+class Schedule {
   final I18NString? text;
   final List<Event> events;
 
-  GroupContent.fromXmlElement(XmlElement tag)
+  Schedule.fromXmlElement(XmlElement tag)
       : text = tag.toI18NString("wwtext"),
         events = tag.mapDescendants("wwevent", (e) => Event.fromXmlElement(e));
 }
