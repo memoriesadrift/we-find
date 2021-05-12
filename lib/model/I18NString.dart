@@ -11,6 +11,9 @@ class I18NString {
   /// to return a value. If the fallback language also does not exist,
   /// then the empty string is returned
   String? get(Lang lang) => _map[lang] ?? _map[fallback] ?? null;
+
+  /// Returns the underlying map in which the language-value pairs are stored
+  Map<Lang, String> get map => _map;
 }
 
 enum Lang { DE, EN }
