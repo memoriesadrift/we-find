@@ -9,18 +9,17 @@ class Exam {
   final Registrations? registrations;
   final List<Label>? labels;
 
-  Exam.fromXmlElement(XmlElement tag)
+  Exam.fromXmlTag(XmlElement tag)
       : title = tag.toI18NString("title"),
-        schedule =
-            tag.mapDescendant("wwlong", (e) => Schedule.fromXmlElement(e)),
+        schedule = tag.mapDescendant("wwlong", (e) => Schedule.fromXmlTag(e)),
         examiners = tag
             .getElement("examiners")
-            ?.mapDescendants("examiner", (e) => Lecturer.fromXmlElement(e)),
+            ?.mapDescendants("examiner", (e) => Lecturer.fromXmlTag(e)),
         registrations = tag.mapDescendant(
-            "registrations", (e) => Registrations.fromXmlElement(e)),
+            "registrations", (e) => Registrations.fromXmlTag(e)),
         labels = tag
             .getElement("labels")
-            ?.mapDescendants("label", (e) => Label.fromXmlElement(e));
+            ?.mapDescendants("label", (e) => Label.fromXmlTag(e));
 }
 
 class Course {
@@ -35,28 +34,27 @@ class Course {
   final List<Chapter>? chapters;
   final CourseOfferee? courseOfferee;
 
-  Course.fromXmlElement(XmlElement tag)
+  Course.fromXmlTag(XmlElement tag)
       : id = tag.getAttribute("id"),
         when = tag.getAttribute("when"),
         version = tag.attrToDateTime("version"),
         longName = tag.toI18NString("longname"),
-        courseType =
-            tag.mapDescendant("type", (e) => CourseType.fromXmlElement(e)),
+        courseType = tag.mapDescendant("type", (e) => CourseType.fromXmlTag(e)),
         ects = tag.getElement("ects")?.textToDouble(),
         sws = tag.getElement("sws")?.textToDouble(),
         immanent = tag.getElement("immanent")?.textToBool(),
         chapters = tag
             .getElement("chapters")
-            ?.mapDescendants("chapter", (e) => Chapter.fromXmlElement(e)),
-        courseOfferee = tag.mapDescendant(
-            "offeredby", (e) => CourseOfferee.fromXmlElement(e));
+            ?.mapDescendants("chapter", (e) => Chapter.fromXmlTag(e)),
+        courseOfferee =
+            tag.mapDescendant("offeredby", (e) => CourseOfferee.fromXmlTag(e));
 }
 
 class CourseType {
   final String? description; // e.g.: Orientierungsveranstaltung
   final String? type; // e.g.: OV
 
-  CourseType.fromXmlElement(XmlElement tag)
+  CourseType.fromXmlTag(XmlElement tag)
       : description = tag.getAttribute("description"),
         type = tag.text;
 }
@@ -65,7 +63,7 @@ class Chapter {
   final I18NString? category;
   final I18NString? subCategory;
 
-  Chapter.fromXmlElement(XmlElement tag)
+  Chapter.fromXmlTag(XmlElement tag)
       : category = tag.toI18NString("category"),
         subCategory = tag.toI18NString("subcategory");
 }
@@ -83,7 +81,7 @@ class Group {
   final GeneralInformation? generalInformation;
   final List<Label>? labels;
 
-  Group.fromXmlElement(XmlElement tag)
+  Group.fromXmlTag(XmlElement tag)
       : id = tag.getAttribute("id"),
         vault = tag.attrToBool("vault"),
         register = tag.getAttribute("register"),
@@ -91,26 +89,25 @@ class Group {
         maxParticipants = tag.getElement("maxparticipants")?.textToInt(),
         languages = tag
             .getElement("languages")
-            ?.mapDescendants("language", (e) => Language.fromXmlElement(e)),
-        schedule =
-            tag.mapDescendant("wwlong", (e) => Schedule.fromXmlElement(e)),
+            ?.mapDescendants("language", (e) => Language.fromXmlTag(e)),
+        schedule = tag.mapDescendant("wwlong", (e) => Schedule.fromXmlTag(e)),
         lecturers = tag
             .getElement("lecturers")
-            ?.mapDescendants("lecturer", (e) => Lecturer.fromXmlElement(e)),
+            ?.mapDescendants("lecturer", (e) => Lecturer.fromXmlTag(e)),
         registrations = tag.mapDescendant(
-            "registrations", (e) => Registrations.fromXmlElement(e)),
-        generalInformation = tag.mapDescendant(
-            "info", (e) => GeneralInformation.fromXmlElement(e)),
+            "registrations", (e) => Registrations.fromXmlTag(e)),
+        generalInformation =
+            tag.mapDescendant("info", (e) => GeneralInformation.fromXmlTag(e)),
         labels = tag
             .getElement("labels")
-            ?.mapDescendants("label", (e) => Label.fromXmlElement(e));
+            ?.mapDescendants("label", (e) => Label.fromXmlTag(e));
 }
 
 class Language {
   final I18NString? title;
   final String? iso;
 
-  Language.fromXmlElement(XmlElement tag)
+  Language.fromXmlTag(XmlElement tag)
       : title = tag.toI18NString("title"),
         iso = tag.getElement("iso")?.text;
 }
@@ -123,7 +120,7 @@ class Location {
   final String? roomExtId;
   final bool? showRoomInfo;
 
-  Location.fromXmlElement(XmlElement tag)
+  Location.fromXmlTag(XmlElement tag)
       : zip = tag.getElement("zip")?.text,
         town = tag.getElement("town")?.text,
         address = tag.getElement("address")?.text,
@@ -138,21 +135,20 @@ class Event {
   final bool? vorbesprechung;
   final Location? location;
 
-  Event.fromXmlElement(XmlElement tag)
+  Event.fromXmlTag(XmlElement tag)
       : begin = tag.attrToDateTime("begin"),
         end = tag.attrToDateTime("end"),
         vorbesprechung = tag.attrToBool("vorbesprechung"),
-        location =
-            tag.mapDescendant("location", (e) => Location.fromXmlElement(e));
+        location = tag.mapDescendant("location", (e) => Location.fromXmlTag(e));
 }
 
 class Schedule {
   final I18NString? text;
   final List<Event> events;
 
-  Schedule.fromXmlElement(XmlElement tag)
+  Schedule.fromXmlTag(XmlElement tag)
       : text = tag.toI18NString("wwtext"),
-        events = tag.mapDescendants("wwevent", (e) => Event.fromXmlElement(e));
+        events = tag.mapDescendants("wwevent", (e) => Event.fromXmlTag(e));
 }
 
 class Lecturer {
@@ -161,7 +157,7 @@ class Lecturer {
   final String? firstName;
   final String? lastName;
 
-  Lecturer.fromXmlElement(XmlElement tag)
+  Lecturer.fromXmlTag(XmlElement tag)
       : id = tag.getAttribute("id"),
         type = tag.getAttribute("type"),
         firstName = tag.getElement("firstname")?.text,
@@ -173,7 +169,7 @@ class Registrations {
   final DateTime? enrollTo;
   final DateTime? unenrollUntil;
 
-  Registrations.fromXmlElement(XmlElement tag)
+  Registrations.fromXmlTag(XmlElement tag)
       : enrollFrom = tag.getElement("enroll")?.attrToDateTime("from"),
         enrollTo = tag.getElement("enroll")?.attrToDateTime("to"),
         unenrollUntil = tag.getElement("disenroll")?.attrToDateTime("until");
@@ -186,7 +182,7 @@ class GeneralInformation {
   final I18NString? examination;
   final I18NString? preconditions;
 
-  GeneralInformation.fromXmlElement(XmlElement tag)
+  GeneralInformation.fromXmlTag(XmlElement tag)
       : comment = tag.toI18NString("comment"),
         performance = tag.toI18NString("performance"),
         literature = tag.toI18NString("literature"),
@@ -198,7 +194,7 @@ class Label {
   final I18NString? id;
   final I18NString? name;
 
-  Label.fromXmlElement(XmlElement tag)
+  Label.fromXmlTag(XmlElement tag)
       : id = tag.toI18NString("id"),
         name = tag.toI18NString("name");
 }
@@ -207,7 +203,7 @@ class Platform {
   final String? type;
   final String? location;
 
-  Platform.fromXmlElement(XmlElement tag)
+  Platform.fromXmlTag(XmlElement tag)
       : type = tag.getAttribute("type"),
         location = tag.text;
 }
@@ -216,7 +212,7 @@ class CourseOfferee {
   final String? id;
   final String? name;
 
-  CourseOfferee.fromXmlElement(XmlElement tag)
+  CourseOfferee.fromXmlTag(XmlElement tag)
       : id = tag.getAttribute("id"),
         name = tag.text;
 }
