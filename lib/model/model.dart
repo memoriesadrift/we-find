@@ -188,7 +188,7 @@ class Location {
         town = tag.getElement("town")?.text,
         address = tag.getElement("address")?.text,
         room = tag.getElement("room")?.text,
-        roomExtId = tag.getElement("roomExtId")?.text,
+        roomExtId = tag.getElement("roomextid")?.text,
         showRoomInfo = tag.textToBool();
 }
 
