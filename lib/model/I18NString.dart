@@ -1,5 +1,7 @@
+/// Custom class to represent a String that might be available
+/// in multiple locales/languages
 class I18NString {
-  final Lang fallback = Lang.DE;
+  static const Lang fallback = Lang.DE;
   final Map<Lang, String> _map;
 
   I18NString(this._map);
