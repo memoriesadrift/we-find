@@ -22,8 +22,8 @@ void main() {
   });
 
   test(
-      "When the dictionary is empty, then the returned value should be null for all languages.",
-      () {
+      "When the dictionary is empty, then the returned value should be null "
+      "for all languages.", () {
     final iString = new I18NString({});
     Lang.values.forEach((lang) => expect(iString.get(lang), null));
   });
