@@ -1,14 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:we_find/styles/theme.dart' as Theme;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    const String WEFIND_TITLE = 'we:find';
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Search Stuff'),
-        leading: Icon(Icons.home),
+      body: Column(
+        children: [
+          Padding(padding: EdgeInsets.fromLTRB(0, 100, 0, 0)),
+          Align(
+            child: Text(
+              WEFIND_TITLE,
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 72,
+                  color: Theme.Colors.titleColor),
+            ),
+            alignment: Alignment.center,
+          ),
+          Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+          Align(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width - 40,
+              height: 40,
+              child: Placeholder(), // TODO: Search Bar
+            ),
+            alignment: Alignment.center,
+          ),
+          Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
+          Align(
+            child: SizedBox(
+                width: 150,
+                height: 150,
+                child: ElevatedButton(
+                  onPressed: null,
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Theme.Colors.primaryColor),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
+                      Align(
+                        child: Icon(
+                          Icons.menu_book,
+                          color: Theme.Colors.accentColor,
+                          size: 40,
+                        ),
+                        alignment: Alignment.center,
+                      ),
+                      Align(
+                        child: Text(
+                          'Course Directory',
+                          style: TextStyle(
+                            color: Theme.Colors.accentColor,
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                      )
+                    ],
+                  ),
+                )),
+            alignment: Alignment.center,
+          )
+        ],
       ),
     );
   }
