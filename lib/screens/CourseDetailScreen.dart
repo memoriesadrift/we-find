@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:we_find/widgets/course_detail_widgets.dart';
-import 'package:we_find/styles/theme.dart' as Theme;
 
 class CourseDetailScreen extends StatelessWidget {
   //TODO: Uncomment this when the Course model is finnished
@@ -9,6 +8,7 @@ class CourseDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
     return Container(
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(15),
@@ -17,12 +17,12 @@ class CourseDetailScreen extends StatelessWidget {
           // title
           Text(
             "VU" + ' ' + "Modelling",
-            style: Theme.Text.heading1Style,
+            style: themeData.textTheme.headline1,
           ),
           // subtitle
           Text(
             "ECTS: " + "6.00",
-            style: Theme.Text.heading2Style,
+            style: themeData.textTheme.headline2,
           ),
           // somehow add groups
           GroupDetails()

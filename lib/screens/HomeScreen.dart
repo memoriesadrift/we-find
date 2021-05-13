@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:we_find/screens/CourseDetailScreen.dart';
-import 'package:we_find/styles/theme.dart' as Theme;
 
 class HomeScreen extends StatelessWidget {
-
   void _testCourseScreen(context) {}
 
   @override
   Widget build(BuildContext context) {
     const String WEFIND_TITLE = 'we:find';
-
+    final ThemeData themeData = Theme.of(context);
     return Scaffold(
       body: Column(
         children: [
@@ -17,7 +15,7 @@ class HomeScreen extends StatelessWidget {
           Align(
             child: Text(
               WEFIND_TITLE,
-              style: Theme.Text.titleStyle,
+              style: themeData.textTheme.headline1,
             ),
             alignment: Alignment.center,
           ),
@@ -39,7 +37,8 @@ class HomeScreen extends StatelessWidget {
                   onPressed: null,
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.Colors.primaryColor),
+                      themeData.primaryColor,
+                    ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
@@ -52,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                       Align(
                         child: Icon(
                           Icons.menu_book,
-                          color: Theme.Colors.accentColor,
+                          color: themeData.accentColor,
                           size: 40,
                         ),
                         alignment: Alignment.center,
@@ -61,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                       Align(
                         child: Text(
                           'Course Directory',
-                          style: Theme.Text.buttonAccentTextStyle,
+                          style: themeData.textTheme.button,
                         ),
                         alignment: Alignment.center,
                       )
