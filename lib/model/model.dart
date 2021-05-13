@@ -2,29 +2,6 @@ import 'package:we_find/extensions/xml_extensions.dart';
 import 'package:we_find/model/I18NString.dart';
 import 'package:xml/xml.dart';
 
-/// Representation of an 'exam' tag
-/// that appears in the XML response of the u:find API.
-/// 'exam' tags are direct descendants of the 'exams' tag.
-class Exam {
-  final I18NString? title;
-  final Schedule? schedule;
-  final List<Lecturer>? examiners;
-  final Registrations? registrations;
-  final List<Label>? labels;
-
-  Exam.fromXmlTag(XmlElement tag)
-      : title = tag.toI18NString("title"),
-        schedule = tag.mapDescendant("wwlong", (e) => Schedule.fromXmlTag(e)),
-        examiners = tag
-            .getElement("examiners")
-            ?.mapDescendants("examiner", (e) => Lecturer.fromXmlTag(e)),
-        registrations = tag.mapDescendant(
-            "registrations", (e) => Registrations.fromXmlTag(e)),
-        labels = tag
-            .getElement("labels")
-            ?.mapDescendants("label", (e) => Label.fromXmlTag(e));
-}
-
 /// Representation of a 'course' tag
 /// that appears in the XML response of the u:find API
 /// 'course' tags are direct descendants of the 'result' root-tag.
@@ -38,6 +15,7 @@ class Course {
   final double? sws;
   final bool? immanent;
   final List<Chapter>? chapters;
+  final List<Group>? groups;
   final CourseOfferee? courseOfferee;
 
   Course.fromXmlTag(XmlElement tag)
@@ -52,6 +30,9 @@ class Course {
         chapters = tag
             .getElement("chapters")
             ?.mapDescendants("chapter", (e) => Chapter.fromXmlTag(e)),
+        groups = tag
+            .getElement("groups")
+            ?.mapDescendants("group", (e) => Group.fromXmlTag(e)),
         courseOfferee =
             tag.mapDescendant("offeredby", (e) => CourseOfferee.fromXmlTag(e));
 }
@@ -74,10 +55,12 @@ class CourseType {
 class Chapter {
   final I18NString? category;
   final I18NString? subCategory;
+  final I18NString? name;
 
   Chapter.fromXmlTag(XmlElement tag)
       : category = tag.toI18NString("category"),
-        subCategory = tag.toI18NString("subcategory");
+        subCategory = tag.toI18NString("subcategory"),
+        name = tag.toI18NString("name");
 }
 
 /// Representation of a 'group' tag
@@ -95,6 +78,7 @@ class Group {
   final List<Lecturer>? lecturers;
   final Registrations? registrations;
   final GeneralInformation? generalInformation;
+  final List<Exam>? exams;
   final List<Label>? labels;
 
   Group.fromXmlTag(XmlElement tag)
@@ -115,9 +99,48 @@ class Group {
             "registrations", (e) => Registrations.fromXmlTag(e)),
         generalInformation =
             tag.mapDescendant("info", (e) => GeneralInformation.fromXmlTag(e)),
+        exams = tag
+            .getElement("exams")
+            ?.mapDescendants("exam", (e) => Exam.fromXmlTag(e)),
         labels = tag
             .getElement("labels")
             ?.mapDescendants("label", (e) => Label.fromXmlTag(e));
+}
+
+/// Representation of an 'exam' tag
+/// that appears in the XML response of the u:find API.
+/// 'exam' tags are direct descendants of the 'exams' tag.
+class Exam {
+  final DateTime? begin;
+  final DateTime? end;
+  final String? id;
+  final bool? vault;
+  final I18NString? when;
+  final I18NString? title;
+  final Schedule? schedule;
+  final List<Lecturer>? examiners;
+  final Registrations? registrations;
+  final List<Label>? labels;
+  final GeneralInformation? generalInformation;
+
+  Exam.fromXmlTag(XmlElement tag)
+      : begin = tag.attrToDateTime("begin"),
+        end = tag.attrToDateTime("end"),
+        id = tag.getAttribute("id"),
+        vault = tag.attrToBool("vault"),
+        when = tag.toI18NString("when"),
+        title = tag.toI18NString("title"),
+        schedule = tag.mapDescendant("wwlong", (e) => Schedule.fromXmlTag(e)),
+        examiners = tag
+            .getElement("examiners")
+            ?.mapDescendants("examiner", (e) => Lecturer.fromXmlTag(e)),
+        registrations = tag.mapDescendant(
+            "registrations", (e) => Registrations.fromXmlTag(e)),
+        labels = tag
+            .getElement("labels")
+            ?.mapDescendants("label", (e) => Label.fromXmlTag(e)),
+        generalInformation =
+            tag.mapDescendant("info", (e) => GeneralInformation.fromXmlTag(e));
 }
 
 /// Representation of a 'platform' tag
@@ -169,7 +192,8 @@ class Event {
       : begin = tag.attrToDateTime("begin"),
         end = tag.attrToDateTime("end"),
         vorbesprechung = tag.attrToBool("vorbesprechung"),
-        locations = tag.mapDescendants("location", (e) => Location.fromXmlTag(e));
+        locations =
+            tag.mapDescendants("location", (e) => Location.fromXmlTag(e));
 }
 
 /// Representation of a 'location' tag
@@ -189,7 +213,7 @@ class Location {
         address = tag.getElement("address")?.text,
         room = tag.getElement("room")?.text,
         roomExtId = tag.getElement("roomextid")?.text,
-        showRoomInfo = tag.textToBool();
+        showRoomInfo = tag.getElement('showroominfo')?.textToBool();
 }
 
 /// Representation of a 'lecturer' tag
