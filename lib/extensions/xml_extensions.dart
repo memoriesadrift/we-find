@@ -30,20 +30,25 @@ extension Parser on XmlElement {
   }
 
   /// Returns the parsed DateTime from the value of the specified attribute
-  /// or null if this tag has no attribute called 'name' or if the value
-  /// cannot be parsed into a DateTime object.
+  /// or null if this tag has no attribute called 'name'
+  /// or if the value cannot be parsed into a DateTime object.
   DateTime? attrToDateTime(String name) {
     return DateTime.tryParse(getAttribute(name) ?? "");
   }
 
   /// Returns the parsed bool from the value of the specified attribute
-  /// or null if this tag has no attribute called 'name' or if the value
-  /// is not one of the values: {'true', 'false'}.
+  /// or null if this tag has no attribute called 'name'
+  /// or null if the value is not one of the values: {'true', 'false'}.
   bool? attrToBool(String name) => stringToBool(getAttribute(name));
 
   /// Returns the parsed bool from the text value of this tag
   /// or null if the value is not one of the values: {'true', 'false'}.
   bool? textToBool() => stringToBool(text);
+
+  /// Returns the parsed int from the value of the specified attribute
+  /// or null if this tag has no attribute called 'name'
+  /// or null if the value cannot be parsed into an int.
+  int? attrToInt(String name) => int.tryParse(getAttribute(name) ?? "");
 
   /// Returns the parsed int from the text value of this tag
   /// or null if the value cannot be parsed into an int.
@@ -60,9 +65,16 @@ extension Parser on XmlElement {
   }
 
   /// Applies the `mapper` function to the first descendant of this tag with 'name'
-  /// or returns null if no such descendant with `name` is found.
+  /// or returns null if no descendant with `name` is found.
   T? mapDescendant<T>(String name, T Function(XmlElement) mapper) {
     final descendant = getElement(name);
     return descendant != null ? mapper(descendant) : null;
+  }
+
+  /// Applies the `mapper` function to the attribute value of this tag with 'name'
+  /// or returns null if no attribute with `name` is found.
+  T? mapAttribute<T>(String name, T Function(String) mapper) {
+    final attr = getAttribute(name);
+    return attr != null ? mapper(attr) : null;
   }
 }

@@ -15,7 +15,7 @@ void main() {
     test(
         "When a CourseOfferee object is created from a full tag, "
         "then all its fields should be non-null", () {
-      final obj = CourseOfferee.fromXmlTag(fullTag);
+      final obj = ProgrammeOferee.fromXmlTag(fullTag);
       expect(obj.id, isNotNull, reason: 'id should not be null');
       expect(obj.name, isNotNull, reason: 'name should not be null');
     });
@@ -535,7 +535,7 @@ void main() {
           reason: 'lecturers should have a length of 2');
       expect(obj.registrations, isNotNull,
           reason: 'registrations should not be null');
-      expect(obj.generalInformation, isNotNull,
+      expect(obj.info, isNotNull,
           reason: 'generalInformation should not be null');
       expect(obj.exams, isNotNull, reason: 'exams should not be null');
       expect(obj.exams!.length, equals(2),
@@ -645,8 +645,353 @@ void main() {
       expect(obj.groups, isNotNull, reason: 'groups should not be null');
       expect(obj.groups!.length, equals(1),
           reason: 'groups should have a length of 1');
-      expect(obj.courseOfferee, isNotNull,
+      expect(obj.offeredBy, isNotNull,
           reason: 'courseOfferee should not be null');
+    });
+  });
+
+  group("StudyModule", () {
+    final fullTag = parseXmlString('''
+    <module id="259075" level="1" spl="5" path="250876|259075" when="2021S" anchor="spl5">
+      <predecessor path="243398|248901" when="2020W"/>
+      <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+      <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+      <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+      <comment xml:lang="de">Informationen zu den einzelnen Studien finden sich im jeweiligen Kapitel.&lt;p&#47;&gt;Allgemeine Informationen siehe auch:&lt;br&#47;&gt;&gt;  &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt;  &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienangebot&#47;&#39;&gt;Studienangebot der SPL Informatik und Wirtschaftsinformatik&lt;&#47;a&gt;&lt;br&#47;&gt;&gt;  &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;hilfe-fuer-studierende&#47;alle-curricula-semesterplaene&#47;&#39;&gt;Alle Curricula und Semesterpläne&lt;&#47;a&gt;</comment>
+      <courses></courses>
+      <exams></exams>
+      <module id="259334" level="2" spl="5" path="250876|259075|259334" when="2021S" anchor="5212016I">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249160" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259334">Bachelor Informatik 2016 (521 [4])</category>
+          <category xml:lang="en" path="250876|259075|259334">Bachelor Computer Science 2016 (521 [4])</category>
+          <title xml:lang="de">Bachelor Informatik 2016 (521 [4])</title>
+          <title xml:lang="en">Bachelor Computer Science 2016 (521 [4])</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-informatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-informatik-2016i-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259286" level="2" spl="5" path="250876|259075|259286" when="2021S" anchor="5212016D">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249112" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259286">Bachelor Informatik 2016 (521 [4]) - Data Science</category>
+          <category xml:lang="en" path="250876|259075|259286">Bachelor Computer Science 2016 (521 [4]) - Data Science</category>
+          <title xml:lang="de">Bachelor Informatik 2016 (521 [4]) - Data Science</title>
+          <title xml:lang="en">Bachelor Computer Science 2016 (521 [4]) - Data Science</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-informatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-informatik-2016d-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259196" level="2" spl="5" path="250876|259075|259196" when="2021S" anchor="5212016M">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249022" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259196">Bachelor Informatik 2016 (521 [4]) - Medieninformatik</category>
+          <category xml:lang="en" path="250876|259075|259196">Bachelor Computer Science 2016 (521 [4]) - Media Informatics</category>
+          <title xml:lang="de">Bachelor Informatik 2016 (521 [4]) - Medieninformatik</title>
+          <title xml:lang="en">Bachelor Computer Science 2016 (521 [4]) - Media Informatics</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-informatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-informatik-2016m-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259426" level="2" spl="5" path="250876|259075|259426" when="2021S" anchor="5212016Z">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249252" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259426">Bachelor Informatik 2016 (521 [4]) - Medizininformatik</category>
+          <category xml:lang="en" path="250876|259075|259426">Bachelor Computer Science 2016 (521 [4]) - Medical Informatics</category>
+          <title xml:lang="de">Bachelor Informatik 2016 (521 [4]) - Medizininformatik</title>
+          <title xml:lang="en">Bachelor Computer Science 2016 (521 [4]) - Medical Informatics</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-informatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-informatik-2016z-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259241" level="2" spl="5" path="250876|259075|259241" when="2021S" anchor="5212016S">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249067" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259241">Bachelor Informatik 2016 (521 [4]) - Scientific Computing</category>
+          <category xml:lang="en" path="250876|259075|259241">Bachelor Computer Science 2016 (521 [4]) - Scientific Computing</category>
+          <title xml:lang="de">Bachelor Informatik 2016 (521 [4]) - Scientific Computing</title>
+          <title xml:lang="en">Bachelor Computer Science 2016 (521 [4]) - Scientific Computing</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-informatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-informatik-2016s-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259141" level="2" spl="5" path="250876|259075|259141" when="2021S" anchor="5262016">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|248967" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259141">Bachelor Wirtschaftsinformatik 2016 (526 [3])</category>
+          <category xml:lang="en" path="250876|259075|259141">Bachelor Business Informatics 2016 (526 [3])</category>
+          <title xml:lang="de">Bachelor Wirtschaftsinformatik 2016 (526 [3])</title>
+          <title xml:lang="en">Bachelor Business Informatics 2016 (526 [3])</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-wirtschaftsinformatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-wirtschaftsinformatik-2016-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259109" level="2" spl="5" path="250876|259075|259109" when="2021S" anchor="UFINF">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|248935" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259109">Bachelor Lehramt UF Informatik (193 053 [1], 198 414 [1])</category>
+          <category xml:lang="en" path="250876|259075|259109">Teacher Training Programme - Bachelor Computer Science (193 053 [1], 198 414 [1])</category>
+          <title xml:lang="de">Bachelor Lehramt UF Informatik (193 053 [1], 198 414 [1])</title>
+          <title xml:lang="en">Teacher Training Programme - Bachelor Computer Science (193 053 [1], 198 414 [1])</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-uf-informatik-2014&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ba-uf-informatik-2014-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259650" level="2" spl="5" path="250876|259075|259650" when="2021S" anchor="BIOINF">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249476" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259650">Master Bioinformatik (875 [1])</category>
+          <category xml:lang="en" path="250876|259075|259650">Master Bioinformatics (875 [1])</category>
+          <title xml:lang="de">Master Bioinformatik (875 [1])</title>
+          <title xml:lang="en">Master Bioinformatics (875 [1])</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-bioinformatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-bioinformatik-2016-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259676" level="2" spl="5" path="250876|259075|259676" when="2021S" anchor="6452020">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|251848" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259676">Master Data Science (645 [1])</category>
+          <category xml:lang="en" path="250876|259075|259676">Master Data Science (645 [1])</category>
+          <title xml:lang="de">Master Data Science (645 [1])</title>
+          <title xml:lang="en">Master Data Science (645 [1])</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-data-science-2020&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-data-science-2020-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <comment xml:lang="en">See also&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Information for first-year students&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-data-science-2020-en&#39;&gt;Curriculum and administrative matters&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung-en&#39;&gt;How to registrater for courses and exams&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-data-science-2020-sp-en&#39;&gt;Timetable&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259544" level="2" spl="5" path="250876|259075|259544" when="2021S" anchor="9212016I">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249370" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259544">Master Informatik (921 [1])</category>
+          <category xml:lang="en" path="250876|259075|259544">Master Computer Science (921 [1])</category>
+          <title xml:lang="de">Master Informatik (921 [1])</title>
+          <title xml:lang="en">Master Computer Science (921 [1])</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-informatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-informatik-2016i-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259510" level="2" spl="5" path="250876|259075|259510" when="2021S" anchor="9212016D">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249336" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259510">Master Informatik (921 [1]) - Data Science</category>
+          <category xml:lang="en" path="250876|259075|259510">Master Computer Science (921 [1]) - Data Science</category>
+          <title xml:lang="de">Master Informatik (921 [1]) - Data Science</title>
+          <title xml:lang="en">Master Computer Science (921 [1]) - Data Science</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-informatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-informatik-2016d-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259472" level="2" spl="5" path="250876|259075|259472" when="2021S" anchor="9212016S">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249298" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259472">Master Informatik (921 [1]) - Scientific Computing</category>
+          <category xml:lang="en" path="250876|259075|259472">Master Computer Science (921 [1]) - Scientific Computing</category>
+          <title xml:lang="de">Master Informatik (921 [1]) - Scientific Computing</title>
+          <title xml:lang="en">Master Computer Science (921 [1]) - Scientific Computing</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-informatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-informatik-2016s-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259613" level="2" spl="5" path="250876|259075|259613" when="2021S" anchor="9352016">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249439" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259613">Master Medieninformatik 2016 (935 [2])</category>
+          <category xml:lang="en" path="250876|259075|259613">Master Media Informatics 2016 (935 [2])</category>
+          <title xml:lang="de">Master Medieninformatik 2016 (935 [2])</title>
+          <title xml:lang="en">Master Media Informatics 2016 (935 [2])</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-medieninformatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-medieninformatik-2016-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259176" level="2" spl="5" path="250876|259075|259176" when="2021S" anchor="9262016">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249002" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259176">Master Wirtschaftsinformatik 2016 (926 [2])</category>
+          <category xml:lang="en" path="250876|259075|259176">Master Business Informatics 2016 (926 [2])</category>
+          <title xml:lang="de">Master Wirtschaftsinformatik 2016 (926 [2])</title>
+          <title xml:lang="en">Master Business Informatics 2016 (926 [2])</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-wirtschaftsinformatik-2016&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-wirtschaftsinformatik-2016-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259131" level="2" spl="5" path="250876|259075|259131" when="2021S" anchor="UFMAINF">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|248957" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259131">Master Lehramt UF Informatik (196 053 [1], 199 514 [1])</category>
+          <category xml:lang="en" path="250876|259075|259131">Teacher Training Programme - Master Computer Science (196 053 [1], 199 514 [1])</category>
+          <title xml:lang="de">Master Lehramt UF Informatik (196 053 [1], 199 514 [1])</title>
+          <title xml:lang="en">Teacher Training Programme - Master Computer Science (196 053 [1], 199 514 [1])</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;studium&#47;studienanfang&#47;&#39;&gt;Informationen für Studienanfänger*innen&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-uf-informatik-2015&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-uf-informatik-2015-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259076" level="2" spl="5" path="250876|259075|259076" when="2021S" anchor="950">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|248902" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259076">Master Informatikdidaktik (950 [1]) - auslaufend</category>
+          <category xml:lang="en" path="250876|259075|259076">Master Degree Programme Informatics Didactics (950 [1]) - discontinued</category>
+          <title xml:lang="de">Master Informatikdidaktik (950 [1]) - auslaufend</title>
+          <title xml:lang="en">Master Degree Programme Informatics Didactics (950 [1]) - discontinued</title>
+          <comment xml:lang="de">Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-informatikdidaktik-2009&#39;&gt;Curriculum und Informationen zum Studium&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ma-informatikdidaktik-2009-sp&#39;&gt;Ansicht nach Semesterplan&lt;&#47;a&gt;&lt;p&#47;&gt;Das Studium ist interuniversitär eingerichtet. Beachten Sie bitte auch das &lt;a href=&#39;https:&#47;&#47;tiss.tuwien.ac.at&#47;curriculum&#47;public&#47;curriculum.xhtml?key=56898&amp;semester=YEAR&#39;&gt;Lehrangebot an der TU Wien&lt;&#47;a&gt;.</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259663" level="2" spl="5" path="250876|259075|259663" when="2021S" anchor="EC-CT">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249489" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259663">Erweiterungscurriculum (EC) Computational Thinking &#47; Informatik (050 [1])</category>
+          <category xml:lang="en" path="250876|259075|259663">Extension Curriculum (EC) Computational Thinking &#47; Computer Science (050 [1])</category>
+          <title xml:lang="de">Erweiterungscurriculum (EC) Computational Thinking &#47; Informatik (050 [1])</title>
+          <title xml:lang="en">Extension Curriculum (EC) Computational Thinking &#47; Computer Science (050 [1])</title>
+          <comment xml:lang="de">Aufgrund der beschränkten Zahl an Plätzen im EC Computational Thinking ist für die Anmeldung zu den Lehrveranstaltungen des EC eine vorherige Registrierung für das EC unbedingt erforderlich (Fristen beachten!).&lt;p&#47;&gt;Siehe auch&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;ec-computational-thinking-2017&#39;&gt;Informationen zum Erweiterungscurriculum&lt;&#47;a&gt;&lt;br&#47;&gt;&gt; &lt;a href=&#39;https:&#47;&#47;informatik.univie.ac.at&#47;anmeldung&#39;&gt;Informationen zur Lehrveranstaltungs- und Prüfungsanmeldung&lt;&#47;a&gt;</comment>
+          <courses></courses>
+          <exams></exams>
+      </module>
+      <module id="259674" level="2" spl="5" path="250876|259075|259674" when="2021S" anchor="99XYZ">
+          <structure>
+              <level id="1" path="250876|259075">
+                  <title xml:lang="de">Studienprogrammleitung 5 - Informatik und Wirtschaftsinformatik</title>
+                  <title xml:lang="en">Directorate of Studies 5 - Computer Science and Business Informatics</title>
+              </level>
+          </structure>
+          <predecessor path="243398|248901|249500" when="2020W"/>
+          <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
+          <category xml:lang="de" path="250876|259075|259674">Sonstiges Lehrangebot</category>
+          <title xml:lang="de">Sonstiges Lehrangebot</title>
+          <courses></courses>
+          <exams></exams>
+      </module>
+</module>
+    ''');
+    test(
+        "When a top-level Module object is created from a full tag, with 18 submodules, "
+        "all its fields should be non-null except level and category"
+        "And its list fields should have proper lengths", () {
+      final obj = StudyModule.fromXmlTag(fullTag);
+      expect(obj.id, isNotNull, reason: 'id should not be null');
+      expect(obj.nestLevel, isNotNull, reason: 'nestLevel should not be null');
+      expect(obj.spl, isNotNull, reason: 'spl should not be null');
+      expect(obj.path, isNotNull, reason: 'path should not be null');
+      expect(obj.path?.length, equals(2),
+          reason: 'path should have a length of 2');
+      expect(obj.when, isNotNull, reason: 'when should not be null');
+      expect(obj.anchor, isNotNull, reason: 'anchor should not be null');
+      expect(obj.level, isNull, reason: 'level should be null');
+      expect(obj.predecessor, isNotNull,
+          reason: 'predecessor should not be null');
+      expect(obj.offeredBy, isNotNull, reason: 'offeredBy should not be null');
+      expect(obj.category, isNull, reason: 'category should be null');
+      expect(obj.title, isNotNull, reason: 'title should not be null');
+      expect(obj.comment, isNotNull, reason: 'comment should not be null');
+      expect(obj.courses, isNotNull, reason: 'courses should not be null');
+      expect(obj.courses?.length, equals(0),
+          reason: 'courses should have a length of 2');
+      expect(obj.exams, isNotNull, reason: 'exams should not be null');
+      expect(obj.exams?.length, equals(0),
+          reason: 'exams should have a length of 2');
     });
   });
 }
