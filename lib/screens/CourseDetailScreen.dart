@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:we_find/widgets/course_detail_widgets.dart';
+import 'package:we_find/styles/theme.dart' as Theme;
 
 class CourseDetailScreen extends StatelessWidget {
   //TODO: Uncomment this when the Course model is finnished
@@ -14,9 +15,15 @@ class CourseDetailScreen extends StatelessWidget {
       child: Column(
         children: [
           // title
-          Text("VU" + ' ' + "Modelling"),
+          Text(
+            "VU" + ' ' + "Modelling",
+            style: Theme.Text.heading1Style,
+          ),
           // subtitle
-          Text("ECTS: " + "6.00"),
+          Text(
+            "ECTS: " + "6.00",
+            style: Theme.Text.heading2Style,
+          ),
           // somehow add groups
           GroupDetails()
         ],

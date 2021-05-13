@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:we_find/styles/theme.dart' as Theme;
 
 class GroupDetails extends StatelessWidget {
   /* TODO: Uncomment this once this class exists
@@ -17,14 +18,23 @@ class GroupDetails extends StatelessWidget {
       child: Column(
         children: [
           // subtitle
-          Text("Max participants:" + ' ' + "42"),
+          Text(
+            "Max participants:" + ' ' + "42",
+            style: Theme.Text.heading3Style,
+          ),
           // build lecturers list
           //_buildLecturersList(Lecturers[] lecturers),
           // subtitle
-          Text("Group information:"),
+          Text(
+            "Group information:",
+            style: Theme.Text.heading3Style,
+          ),
           // regular text
-          SelectableText("Sample Course info1234567897 alalallalalalal." +
-              "Should be able to copy from here!"),
+          SelectableText(
+            "Sample Course info1234567897 alalallalalalal." +
+                "Should be able to copy from here!",
+            style: Theme.Text.textStyle,
+          ),
           //_buildTimeTable(TimeTableEntry[] timeTable)
         ],
       ),
