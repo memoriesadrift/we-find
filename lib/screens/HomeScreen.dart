@@ -1,9 +1,27 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:we_find/model/I18NString.dart';
+import 'package:we_find/model/model.dart';
+import 'package:we_find/model/modelTranslate.dart';
 import 'package:we_find/screens/CourseDetailScreen.dart';
 import 'package:we_find/widgets/search_bar.dart';
 
+import 'package:xml/xml.dart';
+import 'package:we_find/data/course.dart';
+
 class HomeScreen extends StatelessWidget {
-  void _testCourseScreen(context) {}
+  // REMOVE NEXT TWO METHODS ONCE PASSING DATA ACTUALLY WORKS
+  // ONLY USED TO TEST SOME FUNCTIONALITY
+  XmlElement parseXmlString(String string) {
+    return XmlDocument.parse(string).rootElement;
+  }
+
+  Future<Course> _getTestCourse() async {
+    String res = await Future(getTestCourse);
+    return Course.fromXmlTag(parseXmlString(res));
+  }
+
   void fun(String text) {}
 
   @override
@@ -83,7 +101,19 @@ class HomeScreen extends StatelessWidget {
                   return Scaffold(
                     appBar: AppBar(title: Text('Course Detail Screen')),
                     body: Center(
-                      child: CourseDetailScreen(),
+                      child: FutureBuilder<Course>(
+                        future: _getTestCourse(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return CircularProgressIndicator();
+                          }
+                          if (snapshot.data != null) {
+                            return CourseDetailScreen(
+                                CourseTranslate(snapshot.data!, Lang.DE));
+                          }
+                          throw Exception("don't you dare throw this!");
+                        },
+                      ),
                     ),
                   );
                 }),
