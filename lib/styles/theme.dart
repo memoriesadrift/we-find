@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:we_find/styles/style_consts.dart' as StyleConsts;
 
-class Colors {
-  const Colors();
-  static const Color primaryColor = const Color(0xFFB80C09);
-  static const Color secondaryColor = const Color(0xFFFFAE03);
-  static const Color titleColor = const Color(0xFF5A606B);
-  static const Color textColor = titleColor;
-  static const Color accentColor = const Color(0xFFFFFFFC);
-}
+const ColorScheme colorScheme = ColorScheme(
+    primary: StyleConsts.Colors.primaryColor,
+    primaryVariant: StyleConsts.Colors.primaryColorVariant,
+    secondary: StyleConsts.Colors.secondaryColor,
+    secondaryVariant: StyleConsts.Colors.secondaryColorVariant,
+    surface: StyleConsts.Colors.surfaceColor,
+    background: StyleConsts.Colors.backgroundColor,
+    error: StyleConsts.Colors.errorColor,
+    onPrimary: StyleConsts.Colors.accentColor,
+    onSecondary: StyleConsts.Colors.accentColor,
+    onSurface: StyleConsts.Colors.accentColor,
+    onBackground: StyleConsts.Colors.accentColor,
+    onError: StyleConsts.Colors.accentColor,
+    brightness: Brightness.light);
 
-class Text {
-  const Text();
-  static const TextStyle titleStyle = const TextStyle(
-      fontWeight: FontWeight.w500, fontSize: 72, color: Colors.titleColor);
-  static const TextStyle textStyle = const TextStyle(
-      fontWeight: FontWeight.w200, fontSize: 12, color: Colors.textColor);
-  static const TextStyle buttonAccentTextStyle = const TextStyle(
-      fontWeight: FontWeight.w200, fontSize: 16, color: Colors.accentColor);
-  static const TextStyle heading1Style = const TextStyle(
-      fontWeight: FontWeight.w500, fontSize: 48, color: Colors.titleColor);
-  static const TextStyle heading2Style = const TextStyle(
-      fontWeight: FontWeight.w500, fontSize: 36, color: Colors.titleColor);
-  static const TextStyle heading3Style = const TextStyle(
-      fontWeight: FontWeight.w500, fontSize: 28, color: Colors.titleColor);
-  static const TextStyle heading4Style = const TextStyle(
-      fontWeight: FontWeight.w500, fontSize: 22, color: Colors.titleColor);
-}
+const TextTheme textTheme = TextTheme(
+  headline1: StyleConsts.Text.heading1Style,
+  headline2: StyleConsts.Text.heading2Style,
+  headline3: StyleConsts.Text.heading3Style,
+  headline4: StyleConsts.Text.heading4Style,
+  button: StyleConsts.Text.buttonAccentTextStyle,
+  bodyText1: StyleConsts.Text.textStyle,
+);
+
+ThemeData lightThemeData = ThemeData.from(
+  colorScheme: colorScheme,
+  textTheme: textTheme,
+);
