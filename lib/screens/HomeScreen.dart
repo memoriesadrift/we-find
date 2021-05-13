@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:we_find/screens/CourseDetailScreen.dart';
+import 'package:we_find/widgets/search_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   void _testCourseScreen(context) {}
+  void fun(String text) {}
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,11 @@ class HomeScreen extends StatelessWidget {
           ),
           Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
           Align(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width - 40,
-              height: 40,
-              child: Placeholder(), // TODO: Search Bar
+            child: searchBar(
+              key: Key('homeScreenSearchBar'),
+              barWidth: MediaQuery.of(context).size.width - 40,
+              barHeight: 80,
+              callbackFunction: fun,
             ),
             alignment: Alignment.center,
           ),
