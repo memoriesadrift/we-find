@@ -163,13 +163,13 @@ class Event {
   final DateTime? begin;
   final DateTime? end;
   final bool? vorbesprechung;
-  final Location? location;
+  final List<Location>? locations;
 
   Event.fromXmlTag(XmlElement tag)
       : begin = tag.attrToDateTime("begin"),
         end = tag.attrToDateTime("end"),
         vorbesprechung = tag.attrToBool("vorbesprechung"),
-        location = tag.mapDescendant("location", (e) => Location.fromXmlTag(e));
+        locations = tag.mapDescendants("location", (e) => Location.fromXmlTag(e));
 }
 
 /// Representation of a 'location' tag
