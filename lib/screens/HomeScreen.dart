@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:we_find/screens/CourseDetailScreen.dart';
 import 'package:we_find/styles/theme.dart' as Theme;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key key}) : super(key: key);
+
+  void _testCourseScreen(context) {}
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +70,26 @@ class HomeScreen extends StatelessWidget {
                   ),
                 )),
             alignment: Alignment.center,
-          )
+          ),
+          // Is here for now ugly like this as a lambda,
+          // as it needs to have access to context.
+          // If you know a better way feel free to change it
+          ElevatedButton(
+            onPressed: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute<void>(builder: (BuildContext context) {
+                  return Scaffold(
+                    appBar: AppBar(title: Text('Course Detail Screen')),
+                    body: Center(
+                      child: CourseDetailScreen(),
+                    ),
+                  );
+                }),
+              )
+            },
+            child: Text("Test course screen"),
+          ),
         ],
       ),
     );
