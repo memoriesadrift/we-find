@@ -1,5 +1,5 @@
 name: we_find
-description: A new Flutter project.
+description: How do you find u:find? Well... we:find!
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -30,8 +30,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: any
   provider: ^5.0.0
+  xml: ^5.1.0
 
 dev_dependencies:
+  test: any
   flutter_test:
     sdk: flutter
 
