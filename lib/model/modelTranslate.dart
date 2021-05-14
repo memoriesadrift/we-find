@@ -122,3 +122,26 @@ class EventTranslate {
     return _myEvent.locations?[0].room ?? "unknown";
   }
 }
+
+class StudyModuleTranslate {
+  final StudyModule _myStudyModule;
+  final Lang _myLang;
+  const StudyModuleTranslate(this._myStudyModule, this._myLang);
+
+  String getTitle() {
+    return _myStudyModule.title?.get(_myLang) ?? "Title not found";
+  }
+
+  List<StudyModuleTranslate> getChildren() {
+    List<StudyModuleTranslate> ret = [];
+    if (_myStudyModule.submodules == null) {
+      return ret;
+    }
+
+    for (StudyModule eachStudyMod in _myStudyModule.submodules!) {
+      ret.add(StudyModuleTranslate(eachStudyMod, _myLang));
+    }
+
+    return ret;
+  }
+}
