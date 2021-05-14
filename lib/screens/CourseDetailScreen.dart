@@ -1,10 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:we_find/model/modelTranslate.dart';
 import 'package:we_find/widgets/course_detail_widgets.dart';
 
 class CourseDetailScreen extends StatelessWidget {
-  //TODO: Uncomment this when the Course model is finnished
-  // final Course _course;
-  // const CourseDetailScreen(this._course);
+  final CourseTranslate _course;
+  const CourseDetailScreen(this._course);
+
+  ListView _buildCourseDetailScreen(ThemeData themeData) {
+    List<Widget> view = [];
+
+    // Title
+    view.add(Text(
+      _course.getTypeAbbreviation() + " " + _course.getName(),
+      style: themeData.textTheme.headline1,
+    ));
+
+    // ECTS amount
+    view.add(Text(
+      "ECTS: " + _course.getEcts(),
+      style: themeData.textTheme.headline2,
+    ));
+
+    // Groups
+    view.add(Padding(
+      child: GroupPicker(_course.getGroups()),
+      padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+    ));
+
+    return ListView(children: view);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,22 +36,7 @@ class CourseDetailScreen extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(15),
-      child: Column(
-        children: [
-          // title
-          Text(
-            "VU" + ' ' + "Modelling",
-            style: themeData.textTheme.headline1,
-          ),
-          // subtitle
-          Text(
-            "ECTS: " + "6.00",
-            style: themeData.textTheme.headline2,
-          ),
-          // somehow add groups
-          GroupDetails()
-        ],
-      ),
+      child: _buildCourseDetailScreen(themeData),
     );
   }
 }
