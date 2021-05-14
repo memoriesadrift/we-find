@@ -122,3 +122,8 @@ class EventTranslate {
     return _myEvent.locations?[0].room ?? "unknown";
   }
 }
+
+class StudyModuleTranslate {
+  final StudyModule _studyModule;
+  const StudyModuleTranslate(this._studyModule);
+}
