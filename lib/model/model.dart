@@ -20,6 +20,7 @@ class StudyModule {
   final I18NString? comment;
   final List<Course>? courses;
   final List<Exam>? exams;
+  final List<StudyModule>? submodules;
 
   StudyModule.fromXmlTag(XmlElement tag)
       : id = tag.getAttribute("id"),
@@ -43,7 +44,9 @@ class StudyModule {
             ?.mapDescendants("course", (e) => Course.fromXmlTag(e)),
         exams = tag
             .getElement("exams")
-            ?.mapDescendants("exam", (e) => Exam.fromXmlTag(e));
+            ?.mapDescendants("exam", (e) => Exam.fromXmlTag(e)),
+        submodules =
+            tag.mapDescendants("module", (e) => StudyModule.fromXmlTag(e));
 }
 
 /// Representation of a 'predecessor' tag

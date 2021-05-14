@@ -992,6 +992,10 @@ void main() {
       expect(obj.exams, isNotNull, reason: 'exams should not be null');
       expect(obj.exams?.length, equals(0),
           reason: 'exams should have a length of 2');
+      expect(obj.submodules, isNotNull,
+          reason: 'submodules should not be null');
+      expect(obj.submodules?.length, equals(18),
+          reason: 'submodules should have a length of 18');
     });
   });
 }
