@@ -20,9 +20,29 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
 
     for (StudyModuleTranslate eachStudyModule
         in widget._studyModule.getChildren()) {
-      view.add(Text(
-        eachStudyModule.getTitle(),
-        style: themeData.textTheme.headline4,
+      view.add(
+        TextButton(
+          onPressed: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute<void>(builder: (BuildContext context) {
+                return Scaffold(
+                  appBar: AppBar(title: Text('Course Detail Screen')),
+                  body: Center(
+                    child: StudyModuleScreen(eachStudyModule),
+                  ),
+                );
+              }),
+            )
+          },
+          child: Text(
+            eachStudyModule.getTitle(),
+            style: themeData.textTheme.headline4,
+          ),
+        ),
+      );
+      view.add(Divider(
+        color: themeData.colorScheme.primary,
       ));
     }
 
