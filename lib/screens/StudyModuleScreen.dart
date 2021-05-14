@@ -17,29 +17,33 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
       widget._studyModule.getTitle(),
       style: themeData.textTheme.headline3,
     ));
+    view.add(Divider());
 
     for (StudyModuleTranslate eachStudyModule
         in widget._studyModule.getChildren()) {
       view.add(
-        TextButton(
-          onPressed: () => {
-            Navigator.push(
-              context,
-              MaterialPageRoute<void>(builder: (BuildContext context) {
-                return Scaffold(
-                  appBar: AppBar(title: Text('Course Detail Screen')),
-                  body: Center(
-                    child: StudyModuleScreen(eachStudyModule),
-                  ),
-                );
-              }),
-            )
-          },
-          child: Text(
-            eachStudyModule.getTitle(),
-            style: themeData.textTheme.headline4,
+        Wrap(children: [
+          TextButton(
+            onPressed: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute<void>(builder: (BuildContext context) {
+                  return Scaffold(
+                    appBar: AppBar(title: Text('Course Detail Screen')),
+                    body: Center(
+                      child: StudyModuleScreen(eachStudyModule),
+                    ),
+                  );
+                }),
+              )
+            },
+            child: Text(
+              eachStudyModule.getTitle(),
+              style: themeData.textTheme.headline4,
+              textAlign: TextAlign.left,
+            ),
           ),
-        ),
+        ]),
       );
       view.add(Divider(
         color: themeData.colorScheme.primary,
@@ -55,6 +59,8 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Container(
+      margin: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: _buildStudyModuleScreen(themeData),
     );
   }
