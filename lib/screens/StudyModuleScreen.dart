@@ -10,7 +10,7 @@ class StudyModuleScreen extends StatefulWidget {
 }
 
 class _StudyModuleScreenState extends State<StudyModuleScreen> {
-  ListView _buildStudyModuleScreen(ThemeData themeData) {
+  Scrollbar _buildStudyModuleScreen(ThemeData themeData) {
     List<Widget> view = [];
 
     view.add(Text(
@@ -50,8 +50,15 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
       ));
     }
 
-    return ListView(
-      children: view,
+    return Scrollbar(
+      child: ListView(
+        //controller: ScrollController(),
+        children: view,
+      ),
+      showTrackOnHover: true,
+      hoverThickness: 10,
+      isAlwaysShown: true,
+      thickness: 10,
     );
   }
 
