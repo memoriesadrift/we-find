@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:we_find/model/modelTranslate.dart';
+import 'package:we_find/model/modelWrapped.dart';
 import 'package:we_find/widgets/course_detail_widgets.dart';
 
 class CourseDetailScreen extends StatelessWidget {
-  final CourseTranslate _course;
+  final CourseWrapped _course;
   const CourseDetailScreen(this._course);
 
   ListView _buildCourseDetailScreen(ThemeData themeData) {

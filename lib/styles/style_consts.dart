@@ -5,7 +5,7 @@ class Colors {
   Colors._();
 
   const Colors();
-
+  // (2bytes) alpha (2bytes) red (2bytes) green (2bytes) blue
   static const Color primaryColor = const Color(0xFFB80C09);
   static const Color primaryColorVariant = const Color(0xFFD2605F);
   static const Color secondaryColor = const Color(0xFFFFAE03);
@@ -15,7 +15,7 @@ class Colors {
   static const Color errorColor = const Color(0xFFFFd60A);
   static const Color titleColor = const Color(0xFF5A606B);
   static const Color textColor = const Color(0xFF5A606B);
-  static const Color accentColor = const Color(0xFFFFFFFC);
+  static const Color accentColor = const Color(0xFFB01005);
 }
 
 class Fonts {
@@ -46,7 +46,7 @@ class Text {
   static const TextStyle buttonAccentTextStyle = const TextStyle(
     fontWeight: FontWeight.w200,
     fontSize: 16,
-    color: Colors.accentColor,
+    color: Colors.secondaryColor,
   );
   static const TextStyle heading1Style = const TextStyle(
     fontWeight: FontWeight.w500,

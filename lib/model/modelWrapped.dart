@@ -5,10 +5,10 @@ import 'package:we_find/model/model.dart';
 // just extend this if you need to access some information
 // that is not modeled here. I did not want to add getters for everything
 
-class CourseTranslate {
+class CourseWrapped {
   final Course _myCourse;
   final Lang _myLang;
-  const CourseTranslate(this._myCourse, this._myLang);
+  const CourseWrapped(this._myCourse, this._myLang);
 
   // Think of how to return the name of the requested fields as well,
   // so it's all in one place.
@@ -27,24 +27,24 @@ class CourseTranslate {
     return _myCourse.ects?.toString() ?? "Not found";
   }
 
-  List<GroupTranslate> getGroups() {
-    List<GroupTranslate> ret = [];
+  List<GroupWrapped> getGroups() {
+    List<GroupWrapped> ret = [];
     if (_myCourse.groups == null) {
       return ret;
     }
 
     for (Group group in _myCourse.groups!) {
-      ret.add(GroupTranslate(group, _myLang));
+      ret.add(GroupWrapped(group, _myLang));
     }
 
     return ret;
   }
 }
 
-class GroupTranslate {
+class GroupWrapped {
   final Group _myGroup;
   final Lang _myLang;
-  const GroupTranslate(this._myGroup, this._myLang);
+  const GroupWrapped(this._myGroup, this._myLang);
 
   String getId() {
     return _myGroup.id ?? "Not found";
@@ -62,30 +62,30 @@ class GroupTranslate {
     return _myGroup.info?.preconditions?.get(_myLang) ?? "Not found";
   }
 
-  ScheduleTranslate getSchedule() {
+  ScheduleWrapped getSchedule() {
     if (_myGroup.schedule == null) {
       throw NotFoundException("The group had no schedule");
     }
-    return ScheduleTranslate(_myGroup.schedule!);
+    return ScheduleWrapped(_myGroup.schedule!);
   }
 }
 
-class ScheduleTranslate {
+class ScheduleWrapped {
   final Schedule _mySchedule;
-  const ScheduleTranslate(this._mySchedule);
+  const ScheduleWrapped(this._mySchedule);
 
-  List<EventTranslate> getEvents() {
-    List<EventTranslate> ret = [];
+  List<EventWrapped> getEvents() {
+    List<EventWrapped> ret = [];
     for (Event event in _mySchedule.events) {
-      ret.add(EventTranslate(event));
+      ret.add(EventWrapped(event));
     }
     return ret;
   }
 }
 
-class EventTranslate {
+class EventWrapped {
   final Event _myEvent;
-  const EventTranslate(this._myEvent);
+  const EventWrapped(this._myEvent);
 
   String getDate() {
     if (_myEvent.begin == null) {
@@ -123,23 +123,23 @@ class EventTranslate {
   }
 }
 
-class StudyModuleTranslate {
+class StudyModuleWrapped {
   final StudyModule _myStudyModule;
   final Lang _myLang;
-  const StudyModuleTranslate(this._myStudyModule, this._myLang);
+  const StudyModuleWrapped(this._myStudyModule, this._myLang);
 
   String getTitle() {
     return _myStudyModule.title?.get(_myLang) ?? "Title not found";
   }
 
-  List<StudyModuleTranslate> getChildren() {
-    List<StudyModuleTranslate> ret = [];
+  List<StudyModuleWrapped> getChildren() {
+    List<StudyModuleWrapped> ret = [];
     if (_myStudyModule.submodules == null) {
       return ret;
     }
 
     for (StudyModule eachStudyMod in _myStudyModule.submodules!) {
-      ret.add(StudyModuleTranslate(eachStudyMod, _myLang));
+      ret.add(StudyModuleWrapped(eachStudyMod, _myLang));
     }
 
     return ret;

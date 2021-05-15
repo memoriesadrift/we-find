@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:we_find/model/modelTranslate.dart';
+import 'package:we_find/model/modelWrapped.dart';
+import 'package:we_find/widgets/StudyModuleWidget.dart';
 
 import 'StudyModuleScreen.dart';
 
@@ -7,7 +8,7 @@ import 'StudyModuleScreen.dart';
 // if you know how to fix this feel free.
 
 class CourseDirecotryScreen extends StatefulWidget {
-  final StudyModuleTranslate _studyModule;
+  final StudyModuleWrapped _studyModule;
   const CourseDirecotryScreen(this._studyModule);
 
   @override
@@ -31,32 +32,9 @@ class _CourseDirecotryScreenState extends State<CourseDirecotryScreen> {
     ));
     view.add(Divider());
 
-    for (StudyModuleTranslate eachStudyModule
+    for (StudyModuleWrapped eachStudyModule
         in widget._studyModule.getChildren()) {
-      view.add(
-        Wrap(children: [
-          TextButton(
-            onPressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute<void>(builder: (BuildContext context) {
-                  return Scaffold(
-                    appBar: AppBar(title: Text('Course Detail Screen')),
-                    body: Center(
-                      child: StudyModuleScreen(eachStudyModule),
-                    ),
-                  );
-                }),
-              )
-            },
-            child: Text(
-              _trimName(eachStudyModule.getTitle()),
-              style: themeData.textTheme.headline4,
-              textAlign: TextAlign.left,
-            ),
-          ),
-        ]),
-      );
+      view.add(StudyModuleWidget(eachStudyModule, _trimName));
       view.add(Divider(
         color: themeData.colorScheme.primary,
       ));
