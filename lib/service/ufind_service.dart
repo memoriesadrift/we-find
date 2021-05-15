@@ -9,6 +9,7 @@ const authority = "m1-ufind.univie.ac.at";
 
 /// Returns the root [StudyModule] based on the specified semester [when]
 /// and the [spl].
+///
 /// Calling [fetchStudyModule('2021S', 5)] would return the root [StudyModule]
 /// of the Computer Science faculty of the summer semester 2021.
 /// Upon providing a [when] value that is in the future, such as 2030S,
