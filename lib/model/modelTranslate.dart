@@ -1,4 +1,4 @@
-import 'package:we_find/exeptions/exceptions.dart';
+import 'package:we_find/exceptions/exceptions.dart';
 import 'package:we_find/model/I18NString.dart';
 import 'package:we_find/model/model.dart';
 
