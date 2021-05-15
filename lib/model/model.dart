@@ -2,9 +2,9 @@ import 'package:we_find/extensions/xml_extensions.dart';
 import 'package:we_find/model/I18NString.dart';
 import 'package:xml/xml.dart';
 
-/// Representation of a 'module' tag
-/// A 'module' tag is a direct descendant of the 'structure' tag
-/// or of other 'module' tags.
+/// Representation of a [module] tag
+/// A [module] tag is a direct descendant of the [structure] tag
+/// or of other [module] tags.
 class StudyModule {
   final String? id;
   final int? nestLevel;
@@ -49,8 +49,8 @@ class StudyModule {
             tag.mapDescendants("module", (e) => StudyModule.fromXmlTag(e));
 }
 
-/// Representation of a 'predecessor' tag
-/// A 'predecessor' tag is a direct descendant of the 'module' tag.
+/// Representation of a [predecessor] tag
+/// A [predecessor] tag is a direct descendant of the [module] tag.
 class StudyModulePredecessor {
   final Set<String>? path;
   final String? when;
@@ -60,8 +60,8 @@ class StudyModulePredecessor {
         when = tag.getAttribute("when");
 }
 
-/// Representation of a 'level' tag
-/// A 'level' tag is a direct descendant of the 'structure' tag.
+/// Representation of a [level] tag
+/// A [level] tag is a direct descendant of the [structure] tag.
 class StudyModuleLevel {
   final int? id;
   final Set<String>? path;
@@ -73,8 +73,8 @@ class StudyModuleLevel {
         title = tag.toI18NString("title");
 }
 
-/// Representation of a 'course' tag
-/// 'course' tags are direct descendants of the 'result' root-tag.
+/// Representation of a [course] tag
+/// [course] tags are direct descendants of the 'result' root-tag.
 class Course {
   final String? id;
   final String? when;
@@ -107,8 +107,8 @@ class Course {
             "offeredby", (e) => ProgrammeOferee.fromXmlTag(e));
 }
 
-/// Representation of a 'type' tag
-/// A 'type' tag is the direct descendant of a 'course' tag.
+/// Representation of a [type] tag
+/// A [type] tag is the direct descendant of a [course] tag.
 class CourseType {
   final String? description; // e.g.: Orientierungsveranstaltung
   final String? type; // e.g.: OV
@@ -118,8 +118,8 @@ class CourseType {
         type = tag.text;
 }
 
-/// Representation of a 'chapter' tag.
-/// 'chapter' tags are direct descendants of the 'chapters' tag.
+/// Representation of a [chapter] tag.
+/// [chapter] tags are direct descendants of the 'chapters' tag.
 class Chapter {
   final I18NString? category;
   final I18NString? subCategory;
@@ -131,8 +131,8 @@ class Chapter {
         name = tag.toI18NString("name");
 }
 
-/// Representation of a 'group' tag.
-/// 'group' tags are direct descendants of the 'groups' tag.
+/// Representation of a [group] tag.
+/// [group] tags are direct descendants of the 'groups' tag.
 class Group {
   final String? id;
   final bool? vault;
@@ -174,8 +174,8 @@ class Group {
             ?.mapDescendants("label", (e) => Label.fromXmlTag(e));
 }
 
-/// Representation of an 'exam' tag.
-/// 'exam' tags are direct descendants of the 'exams' tag.
+/// Representation of an [exam] tag.
+/// [exam] tags are direct descendants of the [exams] tag.
 class Exam {
   final DateTime? begin;
   final DateTime? end;
@@ -209,8 +209,8 @@ class Exam {
             tag.mapDescendant("info", (e) => GeneralInformation.fromXmlTag(e));
 }
 
-/// Representation of a 'platform' tag.
-/// 'platform' tags are direct descendants of the 'group' tag.
+/// Representation of a [platform] tag.
+/// [platform] tags are direct descendants of the [group] tag.
 class Platform {
   final String? type;
   final String? location;
@@ -220,8 +220,8 @@ class Platform {
         location = tag.text;
 }
 
-/// Representation of a 'language' tag.
-/// 'language' tags are direct descendants of the 'languages' tag.
+/// Representation of a [language] tag.
+/// [language] tags are direct descendants of the [languages] tag.
 class Language {
   final I18NString? title;
   final String? iso;
@@ -231,8 +231,8 @@ class Language {
         iso = tag.getElement("iso")?.text;
 }
 
-/// Representation of a 'wwlong' tag
-/// A 'wwlong' tag is the direct descendant of the 'group'.
+/// Representation of a [wwlong] tag
+/// A [wwlong] tag is the direct descendant of the [group].
 class Schedule {
   final I18NString? text;
   final List<Event> events;
@@ -242,8 +242,8 @@ class Schedule {
         events = tag.mapDescendants("wwevent", (e) => Event.fromXmlTag(e));
 }
 
-/// Representation of a 'wwevent' tag.
-/// 'wwevent' tags are direct descendants of the 'wwlong' tag.
+/// Representation of a [wwevent] tag.
+/// [wwevent] tags are direct descendants of the [wwlong] tag.
 class Event {
   final DateTime? begin;
   final DateTime? end;
@@ -258,8 +258,8 @@ class Event {
             tag.mapDescendants("location", (e) => Location.fromXmlTag(e));
 }
 
-/// Representation of a 'location' tag
-/// A 'location' tag is the direct descendant of the 'wwevent' tag.
+/// Representation of a [location] tag
+/// A [location] tag is the direct descendant of the [wwevent] tag.
 class Location {
   final String? zip;
   final String? town;
@@ -277,8 +277,8 @@ class Location {
         showRoomInfo = tag.getElement('showroominfo')?.textToBool();
 }
 
-/// Representation of a 'lecturer' tag.
-/// 'lecturer' tags are direct descendants of the 'lecturers' tag.
+/// Representation of a [lecturer] tag.
+/// [lecturer] tags are direct descendants of the [lecturers] tag.
 class Lecturer {
   final String? id;
   final String? type;
@@ -292,8 +292,8 @@ class Lecturer {
         lastName = tag.getElement("lastname")?.text;
 }
 
-/// Representation of a 'registration' tag.
-/// 'registration' tags are direct descendants of the 'registrations' tag.
+/// Representation of a [registration] tag.
+/// [registration] tags are direct descendants of the [registrations] tag.
 class Registrations {
   final DateTime? enrollFrom;
   final DateTime? enrollTo;
@@ -305,8 +305,8 @@ class Registrations {
         unenrollUntil = tag.getElement("disenroll")?.attrToDateTime("until");
 }
 
-/// Representation of an 'info' tag.
-/// An 'info' tag is the direct descendant of the 'course' tag.
+/// Representation of an [info] tag.
+/// An [info] tag is the direct descendant of the [course] tag.
 class GeneralInformation {
   final I18NString? comment;
   final I18NString? performance;
@@ -322,8 +322,8 @@ class GeneralInformation {
         preconditions = tag.toI18NString("preconditions");
 }
 
-/// Representation of a 'label' tag.
-/// 'label' tags are direct descendants of the 'labels' tag.
+/// Representation of a [label] tag.
+/// [label] tags are direct descendants of the [labels] tag.
 class Label {
   final I18NString? id;
   final I18NString? name;
@@ -333,8 +333,8 @@ class Label {
         name = tag.toI18NString("name");
 }
 
-/// Representation of an 'offeredby' tag
-/// A 'offeredby' tag is the direct descendant of the 'course'.
+/// Representation of an [offeredby] tag
+/// A [offeredby] tag is the direct descendant of the [course].
 class ProgrammeOferee {
   final String? id;
   final String? name;
