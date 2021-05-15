@@ -27,7 +27,7 @@ class _CourseDirecotryScreenState extends State<CourseDirecotryScreen> {
 
     view.add(Text(
       "Course Directory", // TODO: LANGUAGE
-      style: themeData.textTheme.headline3,
+      style: themeData.textTheme.headline2,
     ));
     view.add(Divider());
 
@@ -71,6 +71,7 @@ class _CourseDirecotryScreenState extends State<CourseDirecotryScreen> {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Scrollbar(
+      isAlwaysShown: true,
       child: Container(
         margin: const EdgeInsets.all(15),
         padding: const EdgeInsets.all(15),
