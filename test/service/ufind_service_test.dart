@@ -41,5 +41,11 @@ void main() {
       final coursesFuture = fetchCourses(query);
       expect(coursesFuture, completion(IterableLength(equals(10))));
     });
+
+    test('When entering a nonsense query an empty list should be returned', () {
+      final query = 'AaEFdfq2e';
+      final coursesFuture = fetchCourses(query);
+      expect(coursesFuture, completion(IterableLength(equals(0))));
+    });
   });
 }

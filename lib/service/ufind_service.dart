@@ -26,7 +26,8 @@ Future<StudyModule?> fetchStudyModule(String when, int spl) {
 
 /// Returns a list of [Course] objects that satisfy the specified [query].
 ///
-/// The [query] needs to be composed as it is described at https://ufind.univie.ac.at/en/help.html.
+/// The [query] needs to be composed as it is described
+/// at https://ufind.univie.ac.at/en/help.html.
 Future<List<Course>> fetchCourses(String query) {
   final url = Uri.https(authority, 'courses', {'query': query});
   return http.get(url).then((response) {
