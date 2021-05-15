@@ -2,6 +2,7 @@ import 'package:test/test.dart';
 import 'package:we_find/extensions/string_extensions.dart';
 import 'package:we_find/model/model.dart';
 
+import '../base_matchers.dart';
 import 'model_matchers.dart';
 
 void main() {
@@ -190,7 +191,7 @@ void main() {
       expect(obj.vorbesprechung, isNotNull,
           reason: 'vorbesprechung should not be null');
       expect(obj.locations, isNotNull, reason: 'locations should not be null');
-      expect(obj.locations!.length, equals(3),
+      expect(obj.locations!, IterableLength(equals(3)),
           reason: 'locations should have a length of 3');
     });
   });
@@ -218,7 +219,7 @@ void main() {
         "the events list should have a length of 1", () {
       final obj = Schedule.fromXmlTag(fullTag);
       expect(obj.text, isNull, reason: 'text should be null');
-      expect(obj.events.length, equals(1),
+      expect(obj.events, IterableLength(equals(1)),
           reason: 'events should have a length of 3');
     });
   });
@@ -331,15 +332,15 @@ void main() {
       expect(obj.title, isNotNull, reason: 'title should not be null');
       expect(obj.when, isNotNull, reason: 'when should not be null');
       expect(obj.schedule, isNotNull, reason: 'schedule should not be null');
-      expect(obj.schedule!.events.length, equals(1),
+      expect(obj.schedule!.events, IterableLength(equals(1)),
           reason: 'schedule.events should have a length of 1');
       expect(obj.examiners, isNotNull, reason: 'examiners should not be null');
-      expect(obj.examiners!.length, equals(2),
+      expect(obj.examiners!, IterableLength(equals(2)),
           reason: 'examiners should have a length of 2');
       expect(obj.registrations, isNotNull,
           reason: 'registrations should not be null');
       expect(obj.labels, isNotNull, reason: 'labels should not be null');
-      expect(obj.labels!.length, equals(1),
+      expect(obj.labels!, IterableLength(equals(1)),
           reason: 'labels should have a length of 1');
       expect(obj.generalInformation, isNotNull,
           reason: 'generalInformation should not be null');
@@ -534,23 +535,23 @@ void main() {
       expect(obj.maxParticipants, isNotNull,
           reason: 'maxParticipants should not be null');
       expect(obj.languages, isNotNull, reason: 'languages should not be null');
-      expect(obj.languages!.length, equals(1),
+      expect(obj.languages!, IterableLength(equals(1)),
           reason: 'languages should have a length of 1');
       expect(obj.schedule, isNotNull, reason: 'schedule should not be null');
-      expect(obj.schedule!.events.length, equals(3),
+      expect(obj.schedule!.events, IterableLength(equals(3)),
           reason: 'schedule.events should have a length of 3');
       expect(obj.lecturers, isNotNull, reason: 'lecturers should not be null');
-      expect(obj.lecturers!.length, equals(2),
+      expect(obj.lecturers!, IterableLength(equals(2)),
           reason: 'lecturers should have a length of 2');
       expect(obj.registrations, isNotNull,
           reason: 'registrations should not be null');
       expect(obj.info, isNotNull,
           reason: 'generalInformation should not be null');
       expect(obj.exams, isNotNull, reason: 'exams should not be null');
-      expect(obj.exams!.length, equals(2),
+      expect(obj.exams!, IterableLength(equals(2)),
           reason: 'exams should have a length of 2');
       expect(obj.labels, isNotNull, reason: 'labels should not be null');
-      expect(obj.labels!.length, equals(1),
+      expect(obj.labels!, IterableLength(equals(1)),
           reason: 'labels should have a length of 1');
     });
   });
@@ -650,10 +651,10 @@ void main() {
       expect(obj.sws, isNotNull, reason: 'sws should not be null');
       expect(obj.immanent, isNotNull, reason: 'immanent should not be null');
       expect(obj.chapters, isNotNull, reason: 'chapters should not be null');
-      expect(obj.chapters!.length, equals(2),
+      expect(obj.chapters!, IterableLength(equals(2)),
           reason: 'chapters should have a length of 2');
       expect(obj.groups, isNotNull, reason: 'groups should not be null');
-      expect(obj.groups!.length, equals(1),
+      expect(obj.groups!, IterableLength(equals(1)),
           reason: 'groups should have a length of 1');
       expect(obj.offeredBy, isNotNull,
           reason: 'courseOfferee should not be null');
@@ -986,7 +987,7 @@ void main() {
       expect(obj.nestLevel, isNotNull, reason: 'nestLevel should not be null');
       expect(obj.spl, isNotNull, reason: 'spl should not be null');
       expect(obj.path, isNotNull, reason: 'path should not be null');
-      expect(obj.path?.length, equals(2),
+      expect(obj.path!, IterableLength(equals(2)),
           reason: 'path should have a length of 2');
       expect(obj.when, isNotNull, reason: 'when should not be null');
       expect(obj.anchor, isNotNull, reason: 'anchor should not be null');
@@ -998,14 +999,14 @@ void main() {
       expect(obj.title, isNotNull, reason: 'title should not be null');
       expect(obj.comment, isNotNull, reason: 'comment should not be null');
       expect(obj.courses, isNotNull, reason: 'courses should not be null');
-      expect(obj.courses?.length, equals(0),
+      expect(obj.courses!, IterableLength(equals(0)),
           reason: 'courses should have a length of 2');
       expect(obj.exams, isNotNull, reason: 'exams should not be null');
-      expect(obj.exams?.length, equals(0),
+      expect(obj.exams!, IterableLength(equals(0)),
           reason: 'exams should have a length of 2');
       expect(obj.submodules, isNotNull,
           reason: 'submodules should not be null');
-      expect(obj.submodules?.length, equals(18),
+      expect(obj.submodules!, IterableLength(equals(18)),
           reason: 'submodules should have a length of 18');
     });
   });

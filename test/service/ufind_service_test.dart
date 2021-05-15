@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:test/test.dart';
 import 'package:we_find/service/ufind_service.dart';
 
+import '../base_matchers.dart';
+
 void main() {
   group('fetchStudyModule', () {
     test(
@@ -28,6 +30,16 @@ void main() {
       final invalid = -3;
       final studyModuleFuture = fetchStudyModule(invalidWhen, invalid);
       expect(studyModuleFuture, throwsA(const TypeMatcher<HttpException>()));
+    });
+  });
+
+  group('fetchCourses', () {
+    test(
+        'When entering a legal query for 10 courses, a list of 10 Course '
+        'objects should be returned from the Future', () {
+      final query = 'spl5 c:10';
+      final coursesFuture = fetchCourses(query);
+      expect(coursesFuture, completion(IterableLength(equals(10))));
     });
   });
 }
