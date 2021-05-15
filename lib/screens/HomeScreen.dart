@@ -109,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                       Align(
                         child: Icon(
                           Icons.menu_book,
-                          color: themeData.accentColor,
+                          color: themeData.colorScheme.secondary,
                           size: 40,
                         ),
                         alignment: Alignment.center,
@@ -156,7 +156,10 @@ class HomeScreen extends StatelessWidget {
                 }),
               )
             },
-            child: Text("Test course screen"),
+            child: Text(
+              "Test course screen",
+              style: themeData.textTheme.button,
+            ),
           ),
         ],
       ),
