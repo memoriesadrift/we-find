@@ -6,6 +6,7 @@ import 'package:we_find/model/I18NString.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/modelTranslate.dart';
 import 'package:we_find/screens/CourseDetailScreen.dart';
+import 'package:we_find/screens/CourseDirectoryScreen.dart';
 import 'package:we_find/screens/StudyModuleScreen.dart';
 import 'package:we_find/widgets/search_bar.dart';
 
@@ -69,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute<void>(builder: (BuildContext context) {
                         return Scaffold(
-                          appBar: AppBar(title: Text('Course Detail Screen')),
+                          appBar: AppBar(title: Text('Course Directory')),
                           body: Center(
                             child: FutureBuilder<StudyModule>(
                               future: _getTestCourseDirectory(),
@@ -78,7 +79,8 @@ class HomeScreen extends StatelessWidget {
                                   return CircularProgressIndicator();
                                 }
                                 if (snapshot.data != null) {
-                                  return StudyModuleScreen(StudyModuleTranslate(
+                                  return CourseDirecotryScreen(
+                                      StudyModuleTranslate(
                                     snapshot.data!,
                                     Lang.DE,
                                   ));

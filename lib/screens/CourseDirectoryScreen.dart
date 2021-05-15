@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:we_find/model/modelTranslate.dart';
 
-class StudyModuleScreen extends StatefulWidget {
+import 'StudyModuleScreen.dart';
+
+// TODO: This is just a copy of StudyModuleScreen with some changes
+// if you know how to fix this feel free.
+
+class CourseDirecotryScreen extends StatefulWidget {
   final StudyModuleTranslate _studyModule;
-  const StudyModuleScreen(this._studyModule);
+  const CourseDirecotryScreen(this._studyModule);
 
   @override
-  _StudyModuleScreenState createState() => _StudyModuleScreenState();
+  _CourseDirecotryScreenState createState() => _CourseDirecotryScreenState();
 }
 
-class _StudyModuleScreenState extends State<StudyModuleScreen> {
+class _CourseDirecotryScreenState extends State<CourseDirecotryScreen> {
   String _trimName(String name) {
-    if (name.endsWith(')')) {
-      return name.substring(0, name.lastIndexOf('('));
-    }
+    if (name.startsWith("Studienprogrammleitung") ||
+        name.startsWith("Directorate of Studies"))
+      return name.substring(name.indexOf(" ") + 1);
     return name;
   }
 
@@ -21,7 +26,7 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
     List<Widget> view = [];
 
     view.add(Text(
-      widget._studyModule.getTitle(),
+      "Course Directory", // TODO: LANGUAGE
       style: themeData.textTheme.headline3,
     ));
     view.add(Divider());
