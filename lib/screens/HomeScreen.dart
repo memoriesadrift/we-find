@@ -1,17 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:we_find/data/coursedir.dart';
 import 'package:we_find/model/I18NString.dart';
 import 'package:we_find/model/model.dart';
-import 'package:we_find/model/modelTranslate.dart';
+import 'package:we_find/model/modelWrapped.dart';
 import 'package:we_find/screens/CourseDetailScreen.dart';
+import 'package:we_find/screens/CourseDirectoryScreen.dart';
+import 'package:we_find/screens/StudyModuleScreen.dart';
 import 'package:we_find/widgets/search_bar.dart';
 
 import 'package:xml/xml.dart';
 import 'package:we_find/data/course.dart';
 
 class HomeScreen extends StatelessWidget {
-  // REMOVE NEXT TWO METHODS ONCE PASSING DATA ACTUALLY WORKS
+  // REMOVE NEXT THREE METHODS ONCE PASSING DATA ACTUALLY WORKS
   // ONLY USED TO TEST SOME FUNCTIONALITY
   XmlElement parseXmlString(String string) {
     return XmlDocument.parse(string).rootElement;
@@ -20,6 +23,11 @@ class HomeScreen extends StatelessWidget {
   Future<Course> _getTestCourse() async {
     String res = await Future(getTestCourse);
     return Course.fromXmlTag(parseXmlString(res));
+  }
+
+  Future<StudyModule> _getTestCourseDirectory() async {
+    String res = await Future(getTestCourseDirectory);
+    return StudyModule.fromXmlTag(parseXmlString(res));
   }
 
   void fun(String text) {}
@@ -55,7 +63,36 @@ class HomeScreen extends StatelessWidget {
                 width: 150,
                 height: 150,
                 child: ElevatedButton(
-                  onPressed: null,
+                  // inserting this here, if somebody
+                  // wants to offload this somewhere feel free
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(builder: (BuildContext context) {
+                        return Scaffold(
+                          appBar: AppBar(title: Text('Course Directory')),
+                          body: Center(
+                            child: FutureBuilder<StudyModule>(
+                              future: _getTestCourseDirectory(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return CircularProgressIndicator();
+                                }
+                                if (snapshot.data != null) {
+                                  return CourseDirecotryScreen(
+                                      StudyModuleWrapped(
+                                    snapshot.data!,
+                                    Lang.DE,
+                                  ));
+                                }
+                                throw Exception("don't you dare throw this!");
+                              },
+                            ),
+                          ),
+                        );
+                      }),
+                    )
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
                       themeData.primaryColor,
@@ -72,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                       Align(
                         child: Icon(
                           Icons.menu_book,
-                          color: themeData.accentColor,
+                          color: themeData.colorScheme.secondary,
                           size: 40,
                         ),
                         alignment: Alignment.center,
@@ -109,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                           }
                           if (snapshot.data != null) {
                             return CourseDetailScreen(
-                                CourseTranslate(snapshot.data!, Lang.DE));
+                                CourseWrapped(snapshot.data!, Lang.DE));
                           }
                           throw Exception("don't you dare throw this!");
                         },
@@ -119,7 +156,10 @@ class HomeScreen extends StatelessWidget {
                 }),
               )
             },
-            child: Text("Test course screen"),
+            child: Text(
+              "Test course screen",
+              style: themeData.textTheme.button,
+            ),
           ),
         ],
       ),

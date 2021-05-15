@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:we_find/model/I18NString.dart';
-import 'package:we_find/model/modelTranslate.dart';
+import 'package:we_find/model/modelWrapped.dart';
 
 class GroupPicker extends StatefulWidget {
-  final List<GroupTranslate> _groups;
+  final List<GroupWrapped> _groups;
 
   const GroupPicker(this._groups);
 
@@ -57,7 +57,7 @@ class _GroupPickerState extends State<GroupPicker> {
 }
 
 class GroupDetails extends StatelessWidget {
-  final GroupTranslate _group;
+  final GroupWrapped _group;
   const GroupDetails(this._group);
 
   Column _buildGroupDetails(ThemeData themeData) {
@@ -132,10 +132,10 @@ class GroupDetails extends StatelessWidget {
 }
 
 class EventCalendar extends StatelessWidget {
-  final ScheduleTranslate _schedule;
+  final ScheduleWrapped _schedule;
   const EventCalendar(this._schedule);
 
-  Row _eventToWidget(EventTranslate event) {
+  Row _eventToWidget(EventWrapped event) {
     return Row(
       children: [
         Text(event.getDate() +
@@ -152,7 +152,7 @@ class EventCalendar extends StatelessWidget {
   Column _buildEventCalendar() {
     List<Row> view = [];
 
-    for (EventTranslate event in _schedule.getEvents()) {
+    for (EventWrapped event in _schedule.getEvents()) {
       view.add(_eventToWidget(event));
     }
 
