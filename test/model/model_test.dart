@@ -1,17 +1,14 @@
 import 'package:test/test.dart';
+import 'package:we_find/extensions/string_extensions.dart';
 import 'package:we_find/model/model.dart';
-import 'package:xml/xml.dart';
 
 import 'model_matchers.dart';
 
-XmlElement parseXmlString(String string) {
-  return XmlDocument.parse(string).rootElement;
-}
-
 void main() {
   group('CourseOfferee', () {
-    final fullTag = parseXmlString(
-        '<offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>');
+    final fullTag =
+        '<offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>'
+            .toXmlElement();
     test(
         "When a CourseOfferee object is created from a full tag, "
         "then all its fields should be non-null", () {
@@ -22,14 +19,15 @@ void main() {
   });
 
   group("Label", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <label>
         <id xml:lang="de">VOR-ORT</id>
         <id xml:lang="en">ON-SITE</id>
         <name xml:lang="de">vor Ort</name>
         <name xml:lang="en">on site</name>
       </label>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When a Label object is created from a full tag, "
         "then all its I18NString fields should have 2 entries.", () {
@@ -42,7 +40,7 @@ void main() {
   });
 
   group("GeneralInformation", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <info>
       <comment xml:lang="de">Ziel des Moduls TGI ist das Kennenlernen und Verstehen der technischen Grundlagen, der Architektur und der allgemeinen Funktionsweise von Computersystemen.&lt;p&#47;&gt;Die Vorlesung gliedert sich in folgende 9 Kapitel:&lt;br&#47;&gt;1. BIT&lt;br&#47;&gt;2. LOGIK&lt;br&#47;&gt;3. TRANSISTOR&lt;br&#47;&gt;4. GATTER&lt;br&#47;&gt;5. SPEICHER&lt;br&#47;&gt;6. PROZESSOR&lt;br&#47;&gt;7. CACHE &amp; Co.&lt;br&#47;&gt;8. ARCHITEKTUR&lt;br&#47;&gt;9. QUANTENCOMPUTING&lt;p&#47;&gt;Zu jedem Kapitel gibt es üblicherweise 4-5 Lernvideos, die von den Studierenden individuell durchgearbeitet und während der gemeinsamen Termine weiter vertieft werden.</comment>
       <performance xml:lang="de">Schriftliche Präsenzprüfung&lt;p&#47;&gt;Als Frageform werden offene Fragen sowie Multiple Choice Fragen eingesetzt.  Es sind keine Unterlagen oder Hilfsmittel erlaubt.&lt;p&#47;&gt;Als Vorbereitung für die Prüfung wird der Besuch der Repetitorien empfohlen, in denen Übungsaufgaben bearbeitet werden, die den Vorlesungsstoff ergänzen. Bitte beachten Sie, dass Sie an den Repetitorien nur teilnehmen können, wenn Sie sich innerhalb der Anmeldefrist in u:space zu einem Repetitorium anmelden.</performance>
@@ -50,7 +48,8 @@ void main() {
       <examination xml:lang="de">Prüfungsrelevant ist immer jener Stoff, der im aktuell durchgeführten Lehrveranstaltungszyklus Gegenstand der Lehrveranstaltung ist.  Der Umfang des prüfungsrelevanten Stoffs wird jeweils über die schriftlich bzw. anderweitig verfügbar gemachten LV-Unterlagen definiert. Die Unterlagen zu dieser Lehrveranstaltung bestehen zum einen aus den Lehrveranstaltungsunterlagen wie zum Beispiel Folien und Lernvideos, zum anderen aus Unterlagen in Form der darin referenzierten Literatur. Das erfolgreiche Studium des Lehrinhalts dieser Lehrveranstaltung erfordert auch die eingehende Beschäftigung mit der referenzierten Literatur (Bücher, Papers, etc.).</examination>
       <preconditions xml:lang="de">Mindestanforderung: Erreichen von mind. 50% der erreichbaren Punkte bei der schriftlichen Prüfung (keine Unterlagen erlaubt).&lt;p&#47;&gt;Zur Feststellung der Gesamtnote wird die folgende Notenskala angewendet:&lt;p&#47;&gt;Beurteilungsmaßstab gemäß der erreichten Punkte (Maximalpunktezahl: 70 Punkte)&lt;br&#47;&gt;61 &lt;= P &lt;= 70 Sehr Gut (1)&lt;br&#47;&gt;51 &lt;= P &lt;= 60 Gut (2)&lt;br&#47;&gt;43 &lt;= P &lt;= 50 Befriedigend (3)&lt;br&#47;&gt;35 &lt;= P &lt;= 42 Genügend (4)&lt;br&#47;&gt;0 &lt;= P &lt; 35 Nicht Genügend (5)</preconditions>
     </info>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When a GeneralInformation object is created from a full tag with only "
         "german text, then all its I18NString fields should have 1 entries.",
@@ -70,12 +69,13 @@ void main() {
   });
 
   group("Registrations", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <registrations>
       <enroll from="2021-04-08T08:00:00+02:00" to="2021-05-28T13:00:00+02:00"/>
       <disenroll until="2021-06-04T14:00:00+02:00"/>
     </registrations>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When a Registrations object is created from a full tag, "
         "then all its DateTime fields should be non-null.", () {
@@ -89,18 +89,20 @@ void main() {
   });
 
   group("Lecturer", () {
-    final lecturerTag = parseXmlString('''
+    final lecturerTag = '''
     <lecturer id="4236" type="V">
       <firstname>Martin</firstname>
       <lastname>Polaschek</lastname>
     </lecturer>
-    ''');
-    final examinerTag = parseXmlString('''
+    '''
+        .toXmlElement();
+    final examinerTag = '''
     <examiner id="88801">
       <firstname>Andreas</firstname>
       <lastname>Janecek</lastname>
     </examiner>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When a Lecturer object is created from a 'lecturer' tag, "
         "then all its fields should be non-null.", () {
@@ -123,7 +125,7 @@ void main() {
   });
 
   group("Location", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <location>
       <zip>1090</zip>
       <town>Wien</town>
@@ -132,7 +134,8 @@ void main() {
       <roomextid>29052</roomextid>
       <showroominfo>true</showroominfo>
     </location>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When a Location object is created from a full tag, "
         "then all its fields should be non-null.", () {
@@ -148,7 +151,7 @@ void main() {
   });
 
   group("Event", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <wwevent begin="2021-06-04T15:00:00+02:00" end="2021-06-04T16:30:00+02:00" vorbesprechung="false">
       <location>
           <zip>1190</zip>
@@ -175,7 +178,8 @@ void main() {
           <showroominfo>true</showroominfo>
       </location>
   </wwevent>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When an Event object is created from a full tag of 3 locations, "
         "then all its fields should be non-null and "
@@ -192,7 +196,7 @@ void main() {
   });
 
   group("Schedule", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <wwlong>
       <wwevent begin="2021-03-08T09:45:00+01:00" end="2021-03-08T11:15:00+01:00" vorbesprechung="false">
         <location>
@@ -205,7 +209,8 @@ void main() {
         </location>
       </wwevent>
     </wwlong>
-    ''');
+    '''
+        .toXmlElement();
 
     test(
         "When a Schedule object is created from a full tag of 1 events, "
@@ -219,13 +224,14 @@ void main() {
   });
 
   group("Language", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <language>
       <title xml:lang="de">Deutsch</title>
       <title xml:lang="en">German</title>
       <iso>de</iso>
     </language>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When a Language object is created from a full tag with emglish and "
         "german text, then all its I18NString fields should have 2 entries "
@@ -239,9 +245,10 @@ void main() {
   });
 
   group("Platform", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <platform type="CEWebs">https:&#47;&#47;cewebs.cs.univie.ac.at&#47;inter&#47;course&#47;view.php?id=2000653</platform>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When a Platform object is created from a full tag, "
         "then all its fields should be non-null.", () {
@@ -252,7 +259,7 @@ void main() {
   });
 
   group("Exam", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <exam begin="2021-06-04T15:00:00+02:00" end="2021-06-04T16:30:00+02:00" id="1224844" extid="1228161" vault="false">
       <title xml:lang="en">Technical Foundations of Computer Science</title>
       <title xml:lang="de">Technische Grundlagen der Informatik</title>
@@ -310,7 +317,8 @@ void main() {
       </labels>
       <info></info>
   </exam>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When an Exam object is created from a full tag, with 1 Event, 2 Examiners and 1 Label "
         "then all its fields should be non-null. And its list fields should have proper lengths",
@@ -339,7 +347,7 @@ void main() {
   });
 
   group("Group", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <group vault="false" id="051010-1" register="878430">
         <platform type="CEWebs">https:&#47;&#47;cewebs.cs.univie.ac.at&#47;inter&#47;course&#47;view.php?id=2000653</platform>
         <livestream>false</livestream>
@@ -513,7 +521,8 @@ void main() {
             </label>
         </labels>
     </group>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When a Group object is created from a full tag, with 1 Language, "
         "3 Events, 2 Lecturers 2 exams and 1 Label then all its fields should be non-null. "
@@ -547,7 +556,7 @@ void main() {
   });
 
   group("Course", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <course id="050000" when="2021S" version="2021-04-21T11:25:54+02:00">
         <longname xml:lang="de">Orientierungsveranstaltung</longname>
         <longname xml:lang="en">Orientation course</longname>
@@ -622,7 +631,8 @@ void main() {
         </groups>
         <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
     </course>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When a Course object is created from a full tag, with 2 chapters and 1 group"
         "then all its fields should be non-null.", () {
@@ -651,7 +661,7 @@ void main() {
   });
 
   group("StudyModule", () {
-    final fullTag = parseXmlString('''
+    final fullTag = '''
     <module id="259075" level="1" spl="5" path="250876|259075" when="2021S" anchor="spl5">
       <predecessor path="243398|248901" when="2020W"/>
       <offeredby id="8505">SPL 5 - Informatik und Wirtschaftsinformatik</offeredby>
@@ -965,7 +975,8 @@ void main() {
           <exams></exams>
       </module>
 </module>
-    ''');
+    '''
+        .toXmlElement();
     test(
         "When a top-level Module object is created from a full tag, with 18 submodules, "
         "all its fields should be non-null except level and category"
