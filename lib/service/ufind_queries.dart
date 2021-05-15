@@ -1,7 +1,6 @@
 /// Fluent API implementation to specify the query arguments to be used
 /// when searching for entities exposed by u:find
 
-
 /// The base class for all query arguments
 /// [asString] must be implemented by all subclasses.
 abstract class QueryArgument {
@@ -10,16 +9,23 @@ abstract class QueryArgument {
   /// Renders this [QueryArgument] as a [String] that can be used
   /// in the http query parameter.
   String asString();
+
+  /// Joins a specified [searchKeyword] and a list of [QueryArgument] instances
+  /// into a single [String] that can be directly used in the http query parameter.
+  static String toQueryString(String searchKeyword, List<QueryArgument> args) {
+    final joinedArgs = args.map((e) => e.asString()).join(' ');
+    return '$searchKeyword $joinedArgs';
+  }
 }
 
 /// The base class for all query arguments
 /// that can be used for general result filtering
-abstract class FilterQueryArgument extends QueryArgument {
-  const FilterQueryArgument();
+abstract class GeneralQueryArgument extends QueryArgument {
+  const GeneralQueryArgument();
 }
 
 /// Set the number of search results
-class Count extends FilterQueryArgument {
+class Count extends GeneralQueryArgument {
   final int numSearchResults;
 
   Count(this.numSearchResults);
@@ -29,9 +35,9 @@ class Count extends FilterQueryArgument {
 }
 
 /// Exact, non-fuzzy search
-const FilterQueryArgument Exact = _Exact();
+const GeneralQueryArgument Exact = _Exact();
 
-class _Exact extends FilterQueryArgument {
+class _Exact extends GeneralQueryArgument {
   const _Exact();
 
   @override

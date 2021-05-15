@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:we_find/extensions/string_extensions.dart';
 import 'package:we_find/extensions/xml_extensions.dart';
 import 'package:we_find/model/model.dart';
+import 'package:we_find/service/ufind_queries.dart';
 
 const authority = "m1-ufind.univie.ac.at";
 
@@ -38,4 +39,13 @@ Future<List<Course>> fetchCourses(String query) {
     final root = response.body.toXmlElement();
     return root.mapDescendants('course', (e) => Course.fromXmlTag(e));
   });
+}
+
+const defaultQueryArg = CurrentTerm;
+
+/// Convenience method to query for courses.
+Future<List<Course>> queryForCourses(String searchKeyword,
+    {QueryArgument queryArg = defaultQueryArg}) {
+  final queryString = '$searchKeyword ${queryArg.asString()}';
+  return fetchCourses(queryString);
 }

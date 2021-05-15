@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:test/test.dart';
+import 'package:we_find/service/ufind_queries.dart';
 import 'package:we_find/service/ufind_service.dart';
 
 import '../base_matchers.dart';
@@ -46,6 +47,14 @@ void main() {
       final query = 'AaEFdfq2e';
       final coursesFuture = fetchCourses(query);
       expect(coursesFuture, completion(IterableLength(equals(0))));
+    });
+  });
+
+  group('queryForCourses', () {
+    test('When querying for courses with a count argument of 42, '
+        '42 results should be returned', () {
+      final coursesFuture = queryForCourses('math', queryArg: Count(42));
+      expect(coursesFuture, completion(IterableLength(equals(42))));
     });
   });
 }
