@@ -10,7 +10,7 @@ class StudyModuleScreen extends StatefulWidget {
 }
 
 class _StudyModuleScreenState extends State<StudyModuleScreen> {
-  Scrollbar _buildStudyModuleScreen(ThemeData themeData) {
+  ListView _buildStudyModuleScreen(ThemeData themeData) {
     List<Widget> view = [];
 
     view.add(Text(
@@ -50,25 +50,20 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
       ));
     }
 
-    return Scrollbar(
-      child: ListView(
-        //controller: ScrollController(),
-        children: view,
-      ),
-      showTrackOnHover: true,
-      hoverThickness: 10,
-      isAlwaysShown: true,
-      thickness: 10,
+    return ListView(
+      children: view,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    return Container(
-      margin: const EdgeInsets.all(15),
-      padding: const EdgeInsets.all(15),
-      child: _buildStudyModuleScreen(themeData),
+    return Scrollbar(
+      child: Container(
+        margin: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
+        child: _buildStudyModuleScreen(themeData),
+      ),
     );
   }
 }
