@@ -83,6 +83,6 @@ Future<T> _fetchXmlContent<T>(Uri uri, T Function(XmlElement) mapper) {
 
 String _currentTerm() {
   final dateTime = DateTime.now();
-  final term = dateTime.month > 3 && dateTime.month < 10 ? 'S' : 'W';
+  final term = dateTime.month > 2 && dateTime.month < 10 ? 'S' : 'W';
   return '${dateTime.year}$term';
 }
