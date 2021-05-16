@@ -152,46 +152,6 @@ class HomeScreen extends StatelessWidget {
                 )),
             alignment: Alignment.center,
           ),
-<<<<<<< HEAD
-          // Is here for now ugly like this as a lambda,
-          // as it needs to have access to context.
-          // If you know a better way feel free to change it
-          // Course detail test
-          ElevatedButton(
-            onPressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute<void>(builder: (BuildContext context) {
-                  return Scaffold(
-                    appBar: AppBar(title: Text('Course Detail Screen')),
-                    body: Center(
-                      child: FutureBuilder<Course>(
-                        future: _getTestCourse(),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return CircularProgressIndicator();
-                          }
-                          if (snapshot.data != null) {
-                            return CourseDetailScreen(CourseWrapped(
-                              context,
-                              snapshot.data!,
-                            ));
-                          }
-                          throw Exception("don't you dare throw this!");
-                        },
-                      ),
-                    ),
-                  );
-                }),
-              )
-            },
-            child: Text(
-              "Test course screen",
-              style: themeData.textTheme.button,
-            ),
-          ),
-=======
->>>>>>> Delete test course button, closes #57
         ],
       ),
     );

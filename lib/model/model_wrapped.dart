@@ -25,12 +25,14 @@ class CourseWrapped extends BaseWrapped {
   Course get course => _course;
 
   String get id => _course.id ?? "Not found";
+  String get offeree => _course.offeredBy?.name ?? "unknown department";
 
   String get typeAbbreviation => _course.courseType?.type ?? "--";
 
   String get name => _course.longName?.get(lang) ?? "Not found";
 
   String get ects => _course.ects?.toString() ?? "Not found";
+  String get semester => _course.when ?? "Unknown Semester";
 
   Course get internalCourse => _course;
 

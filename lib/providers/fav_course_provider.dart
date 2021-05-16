@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:we_find/model/model.dart';
+import 'package:we_find/model/model_wrapped.dart';
 
 /// Provider that keeps track of the [Course] instances
 /// that were marked as favourite by the user
