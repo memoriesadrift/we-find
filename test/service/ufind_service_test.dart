@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:test/test.dart';
-import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/service/ufind_queries.dart';
 import 'package:we_find/service/ufind_service.dart';
 
@@ -14,7 +13,7 @@ void main() {
         'should not be null', () {
       final validWhen = '2021S';
       final validSpl = 5;
-      final studyModuleFuture = fetchStudyModule(validWhen, validSpl);
+      final studyModuleFuture = fetchStudyModule(validSpl, validWhen);
       expect(studyModuleFuture, completion(isNotNull));
     });
     test(
@@ -22,7 +21,7 @@ void main() {
         'returned from the Future should be null', () {
       final futureWhen = '2030S';
       final validSpl = 5;
-      final studyModuleFuture = fetchStudyModule(futureWhen, validSpl);
+      final studyModuleFuture = fetchStudyModule(validSpl, futureWhen);
       expect(studyModuleFuture, completion(isNull));
     });
     test(
@@ -30,7 +29,7 @@ void main() {
         'an HttpException should be thrown', () {
       final invalidWhen = '2021lol';
       final invalid = -3;
-      final studyModuleFuture = fetchStudyModule(invalidWhen, invalid);
+      final studyModuleFuture = fetchStudyModule(invalid, invalidWhen);
       expect(studyModuleFuture, throwsA(const TypeMatcher<HttpException>()));
     });
   });

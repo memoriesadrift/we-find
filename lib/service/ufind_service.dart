@@ -11,7 +11,10 @@ import 'package:xml/xml.dart';
 const authority = "m1-ufind.univie.ac.at";
 
 /// Returns the root [StudyModule] based on the specified semester [when].
-Future<List<StudyModule>> fetchRootStudyModules(String when) {
+///
+/// If [when] is not specified, then the current term will be used by default.
+Future<List<StudyModule>> fetchRootStudyModules([String? when]) {
+  when ??= _currentTerm();
   final url = Uri.https(authority, 'courses/browse/$when');
   return _fetchXmlContent(
       url,
@@ -26,7 +29,10 @@ Future<List<StudyModule>> fetchRootStudyModules(String when) {
 /// of the Computer Science faculty of the summer semester 2021.
 /// Upon providing a [when] value that is in the future, such as 2030S,
 /// the request will be successful, however the returned [StudyModule] will be null.
-Future<StudyModule?> fetchStudyModule(String when, int spl) {
+///
+/// If [when] is not specified, then the current term will be used by default.
+Future<StudyModule?> fetchStudyModule(int spl, [String? when]) {
+  when ??= _currentTerm();
   final url = Uri.https(authority, 'courses/browse/$when/$spl');
   return _fetchXmlContent(url,
       (root) => root.mapDescendant('module', (e) => StudyModule.fromXmlTag(e)));
@@ -40,6 +46,15 @@ Future<List<Course>> fetchCourses(String query) {
   final url = Uri.https(authority, 'courses', {'query': query});
   return _fetchXmlContent(url,
       (root) => root.mapDescendants('course', (e) => Course.fromXmlTag(e)));
+}
+
+/// Returns a course that takes place in the term marked by [when] with [id].
+///
+/// If [when] is not specified, then the current term will be used by default.
+Future<Course> fetchCourseById(String id, [String? when]) {
+  when ??= _currentTerm();
+  final url = Uri.https(authority, 'courses/browse/$id/$when');
+  return _fetchXmlContent(url, (root) => Course.fromXmlTag(root));
 }
 
 const defaultQueryArgs = <QueryArgument>[];
@@ -64,4 +79,10 @@ Future<T> _fetchXmlContent<T>(Uri uri, T Function(XmlElement) mapper) {
     final root = Utf8Decoder().convert(response.bodyBytes).toXmlElement();
     return mapper(root);
   });
+}
+
+String _currentTerm() {
+  final dateTime = DateTime.now();
+  final term = dateTime.month > 3 && dateTime.month < 10 ? 'S' : 'W';
+  return '${dateTime.year}$term';
 }

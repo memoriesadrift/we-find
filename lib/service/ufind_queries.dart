@@ -130,3 +130,25 @@ class _SortByCourseNumber extends CourseQueryArgument {
   @override
   String asString() => '+sortnumber';
 }
+
+/// Search for courses by course number
+class CourseNumber extends CourseQueryArgument {
+  /// 6 digits
+  final String number;
+
+  CourseNumber(this.number);
+
+  @override
+  String asString() => '$number';
+}
+
+/// Search for courses by a partial course number
+class PartialCourseNumber extends CourseQueryArgument {
+  /// 2-5 digits
+  final String number;
+
+  PartialCourseNumber(this.number);
+
+  @override
+  String asString() => '$number*';
+}
