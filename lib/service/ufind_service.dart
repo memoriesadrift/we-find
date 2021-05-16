@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -21,7 +22,7 @@ Future<StudyModule?> fetchStudyModule(String when, int spl) {
     if (response.statusCode != 200)
       throw new HttpException(
           'Unexpected response status code: ${response.statusCode}');
-    final root = response.body.toXmlElement();
+    final root = Utf8Decoder().convert(response.bodyBytes).toXmlElement();
     return root.mapDescendant('module', (e) => StudyModule.fromXmlTag(e));
   });
 }
@@ -36,7 +37,7 @@ Future<List<Course>> fetchCourses(String query) {
     if (response.statusCode != 200)
       throw new HttpException(
           'Unexpected response status code: ${response.statusCode}');
-    final root = response.body.toXmlElement();
+    final root = Utf8Decoder().convert(response.bodyBytes).toXmlElement();
     return root.mapDescendants('course', (e) => Course.fromXmlTag(e));
   });
 }
