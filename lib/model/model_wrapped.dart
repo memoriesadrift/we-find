@@ -1,13 +1,25 @@
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:we_find/exceptions/exceptions.dart';
-import 'package:we_find/model/I18NString.dart';
+import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/model/model.dart';
+import 'package:we_find/providers/lang_provider.dart';
 
 // just extend this if you need to access some information
 // that is not modeled here. I did not want to add getters for everything
 
+abstract class BaseWrapped {
+  final BuildContext context;
+
+  BaseWrapped(this.context);
+
+  Lang getLang() => Provider.of<LangProvider>(context).currentLang;
+}
+
 class CourseWrapped {
   final Course _myCourse;
   final Lang _myLang;
+
   const CourseWrapped(this._myCourse, this._myLang);
 
   // Think of how to return the name of the requested fields as well,
@@ -44,6 +56,7 @@ class CourseWrapped {
 class GroupWrapped {
   final Group _myGroup;
   final Lang _myLang;
+
   const GroupWrapped(this._myGroup, this._myLang);
 
   String getId() {
@@ -72,6 +85,7 @@ class GroupWrapped {
 
 class ScheduleWrapped {
   final Schedule _mySchedule;
+
   const ScheduleWrapped(this._mySchedule);
 
   List<EventWrapped> getEvents() {
@@ -85,6 +99,7 @@ class ScheduleWrapped {
 
 class EventWrapped {
   final Event _myEvent;
+
   const EventWrapped(this._myEvent);
 
   String getDate() {
@@ -126,6 +141,7 @@ class EventWrapped {
 class StudyModuleWrapped {
   final StudyModule _myStudyModule;
   final Lang _myLang;
+
   const StudyModuleWrapped(this._myStudyModule, this._myLang);
 
   String getTitle() {

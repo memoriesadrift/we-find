@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 import 'package:we_find/providers/fav_course_provider.dart';
 import 'package:we_find/providers/lang_provider.dart';
-import 'package:we_find/screens/HomeScreen.dart';
+import 'package:we_find/screens/home_screen.dart';
 import 'package:we_find/styles/theme.dart' as Theme;
 
 void main() => runApp(appProvider(WeFindApp()));
