@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:we_find/model/model.dart';
+import 'package:we_find/model/model_wrapped.dart';
 
 /// Provider that keeps track of the [Course] instances
 /// that were marked as favourite by the user
@@ -9,7 +10,9 @@ class FavCourseProvider with ChangeNotifier {
   Set<Course> get courses => _courses;
 
   /// Returns whether the supplied [course] is marked as favourite.
-  bool _isFavCourse(Course course) => _courses.contains(course);
+  bool _isFavCourse(Course course) {
+    return _courses.contains(course);
+  }
 
   /// Marks the supplied [course] as favourite.
   void _markCourseAsFav(Course course) => _courses.add(course);
