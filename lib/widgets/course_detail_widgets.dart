@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:we_find/model/I18NString.dart';
-import 'package:we_find/model/modelWrapped.dart';
+import 'package:we_find/model/i18n_string.dart';
+import 'package:we_find/model/model_wrapped.dart';
 
 class GroupPicker extends StatefulWidget {
   final List<GroupWrapped> _groups;

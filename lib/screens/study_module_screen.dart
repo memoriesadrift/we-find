@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:we_find/model/modelWrapped.dart';
-import 'package:we_find/widgets/StudyModuleWidget.dart';
+import 'package:we_find/model/model_wrapped.dart';
+import 'package:we_find/widgets/study_module_widget.dart';
 
-class CourseDirecotryScreen extends StatefulWidget {
+class StudyModuleScreen extends StatefulWidget {
   final StudyModuleWrapped _studyModule;
-  const CourseDirecotryScreen(this._studyModule);
+  const StudyModuleScreen(this._studyModule);
 
   @override
-  _CourseDirecotryScreenState createState() => _CourseDirecotryScreenState();
+  _StudyModuleScreenState createState() => _StudyModuleScreenState();
 }
 
-class _CourseDirecotryScreenState extends State<CourseDirecotryScreen> {
+class _StudyModuleScreenState extends State<StudyModuleScreen> {
   String _trimName(String name) {
-    if (name.startsWith("Studienprogrammleitung") ||
-        name.startsWith("Directorate of Studies"))
-      return name.substring(name.indexOf(" ") + 1);
+    if (name.endsWith(')')) {
+      return name.substring(0, name.lastIndexOf('('));
+    }
     return name;
   }
 
@@ -24,8 +24,8 @@ class _CourseDirecotryScreenState extends State<CourseDirecotryScreen> {
     List<Widget> view = [];
 
     view.add(Text(
-      "Course Directory", // TODO: LANGUAGE
-      style: themeData.textTheme.headline2,
+      widget._studyModule.getTitle(),
+      style: themeData.textTheme.headline3,
     ));
     view.add(Divider());
 
@@ -45,7 +45,6 @@ class _CourseDirecotryScreenState extends State<CourseDirecotryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scrollbar(
-      isAlwaysShown: true,
       child: Container(
         margin: const EdgeInsets.all(15),
         padding: const EdgeInsets.all(15),

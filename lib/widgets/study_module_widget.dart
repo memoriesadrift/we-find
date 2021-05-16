@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:we_find/model/modelWrapped.dart';
-import 'package:we_find/screens/CourseDetailScreen.dart';
+import 'package:we_find/model/model_wrapped.dart';
+import 'package:we_find/screens/study_module_screen.dart';
 
-class CourseWidget extends StatelessWidget {
-  final CourseWrapped _myCourse;
-  const CourseWidget(this._myCourse);
+class StudyModuleWidget extends StatelessWidget {
+  final StudyModuleWrapped _myStudyModule;
+  final Function? _trimName;
+  const StudyModuleWidget(this._myStudyModule, this._trimName);
+
+  String _getTrimmedTitle(String title) {
+    if (_trimName == null) {
+      return title;
+    }
+    return _trimName!(title);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +28,21 @@ class CourseWidget extends StatelessWidget {
                   return Scaffold(
                     appBar: AppBar(title: Text('Course Detail Screen')),
                     body: Center(
-                      child: CourseDetailScreen(_myCourse),
+                      child: StudyModuleScreen(_myStudyModule),
                     ),
                   );
                 }),
               )
             },
             child: Container(
-              width: double.infinity,
+              width: double.infinity, // 100% width of parent
               child: Text(
-                _myCourse.getName(),
+                _getTrimmedTitle(_myStudyModule.getTitle()),
                 style: themeData.textTheme.headline4,
                 textAlign: TextAlign.left,
-              ), // add more text here
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

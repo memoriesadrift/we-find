@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:we_find/model/I18NString.dart';
+import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/model/model.dart';
-import 'package:we_find/model/modelWrapped.dart';
-import 'package:we_find/widgets/CourseWidget.dart';
+import 'package:we_find/model/model_wrapped.dart';
+import 'package:we_find/widgets/course_widget.dart';
 
 class SerchResultsScreen extends StatelessWidget {
   final List<CourseWrapped> _myCourses = [];

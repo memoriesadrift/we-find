@@ -1,4 +1,4 @@
-import 'package:we_find/model/I18NString.dart';
+import 'package:we_find/model/i18n_string.dart';
 import 'package:xml/xml.dart';
 
 /// Returns the parsed [bool] from the specified [String]

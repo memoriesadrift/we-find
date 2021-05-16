@@ -1,5 +1,5 @@
 import 'package:we_find/exceptions/exceptions.dart';
-import 'package:we_find/model/I18NString.dart';
+import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/model/model.dart';
 
 // just extend this if you need to access some information

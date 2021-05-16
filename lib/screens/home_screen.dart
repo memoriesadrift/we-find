@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:we_find/data/coursedir.dart';
-import 'package:we_find/model/I18NString.dart';
+import 'package:we_find/data/course_dir.dart';
+import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/model/model.dart';
-import 'package:we_find/model/modelWrapped.dart';
-import 'package:we_find/screens/CourseDetailScreen.dart';
-import 'package:we_find/screens/CourseDirectoryScreen.dart';
-import 'package:we_find/screens/SearchResultsScreen.dart';
+import 'package:we_find/model/model_wrapped.dart';
+import 'package:we_find/screens/course_detail_screen.dart';
+import 'package:we_find/screens/course_directory_screen.dart';
+import 'package:we_find/screens/search_results_screen.dart';
 import 'package:we_find/service/ufind_service.dart';
 import 'package:we_find/widgets/search_bar.dart';
 

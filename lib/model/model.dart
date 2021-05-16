@@ -1,5 +1,5 @@
 import 'package:we_find/extensions/xml_extensions.dart';
-import 'package:we_find/model/I18NString.dart';
+import 'package:we_find/model/i18n_string.dart';
 import 'package:xml/xml.dart';
 
 /// Representation of a [module] tag
