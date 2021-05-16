@@ -32,6 +32,8 @@ class CourseWrapped extends BaseWrapped {
 
   String get ects => _course.ects?.toString() ?? "Not found";
 
+  Course get internalCourse => _course;
+
   List<GroupWrapped> get groups =>
       _course.groups
           ?.map((group) => GroupWrapped(context, group))

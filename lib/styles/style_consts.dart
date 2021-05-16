@@ -40,7 +40,7 @@ class Text {
   );
   static const TextStyle textStyle = const TextStyle(
     fontWeight: FontWeight.w200,
-    fontSize: 12,
+    fontSize: 14,
     color: Colors.textColor,
   );
   static const TextStyle buttonAccentTextStyle = const TextStyle(
