@@ -14,7 +14,9 @@ class SerchResultsScreen extends StatelessWidget {
     }
   }
 
-  ListView _buildSearchResults(ThemeData themeData) {
+  ListView _buildSearchResults(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+
     List<Widget> view = [];
 
     view.add(Text(
@@ -34,13 +36,11 @@ class SerchResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
-
     return Container(
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(15),
       child: Scrollbar(
-        child: _buildSearchResults(themeData),
+        child: _buildSearchResults(context),
       ),
     );
   }
