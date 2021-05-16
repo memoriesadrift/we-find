@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:we_find/model/I18NString.dart';
+import 'package:provider/provider.dart';
 import 'package:we_find/model/modelWrapped.dart';
+import 'package:we_find/providers/lang_provider.dart';
 
 class GroupPicker extends StatefulWidget {
   final List<GroupWrapped> _groups;
@@ -58,11 +59,14 @@ class _GroupPickerState extends State<GroupPicker> {
 
 class GroupDetails extends StatelessWidget {
   final GroupWrapped _group;
+
   const GroupDetails(this._group);
 
-  Column _buildGroupDetails(ThemeData themeData) {
-    Lang currentLang = Lang.DE;
-    Lang fallbackLang = Lang.EN;
+  Column _buildGroupDetails(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+    // Access the language set by the user
+    final langProvider = Provider.of<LangProvider>(context);
+    final currentLang = langProvider.currentLang;
 
     List<Widget> view = [];
 
@@ -121,18 +125,18 @@ class GroupDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
     return Container(
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(15),
       //height: 1000,
-      child: _buildGroupDetails(themeData),
+      child: _buildGroupDetails(context),
     );
   }
 }
 
 class EventCalendar extends StatelessWidget {
   final ScheduleWrapped _schedule;
+
   const EventCalendar(this._schedule);
 
   Row _eventToWidget(EventWrapped event) {
