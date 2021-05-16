@@ -18,7 +18,9 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
     return name;
   }
 
-  ListView _buildStudyModuleScreen(ThemeData themeData) {
+  ListView _buildStudyModuleScreen(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+
     List<Widget> view = [];
 
     view.add(Text(
@@ -42,12 +44,11 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
     return Scrollbar(
       child: Container(
         margin: const EdgeInsets.all(15),
         padding: const EdgeInsets.all(15),
-        child: _buildStudyModuleScreen(themeData),
+        child: _buildStudyModuleScreen(context),
       ),
     );
   }
