@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:we_find/model/modelWrapped.dart';
 import 'package:we_find/widgets/StudyModuleWidget.dart';
 
-import 'StudyModuleScreen.dart';
-
-// TODO: This is just a copy of StudyModuleScreen with some changes
-// if you know how to fix this feel free.
-
 class CourseDirecotryScreen extends StatefulWidget {
   final StudyModuleWrapped _studyModule;
   const CourseDirecotryScreen(this._studyModule);

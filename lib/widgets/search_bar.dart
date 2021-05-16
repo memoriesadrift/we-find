@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class searchBar extends StatefulWidget {
+class SearchBar extends StatefulWidget {
   double barWidth;
   double barHeight;
   Function callbackFunction;
-  searchBar(
+  SearchBar(
       {required Key key,
       this.barWidth = (100),
       this.barHeight = (40),
@@ -12,10 +12,10 @@ class searchBar extends StatefulWidget {
       : super(key: key);
 
   @override
-  _searchBarState createState() => _searchBarState();
+  _SearchBarState createState() => _SearchBarState();
 }
 
-class _searchBarState extends State<searchBar> {
+class _SearchBarState extends State<SearchBar> {
   final int cacheSize = 4;
   List<String> searchCache = [];
   List<String> typeAheadCache = [];
