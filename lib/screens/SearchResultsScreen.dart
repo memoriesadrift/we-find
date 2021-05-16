@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:we_find/model/I18NString.dart';
+import 'package:provider/provider.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/modelWrapped.dart';
+import 'package:we_find/providers/lang_provider.dart';
 import 'package:we_find/widgets/CourseWidget.dart';
 
-class SerchResultsScreen extends StatelessWidget {
+class SearchResultsScreen extends StatelessWidget {
+  final BuildContext _context;
   final List<CourseWrapped> _myCourses = [];
   final String _searchQuery;
-  SerchResultsScreen(List<Course> courses, this._searchQuery) {
+
+  SearchResultsScreen(this._context, List<Course> courses, this._searchQuery) {
+    final langProvider = Provider.of<LangProvider>(_context);
+    final currentLang = langProvider.currentLang;
     for (Course eachCourse in courses) {
       // TODO: CHANGE THE LANGUAGE TO SOMETHING MEANINGFULL!
-      _myCourses.add(CourseWrapped(eachCourse, Lang.DE));
+      _myCourses.add(CourseWrapped(eachCourse, currentLang));
     }
   }
 

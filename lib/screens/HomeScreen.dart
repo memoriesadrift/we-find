@@ -1,18 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:we_find/data/course.dart';
 import 'package:we_find/data/coursedir.dart';
-import 'package:we_find/model/I18NString.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/modelWrapped.dart';
+import 'package:we_find/providers/lang_provider.dart';
 import 'package:we_find/screens/CourseDetailScreen.dart';
 import 'package:we_find/screens/CourseDirectoryScreen.dart';
 import 'package:we_find/screens/SearchResultsScreen.dart';
 import 'package:we_find/service/ufind_service.dart';
 import 'package:we_find/widgets/search_bar.dart';
-
 import 'package:xml/xml.dart';
-import 'package:we_find/data/course.dart';
 
 class HomeScreen extends StatelessWidget {
   // REMOVE NEXT THREE METHODS ONCE PASSING DATA ACTUALLY WORKS
@@ -37,6 +37,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const String WEFIND_TITLE = 'we:find';
     final ThemeData themeData = Theme.of(context);
+    final langProvider = Provider.of<LangProvider>(context);
+    final currentLang = langProvider.currentLang;
+
     return Scaffold(
       body: Column(
         children: [
@@ -70,7 +73,8 @@ class HomeScreen extends StatelessWidget {
                               return CircularProgressIndicator();
                             }
                             if (snapshot.data != null) {
-                              return SerchResultsScreen(snapshot.data!, input);
+                              return SearchResultsScreen(
+                                  context, snapshot.data!, input);
                             }
                             throw Exception("don't you dare throw this!");
                           },
@@ -109,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                                   return CourseDirecotryScreen(
                                       StudyModuleWrapped(
                                     snapshot.data!,
-                                    Lang.DE,
+                                    currentLang,
                                   ));
                                 }
                                 throw Exception("don't you dare throw this!");
@@ -174,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                           }
                           if (snapshot.data != null) {
                             return CourseDetailScreen(
-                                CourseWrapped(snapshot.data!, Lang.DE));
+                                CourseWrapped(snapshot.data!, currentLang));
                           }
                           throw Exception("don't you dare throw this!");
                         },
