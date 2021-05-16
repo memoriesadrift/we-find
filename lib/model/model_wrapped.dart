@@ -5,159 +5,108 @@ import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/providers/lang_provider.dart';
 
-// just extend this if you need to access some information
-// that is not modeled here. I did not want to add getters for everything
-
+/// Base class for all the model wrappers that serve to return data from
+/// the model objects even in case of encountering [null] values
 abstract class BaseWrapped {
-  final BuildContext context;
+  final BuildContext _context;
 
-  BaseWrapped(this.context);
+  BaseWrapped(this._context);
 
-  Lang getLang() => Provider.of<LangProvider>(context).currentLang;
+  BuildContext get context => _context;
+
+  Lang get lang => Provider.of<LangProvider>(_context).currentLang;
 }
 
-class CourseWrapped {
-  final Course _myCourse;
-  final Lang _myLang;
+class CourseWrapped extends BaseWrapped {
+  final Course _course;
 
-  const CourseWrapped(this._myCourse, this._myLang);
+  CourseWrapped(BuildContext context, this._course) : super(context);
 
-  // Think of how to return the name of the requested fields as well,
-  // so it's all in one place.
-  // e.g.: getCourseName to get the courseName and getCourseNameTitle to get
-  // "Course Name" (dependent on language)
+  Course get course => _course;
 
-  String getTypeAbbreviation() {
-    return _myCourse.courseType?.type ?? "--";
-  }
+  String get typeAbbreviation => _course.courseType?.type ?? "--";
 
-  String getName() {
-    return _myCourse.longName?.get(_myLang) ?? "Not found";
-  }
+  String get name => _course.longName?.get(lang) ?? "Not found";
 
-  String getEcts() {
-    return _myCourse.ects?.toString() ?? "Not found";
-  }
+  String get ects => _course.ects?.toString() ?? "Not found";
 
-  List<GroupWrapped> getGroups() {
-    List<GroupWrapped> ret = [];
-    if (_myCourse.groups == null) {
-      return ret;
-    }
-
-    for (Group group in _myCourse.groups!) {
-      ret.add(GroupWrapped(group, _myLang));
-    }
-
-    return ret;
-  }
+  List<GroupWrapped> get groups =>
+      _course.groups
+          ?.map((group) => GroupWrapped(context, group))
+          .toList(growable: false) ??
+      [];
 }
 
-class GroupWrapped {
-  final Group _myGroup;
-  final Lang _myLang;
+class GroupWrapped extends BaseWrapped {
+  final Group _group;
 
-  const GroupWrapped(this._myGroup, this._myLang);
+  GroupWrapped(BuildContext context, this._group) : super(context);
 
-  String getId() {
-    return _myGroup.id ?? "Not found";
-  }
+  String get id => _group.id ?? "Not found";
 
-  String getMaxParticipants() {
-    return _myGroup.maxParticipants?.toString() ?? "unknown";
-  }
+  String get maxParticipants => _group.maxParticipants?.toString() ?? "unknown";
 
-  String getDescription() {
-    return _myGroup.info?.comment?.get(_myLang) ?? "Not found";
-  }
+  String get description => _group.info?.comment?.get(lang) ?? "Not found";
 
-  String getMinumumRequirements() {
-    return _myGroup.info?.preconditions?.get(_myLang) ?? "Not found";
-  }
+  String get minumumRequirements =>
+      _group.info?.preconditions?.get(lang) ?? "Not found";
 
-  ScheduleWrapped getSchedule() {
-    if (_myGroup.schedule == null) {
+  ScheduleWrapped get schedule {
+    if (_group.schedule == null)
       throw NotFoundException("The group had no schedule");
-    }
-    return ScheduleWrapped(_myGroup.schedule!);
+
+    return ScheduleWrapped(context, _group.schedule!);
   }
 }
 
-class ScheduleWrapped {
-  final Schedule _mySchedule;
+class ScheduleWrapped extends BaseWrapped {
+  final Schedule _schedule;
 
-  const ScheduleWrapped(this._mySchedule);
+  ScheduleWrapped(BuildContext context, this._schedule) : super(context);
 
-  List<EventWrapped> getEvents() {
-    List<EventWrapped> ret = [];
-    for (Event event in _mySchedule.events) {
-      ret.add(EventWrapped(event));
-    }
-    return ret;
-  }
+  List<EventWrapped> get events => _schedule.events
+      .map((event) => EventWrapped(context, event))
+      .toList(growable: false);
 }
 
-class EventWrapped {
-  final Event _myEvent;
+class EventWrapped extends BaseWrapped {
+  final Event _event;
 
-  const EventWrapped(this._myEvent);
+  EventWrapped(BuildContext context, this._event) : super(context);
 
-  String getDate() {
-    if (_myEvent.begin == null) {
-      return "unknown";
-    }
-    return _myEvent.begin!.day.toString() +
-        "." +
-        _myEvent.begin!.month.toString() +
-        "." +
-        _myEvent.begin!.year.toString();
+  String get date {
+    if (_event.begin == null) return 'unknown';
+    final begin = _event.begin!;
+    return [begin.day, begin.month, begin.year]
+        .map((e) => e.toString())
+        .join('.');
   }
 
-  String getBeginHour() {
-    if (_myEvent.begin == null) {
-      return "unknown";
-    }
-    return _myEvent.begin!.hour.toString() +
-        ":" +
-        _myEvent.begin!.minute.toString();
+  String get beginHour {
+    if (_event.begin == null) return 'unknown';
+    final begin = _event.begin!;
+    return [begin.hour, begin.minute].map((e) => e.toString()).join(':');
   }
 
-  String getEndHour() {
-    if (_myEvent.end == null) {
-      return "unknown";
-    }
-    return _myEvent.end!.hour.toString() +
-        ":" +
-        _myEvent.end!.minute.toString();
+  String get endHour {
+    if (_event.end == null) return 'unknown';
+    final end = _event.end!;
+    return [end.hour, end.minute].map((e) => e.toString()).join(':');
   }
 
-  String getRoom() {
-    //TODO: Maybe change this to be able to show multiple locations?
-    // TBH I dont think anybody is going to notice though
-    return _myEvent.locations?[0].room ?? "unknown";
-  }
+  String get room => _event.locations?[0].room ?? "unknown";
 }
 
-class StudyModuleWrapped {
-  final StudyModule _myStudyModule;
-  final Lang _myLang;
+class StudyModuleWrapped extends BaseWrapped {
+  final StudyModule _studyModule;
 
-  const StudyModuleWrapped(this._myStudyModule, this._myLang);
+  StudyModuleWrapped(BuildContext context, this._studyModule) : super(context);
 
-  String getTitle() {
-    return _myStudyModule.title?.get(_myLang) ?? "Title not found";
-  }
+  String get title => _studyModule.title?.get(lang) ?? "Title not found";
 
-  List<StudyModuleWrapped> getChildren() {
-    List<StudyModuleWrapped> ret = [];
-    if (_myStudyModule.submodules == null) {
-      return ret;
-    }
-
-    for (StudyModule eachStudyMod in _myStudyModule.submodules!) {
-      ret.add(StudyModuleWrapped(eachStudyMod, _myLang));
-    }
-
-    return ret;
-  }
+  List<StudyModuleWrapped> get children =>
+      _studyModule.submodules
+          ?.map((studyModule) => StudyModuleWrapped(context, studyModule))
+          .toList(growable: false) ??
+      [];
 }
