@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                               return CircularProgressIndicator();
                             }
                             if (snapshot.data != null) {
-                              return SerchResultsScreen(snapshot.data!);
+                              return SerchResultsScreen(snapshot.data!, input);
                             }
                             throw Exception("don't you dare throw this!");
                           },

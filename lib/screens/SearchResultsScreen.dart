@@ -6,15 +6,23 @@ import 'package:we_find/widgets/CourseWidget.dart';
 
 class SerchResultsScreen extends StatelessWidget {
   final List<CourseWrapped> _myCourses = [];
-  SerchResultsScreen(List<Course> courses) {
+  final String _searchQuery;
+  SerchResultsScreen(List<Course> courses, this._searchQuery) {
     for (Course eachCourse in courses) {
       // TODO: CHANGE THE LANGUAGE TO SOMETHING MEANINGFULL!
       _myCourses.add(CourseWrapped(eachCourse, Lang.DE));
     }
   }
 
-  ListView _buildSearchResults() {
+  ListView _buildSearchResults(ThemeData themeData) {
     List<Widget> view = [];
+
+    view.add(Text(
+      "Search results for: $_searchQuery", // TODO: LANGUAGE
+      style: themeData.textTheme.headline2,
+    ));
+    view.add(Divider());
+
     for (CourseWrapped eachCourse in _myCourses) {
       view.add(CourseWidget(eachCourse));
       view.add(Divider());
@@ -29,7 +37,11 @@ class SerchResultsScreen extends StatelessWidget {
     final ThemeData themeData = Theme.of(context);
 
     return Container(
-      child: _buildSearchResults(),
+      margin: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
+      child: Scrollbar(
+        child: _buildSearchResults(themeData),
+      ),
     );
   }
 }
