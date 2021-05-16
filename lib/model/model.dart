@@ -105,6 +105,17 @@ class Course {
             ?.mapDescendants("group", (e) => Group.fromXmlTag(e)),
         offeredBy = tag.mapDescendant(
             "offeredby", (e) => ProgrammeOferee.fromXmlTag(e));
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Course &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          when == other.when;
+
+  @override
+  int get hashCode => id.hashCode ^ when.hashCode;
 }
 
 /// Representation of a [type] tag
