@@ -24,6 +24,8 @@ class CourseWrapped extends BaseWrapped {
 
   Course get course => _course;
 
+  String get id => _course.id ?? "Not found"; // TODO: maybe throw error here?
+
   String get typeAbbreviation => _course.courseType?.type ?? "--";
 
   String get name => _course.longName?.get(lang) ?? "Not found";
@@ -104,11 +106,21 @@ class StudyModuleWrapped extends BaseWrapped {
 
   StudyModuleWrapped(BuildContext context, this._studyModule) : super(context);
 
+  String get term => _studyModule.when ?? "2020S"; // is this the best idea?
+
+  int get splNumber => _studyModule.spl ?? -1;
+
   String get title => _studyModule.title?.get(lang) ?? "Title not found";
+
+  List<CourseWrapped> get courses =>
+      _studyModule.courses
+          ?.map((course) => CourseWrapped(context, course))
+          .toList(growable: false) ??
+      []; // returns empty list
 
   List<StudyModuleWrapped> get children =>
       _studyModule.submodules
           ?.map((studyModule) => StudyModuleWrapped(context, studyModule))
           .toList(growable: false) ??
-      [];
+      []; // returns empty list
 }
