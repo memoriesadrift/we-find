@@ -57,4 +57,13 @@ void main() {
       expect(coursesFuture, completion(IterableLength(equals(42))));
     });
   });
+
+  group('fetchRootStudyModules', () {
+    test('When fetching modules in a non-future semester, then '
+        'a non-empty list of StudyModule objects should be returned', () {
+      final studyModulesFuture = fetchRootStudyModules('2021S');
+      expect(studyModulesFuture, completion(IterableLength(greaterThan(0))));
+    });
+  });
+
 }

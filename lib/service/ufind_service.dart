@@ -9,6 +9,18 @@ import 'package:we_find/service/ufind_queries.dart';
 
 const authority = "m1-ufind.univie.ac.at";
 
+/// Returns the root [StudyModule] based on the specified semester [when].
+Future<List<StudyModule>> fetchRootStudyModules(String when) {
+  final url = Uri.https(authority, 'courses/browse/$when');
+  return http.get(url).then((response) {
+    if (response.statusCode != 200)
+      throw new HttpException(
+          'Unexpected response status code: ${response.statusCode}');
+    final root = Utf8Decoder().convert(response.bodyBytes).toXmlElement();
+    return root.mapDescendants('module', (e) => StudyModule.fromXmlTag(e));
+  });
+}
+
 /// Returns the root [StudyModule] based on the specified semester [when]
 /// and the [spl].
 ///
