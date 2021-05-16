@@ -69,6 +69,7 @@ class _SearchBarState extends State<SearchBar> {
               widget.callbackFunction(text);
             },
             decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
                 hintText: 'Search for a course...'),
           ),
