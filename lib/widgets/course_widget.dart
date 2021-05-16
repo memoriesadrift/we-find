@@ -33,13 +33,9 @@ class CourseWidget extends StatelessWidget {
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            print('added favourite, list: ');
                             Provider.of<FavCourseProvider>(context,
                                     listen: false)
                                 .toggleCourseAsFav(_myCourse.internalCourse);
-                            print(Provider.of<FavCourseProvider>(context,
-                                    listen: false)
-                                .courses);
                           },
                         )
                       ],
@@ -51,13 +47,51 @@ class CourseWidget extends StatelessWidget {
                 }),
               )
             },
-            child: Container(
-              width: double.infinity,
-              child: Text(
-                _myCourse.name,
-                style: themeData.textTheme.headline4,
-                textAlign: TextAlign.left,
-              ), // add more text here
+            child: Padding(
+              padding: EdgeInsets.all(5),
+              child: Column(children: [
+                Row(children: [
+                  Container(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                      child: Text(
+                        _myCourse.typeAbbreviation,
+                        style: themeData.textTheme.headline4,
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      _myCourse.name,
+                      style: themeData.textTheme.headline4,
+                      textAlign: TextAlign.left,
+                    ), // add more text here
+                  ),
+                ]),
+                Padding(padding: EdgeInsets.all(3)),
+                Row(
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                        child: Text(
+                          _myCourse.ects + " ECTS",
+                          style: themeData.textTheme.headline6,
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        _myCourse.offeree,
+                        style: themeData.textTheme.headline6,
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                  ],
+                )
+              ]),
             ),
           )
         ],
