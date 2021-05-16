@@ -24,13 +24,13 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
     List<Widget> view = [];
 
     view.add(Text(
-      widget._studyModule.getTitle(),
+      widget._studyModule.title,
       style: themeData.textTheme.headline3,
     ));
     view.add(Divider());
 
     for (StudyModuleWrapped eachStudyModule
-        in widget._studyModule.getChildren()) {
+        in widget._studyModule.children) {
       view.add(StudyModuleWidget(eachStudyModule, _trimName));
       view.add(Divider(
         color: themeData.colorScheme.primary,

@@ -30,7 +30,7 @@ class _CourseDirectoryScreenState extends State<CourseDirectoryScreen> {
     view.add(Divider());
 
     for (StudyModuleWrapped eachStudyModule
-        in widget._studyModule.getChildren()) {
+        in widget._studyModule.children) {
       view.add(StudyModuleWidget(eachStudyModule, _trimName));
       view.add(Divider(
         color: themeData.colorScheme.primary,

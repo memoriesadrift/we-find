@@ -29,7 +29,7 @@ class CourseWidget extends StatelessWidget {
             child: Container(
               width: double.infinity,
               child: Text(
-                _myCourse.getName(),
+                _myCourse.name,
                 style: themeData.textTheme.headline4,
                 textAlign: TextAlign.left,
               ), // add more text here

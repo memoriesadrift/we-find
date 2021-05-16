@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:we_find/data/course.dart';
-
 import 'package:we_find/data/course_dir.dart';
-import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/providers/lang_provider.dart';
@@ -75,8 +73,7 @@ class HomeScreen extends StatelessWidget {
                               return CircularProgressIndicator();
                             }
                             if (snapshot.data != null) {
-                              return SearchResultsScreen(
-                                  context, snapshot.data!, input);
+                              return SearchResultsScreen(input, snapshot.data!);
                             }
                             throw Exception("don't you dare throw this!");
                           },
@@ -114,8 +111,8 @@ class HomeScreen extends StatelessWidget {
                                 if (snapshot.data != null) {
                                   return CourseDirectoryScreen(
                                       StudyModuleWrapped(
+                                    context,
                                     snapshot.data!,
-                                    currentLang,
                                   ));
                                 }
                                 throw Exception("don't you dare throw this!");
@@ -179,8 +176,10 @@ class HomeScreen extends StatelessWidget {
                             return CircularProgressIndicator();
                           }
                           if (snapshot.data != null) {
-                            return CourseDetailScreen(
-                                CourseWrapped(snapshot.data!, currentLang));
+                            return CourseDetailScreen(CourseWrapped(
+                              context,
+                              snapshot.data!,
+                            ));
                           }
                           throw Exception("don't you dare throw this!");
                         },

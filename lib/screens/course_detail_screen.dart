@@ -13,19 +13,19 @@ class CourseDetailScreen extends StatelessWidget {
 
     // Title
     view.add(Text(
-      _course.getTypeAbbreviation() + " " + _course.getName(),
+      _course.typeAbbreviation + " " + _course.name,
       style: themeData.textTheme.headline1,
     ));
 
     // ECTS amount
     view.add(Text(
-      "ECTS: " + _course.getEcts(),
+      "ECTS: " + _course.ects,
       style: themeData.textTheme.headline2,
     ));
 
     // Groups
     view.add(Padding(
-      child: GroupPicker(_course.getGroups()),
+      child: GroupPicker(_course.groups),
       padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
     ));
 

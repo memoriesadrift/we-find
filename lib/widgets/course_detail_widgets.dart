@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
-
-import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/providers/lang_provider.dart';
 
@@ -28,7 +26,7 @@ class _GroupPickerState extends State<GroupPicker> {
     // which this would not detect
     for (int i = 0; i < widget._groups.length; ++i) {
       items.add(DropdownMenuItem(
-        child: Text(_extractNumberFromId(widget._groups[i].getId())),
+        child: Text(_extractNumberFromId(widget._groups[i].id)),
         onTap: () => setState(() => _showingGroupIndex = i),
         value: i,
       ));
@@ -75,7 +73,7 @@ class GroupDetails extends StatelessWidget {
     // Max participants
     view.add(Padding(
       child: Text(
-        "Max participants: " + _group.getMaxParticipants(),
+        "Max participants: " + _group.maxParticipants,
         style: themeData.textTheme.headline4,
       ),
       padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -92,7 +90,7 @@ class GroupDetails extends StatelessWidget {
     // has to be wrapped in html widget,
     // as it can contain html tags
     view.add(Html(
-      data: _group.getDescription(),
+      data: _group.description,
     ));
 
     // Dates
@@ -104,7 +102,7 @@ class GroupDetails extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
     ));
     try {
-      view.add(EventCalendar(_group.getSchedule()));
+      view.add(EventCalendar(_group.schedule));
     } catch (e) {
       // do nothing
     }
@@ -117,7 +115,7 @@ class GroupDetails extends StatelessWidget {
       ),
       padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
     ));
-    view.add(Html(data: _group.getMinumumRequirements()));
+    view.add(Html(data: _group.minumumRequirements));
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -143,22 +141,14 @@ class EventCalendar extends StatelessWidget {
 
   Row _eventToWidget(EventWrapped event) {
     return Row(
-      children: [
-        Text(event.getDate() +
-            " " +
-            event.getBeginHour() +
-            "-" +
-            event.getEndHour()),
-        Spacer(),
-        Text(event.getRoom())
-      ],
+      children: [Text(event.fullEventDate), Spacer(), Text(event.room)],
     );
   }
 
   Column _buildEventCalendar() {
     List<Row> view = [];
 
-    for (EventWrapped event in _schedule.getEvents()) {
+    for (EventWrapped event in _schedule.events) {
       view.add(_eventToWidget(event));
     }
 

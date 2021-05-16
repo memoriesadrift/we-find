@@ -5,6 +5,7 @@ import 'package:we_find/screens/study_module_screen.dart';
 class StudyModuleWidget extends StatelessWidget {
   final StudyModuleWrapped _myStudyModule;
   final Function? _trimName;
+
   const StudyModuleWidget(this._myStudyModule, this._trimName);
 
   String _getTrimmedTitle(String title) {
@@ -37,7 +38,7 @@ class StudyModuleWidget extends StatelessWidget {
             child: Container(
               width: double.infinity, // 100% width of parent
               child: Text(
-                _getTrimmedTitle(_myStudyModule.getTitle()),
+                _getTrimmedTitle(_myStudyModule.title),
                 style: themeData.textTheme.headline4,
                 textAlign: TextAlign.left,
               ),

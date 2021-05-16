@@ -94,6 +94,8 @@ class EventWrapped extends BaseWrapped {
     return [end.hour, end.minute].map((e) => e.toString()).join(':');
   }
 
+  String get fullEventDate => '$date $beginHour - $endHour';
+
   String get room => _event.locations?[0].room ?? "unknown";
 }
 
