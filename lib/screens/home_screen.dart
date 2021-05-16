@@ -152,6 +152,7 @@ class HomeScreen extends StatelessWidget {
                 )),
             alignment: Alignment.center,
           ),
+<<<<<<< HEAD
           // Is here for now ugly like this as a lambda,
           // as it needs to have access to context.
           // If you know a better way feel free to change it
@@ -189,6 +190,8 @@ class HomeScreen extends StatelessWidget {
               style: themeData.textTheme.button,
             ),
           ),
+=======
+>>>>>>> Delete test course button, closes #57
         ],
       ),
     );
