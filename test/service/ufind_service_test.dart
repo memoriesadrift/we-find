@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:test/test.dart';
+import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/service/ufind_queries.dart';
 import 'package:we_find/service/ufind_service.dart';
 
@@ -54,7 +55,7 @@ void main() {
     test(
         'When querying for courses with a count argument of 42, '
         '42 results should be returned', () {
-      final coursesFuture = queryForCourses('math', queryArg: Count(42));
+      final coursesFuture = queryForCourses('math', queryArgs: [Count(42)]);
       expect(coursesFuture, completion(IterableLength(equals(42))));
     });
   });

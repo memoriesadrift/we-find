@@ -42,13 +42,13 @@ Future<List<Course>> fetchCourses(String query) {
       (root) => root.mapDescendants('course', (e) => Course.fromXmlTag(e)));
 }
 
-const defaultQueryArg = CurrentTerm;
+const defaultQueryArgs = <QueryArgument>[];
 
 /// Convenience method to query for courses.
 Future<List<Course>> queryForCourses(String searchKeyword,
-    {QueryArgument queryArg = defaultQueryArg}) {
-  final queryString = '$searchKeyword ${queryArg.asString()}';
-  return fetchCourses(queryString);
+    {List<QueryArgument> queryArgs = defaultQueryArgs}) {
+  final query = QueryArgument.toQueryString(searchKeyword, queryArgs);
+  return fetchCourses(query);
 }
 
 /// Applies [mapper] to the [XmlElement] retrieved & parsed from the
