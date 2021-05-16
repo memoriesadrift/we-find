@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/screens/course_detail_screen.dart';
+import 'package:we_find/providers/fav_course_provider.dart';
 
 class CourseWidget extends StatelessWidget {
   final CourseWrapped _myCourse;
@@ -18,7 +20,30 @@ class CourseWidget extends StatelessWidget {
                 context,
                 MaterialPageRoute<void>(builder: (BuildContext context) {
                   return Scaffold(
-                    appBar: AppBar(title: Text('Course Detail Screen')),
+                    appBar: AppBar(
+                      title: Text('Course Detail Screen'),
+                      actions: <Widget>[
+                        IconButton(
+                          icon: Icon(
+                            Provider.of<FavCourseProvider>(context)
+                                    .courses
+                                    .contains(_myCourse.internalCourse)
+                                ? Icons.favorite
+                                : Icons.favorite_outline,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            print('added favourite, list: ');
+                            Provider.of<FavCourseProvider>(context,
+                                    listen: false)
+                                .toggleCourseAsFav(_myCourse.internalCourse);
+                            print(Provider.of<FavCourseProvider>(context,
+                                    listen: false)
+                                .courses);
+                          },
+                        )
+                      ],
+                    ),
                     body: Center(
                       child: CourseDetailScreen(_myCourse),
                     ),
