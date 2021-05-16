@@ -7,7 +7,8 @@ import 'package:we_find/model/model.dart';
 import 'package:we_find/model/modelWrapped.dart';
 import 'package:we_find/screens/CourseDetailScreen.dart';
 import 'package:we_find/screens/CourseDirectoryScreen.dart';
-import 'package:we_find/screens/StudyModuleScreen.dart';
+import 'package:we_find/screens/SearchResultsScreen.dart';
+import 'package:we_find/service/ufind_service.dart';
 import 'package:we_find/widgets/search_bar.dart';
 
 import 'package:xml/xml.dart';
@@ -40,6 +41,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Padding(padding: EdgeInsets.fromLTRB(0, 100, 0, 0)),
+          // Title
           Align(
             child: Text(
               WEFIND_TITLE,
@@ -48,16 +50,41 @@ class HomeScreen extends StatelessWidget {
             alignment: Alignment.center,
           ),
           Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
+          // Search bar
           Align(
-            child: searchBar(
+            child: SearchBar(
               key: Key('homeScreenSearchBar'),
               barWidth: MediaQuery.of(context).size.width - 40,
               barHeight: 80,
-              callbackFunction: fun,
+              callbackFunction: (String input) => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(builder: (BuildContext context) {
+                    return Scaffold(
+                      appBar: AppBar(title: Text('Search Results')),
+                      body: Center(
+                        child: FutureBuilder<List<Course>>(
+                          future: fetchCourses(input),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return CircularProgressIndicator();
+                            }
+                            if (snapshot.data != null) {
+                              return SerchResultsScreen(snapshot.data!, input);
+                            }
+                            throw Exception("don't you dare throw this!");
+                          },
+                        ),
+                      ),
+                    );
+                  }),
+                )
+              },
             ),
             alignment: Alignment.center,
           ),
           Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
+          // Course directory
           Align(
             child: SizedBox(
                 width: 150,
@@ -130,6 +157,7 @@ class HomeScreen extends StatelessWidget {
           // Is here for now ugly like this as a lambda,
           // as it needs to have access to context.
           // If you know a better way feel free to change it
+          // Course detail test
           ElevatedButton(
             onPressed: () => {
               Navigator.push(

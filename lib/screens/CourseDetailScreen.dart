@@ -6,7 +6,9 @@ class CourseDetailScreen extends StatelessWidget {
   final CourseWrapped _course;
   const CourseDetailScreen(this._course);
 
-  ListView _buildCourseDetailScreen(ThemeData themeData) {
+  ListView _buildCourseDetailScreen(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+
     List<Widget> view = [];
 
     // Title
@@ -32,11 +34,10 @@ class CourseDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
     return Container(
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(15),
-      child: _buildCourseDetailScreen(themeData),
+      child: _buildCourseDetailScreen(context),
     );
   }
 }
