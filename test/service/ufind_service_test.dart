@@ -51,7 +51,8 @@ void main() {
   });
 
   group('queryForCourses', () {
-    test('When querying for courses with a count argument of 42, '
+    test(
+        'When querying for courses with a count argument of 42, '
         '42 results should be returned', () {
       final coursesFuture = queryForCourses('math', queryArg: Count(42));
       expect(coursesFuture, completion(IterableLength(equals(42))));
@@ -59,11 +60,18 @@ void main() {
   });
 
   group('fetchRootStudyModules', () {
-    test('When fetching modules in a non-future semester, then '
-        'a non-empty list of StudyModule objects should be returned', () {
+    test(
+        'When fetching modules in a non-future semester, '
+        'then a non-empty list of StudyModule objects should be returned', () {
       final studyModulesFuture = fetchRootStudyModules('2021S');
       expect(studyModulesFuture, completion(IterableLength(greaterThan(0))));
     });
-  });
 
+    test(
+        'When fetching modules in a future semester, '
+        'then an empty list of StudyModule objects should be returned', () {
+      final studyModulesFuture = fetchRootStudyModules('2028S');
+      expect(studyModulesFuture, completion(IterableLength(equals(0))));
+    });
+  });
 }
