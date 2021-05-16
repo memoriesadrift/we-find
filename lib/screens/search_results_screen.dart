@@ -1,23 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
-import 'package:we_find/providers/lang_provider.dart';
 import 'package:we_find/widgets/course_widget.dart';
 
 class SearchResultsScreen extends StatelessWidget {
-  final BuildContext _context;
-  final List<CourseWrapped> _myCourses = [];
   final String _searchQuery;
+  final List<Course> _courses;
 
-  SearchResultsScreen(this._context, List<Course> courses, this._searchQuery) {
-    final langProvider = Provider.of<LangProvider>(_context);
-    final currentLang = langProvider.currentLang;
-    for (Course eachCourse in courses) {
-      // TODO: CHANGE THE LANGUAGE TO SOMETHING MEANINGFULL!
-      _myCourses.add(CourseWrapped(eachCourse, currentLang));
-    }
-  }
+  SearchResultsScreen(this._searchQuery, this._courses);
 
   ListView _buildSearchResults(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
@@ -30,10 +20,12 @@ class SearchResultsScreen extends StatelessWidget {
     ));
     view.add(Divider());
 
-    for (CourseWrapped eachCourse in _myCourses) {
-      view.add(CourseWidget(eachCourse));
+    _courses.forEach((course) {
+      final courseWrapped = CourseWrapped(context, course);
+      view.add(CourseWidget(courseWrapped));
       view.add(Divider());
-    }
+    });
+
     return ListView(
       children: view,
     );
