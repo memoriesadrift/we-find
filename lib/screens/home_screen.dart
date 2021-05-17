@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/providers/fav_course_provider.dart';
-import 'package:we_find/providers/lang_provider.dart';
 import 'package:we_find/screens/advaned_search_screen.dart';
 import 'package:we_find/screens/course_directory_screen.dart';
 import 'package:we_find/screens/search_results_screen.dart';
@@ -21,10 +20,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String WEFIND_TITLE = 'we:find';
     final ThemeData themeData = Theme.of(context);
-    final langProvider = Provider.of<LangProvider>(context);
-    final currentLang = langProvider.currentLang;
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -34,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                 // Title
                 Align(
                   child: Text(
-                    WEFIND_TITLE,
+                    'we:find',
                     style: themeData.textTheme.headline1,
                   ),
                   alignment: Alignment.center,
@@ -219,7 +215,6 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                   child: Text(

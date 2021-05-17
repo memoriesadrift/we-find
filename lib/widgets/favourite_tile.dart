@@ -37,7 +37,7 @@ class FavouriteTile extends StatelessWidget {
                 MaterialPageRoute<void>(builder: (BuildContext context) {
                   return Scaffold(
                     appBar: AppBar(
-                      title: Text('Course Detail Screen'),
+                      title: Text('Course Detail'),
                       actions: <Widget>[
                         IconButton(
                           icon: Icon(

@@ -22,8 +22,6 @@ class _GroupPickerState extends State<GroupPicker> {
 
   DropdownButton<int> _buildDropDownButton() {
     List<DropdownMenuItem<int>> items = [];
-    // TODO: Check if this behaves correctly. For example PR1 has a group 99
-    // which this would not detect
     for (int i = 0; i < widget._groups.length; ++i) {
       items.add(DropdownMenuItem(
         child: Text(_extractNumberFromId(widget._groups[i].id)),

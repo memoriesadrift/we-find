@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
+import 'package:we_find/providers/fav_course_provider.dart';
 import 'package:we_find/screens/course_detail_screen.dart';
 import 'package:we_find/screens/study_module_screen.dart';
 import 'package:we_find/service/ufind_service.dart';
@@ -131,7 +133,9 @@ class CourseDirectoryStudyModuleWidget extends StatelessWidget {
             context,
             MaterialPageRoute<void>(builder: (BuildContext context) {
               return Scaffold(
-                appBar: AppBar(title: Text('Course Detail Screen')),
+                appBar: AppBar(
+                  title: Text('Course Directory'),
+                ),
                 body: Center(
                   child: StudyModuleScreen(_myStudyModule),
                 ),
@@ -166,7 +170,25 @@ class CourseDirectoryCourseWidget extends StatelessWidget {
             context,
             MaterialPageRoute<void>(builder: (BuildContext context) {
               return Scaffold(
-                appBar: AppBar(title: Text('Course Detail Screen')),
+                appBar: AppBar(
+                  title: Text('Course Detail'),
+                  actions: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Provider.of<FavCourseProvider>(context)
+                                .courses
+                                .contains(_myCourse.internalCourse)
+                            ? Icons.favorite
+                            : Icons.favorite_outline,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        Provider.of<FavCourseProvider>(context, listen: false)
+                            .toggleCourseAsFav(_myCourse.internalCourse);
+                      },
+                    )
+                  ],
+                ),
                 body: Center(
                   child: FutureBuilder<Course?>(
                     future: fetchCourseById(_myCourse.id),
