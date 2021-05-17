@@ -52,13 +52,11 @@ class CourseWidget extends StatelessWidget {
               child: Column(children: [
                 Row(children: [
                   Container(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: Text(
-                        _myCourse.typeAbbreviation,
-                        style: themeData.textTheme.headline4,
-                        textAlign: TextAlign.left,
-                      ),
+                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                    child: Text(
+                      _myCourse.typeAbbreviation,
+                      style: themeData.textTheme.headline4,
+                      textAlign: TextAlign.left,
                     ),
                   ),
                   Expanded(
@@ -66,20 +64,19 @@ class CourseWidget extends StatelessWidget {
                       _myCourse.name,
                       style: themeData.textTheme.headline4,
                       textAlign: TextAlign.left,
-                    ), // add more text here
+                    ),
                   ),
+                  Text(_myCourse.semester),
                 ]),
                 Padding(padding: EdgeInsets.all(3)),
                 Row(
                   children: [
                     Container(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                        child: Text(
-                          _myCourse.ects + " ECTS",
-                          style: themeData.textTheme.headline6,
-                          textAlign: TextAlign.left,
-                        ),
+                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                      child: Text(
+                        _myCourse.ects + " ECTS",
+                        style: themeData.textTheme.headline6,
+                        textAlign: TextAlign.left,
                       ),
                     ),
                     Expanded(

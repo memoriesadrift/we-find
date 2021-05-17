@@ -14,7 +14,7 @@ const authority = "m1-ufind.univie.ac.at";
 ///
 /// If [when] is not specified, then the current term will be used by default.
 Future<List<StudyModule>> fetchRootStudyModules([String? when]) {
-  when ??= _currentTerm();
+  when ??= currentTerm();
   final url = Uri.https(authority, 'courses/browse/$when');
   return _fetchXmlContent(
       url,
@@ -32,7 +32,7 @@ Future<List<StudyModule>> fetchRootStudyModules([String? when]) {
 ///
 /// If [when] is not specified, then the current term will be used by default.
 Future<StudyModule?> fetchStudyModule(int spl, [String? when]) {
-  when ??= _currentTerm();
+  when ??= currentTerm();
   final url = Uri.https(authority, 'courses/browse/$when/$spl');
   return _fetchXmlContent(url,
       (root) => root.mapDescendant('module', (e) => StudyModule.fromXmlTag(e)));
@@ -52,7 +52,7 @@ Future<List<Course>> fetchCourses(String query) {
 ///
 /// If [when] is not specified, then the current term will be used by default.
 Future<Course> fetchCourseById(String id, [String? when]) {
-  when ??= _currentTerm();
+  when ??= currentTerm();
   final url = Uri.https(authority, 'courses/$id/$when');
   return _fetchXmlContent(url, (root) => Course.fromXmlTag(root));
 }
@@ -81,7 +81,7 @@ Future<T> _fetchXmlContent<T>(Uri uri, T Function(XmlElement) mapper) {
   });
 }
 
-String _currentTerm() {
+String currentTerm() {
   final dateTime = DateTime.now();
   final term = dateTime.month > 2 && dateTime.month < 10 ? 'S' : 'W';
   return '${dateTime.year}$term';
