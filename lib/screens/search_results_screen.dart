@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/widgets/course_widget.dart';
@@ -11,11 +12,12 @@ class SearchResultsScreen extends StatelessWidget {
 
   ListView _buildSearchResults(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final StringConstants constants = StringConstants(context);
 
     List<Widget> view = [];
 
     view.add(Text(
-      "Search results for: $_searchQuery", // TODO: LANGUAGE
+      "${constants.SearchResultsFor}: $_searchQuery", // TODO: LANGUAGE
       style: themeData.textTheme.headline2,
     ));
     view.add(Divider());
@@ -28,7 +30,7 @@ class SearchResultsScreen extends StatelessWidget {
 
     if (_courses.isEmpty) {
       view.add(Text(
-        "No results found!",
+        constants.NoResultsFound,
         style: themeData.textTheme.headline2,
       ));
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:we_find/language/language_constants.dart';
 
 class CustomCheckbox extends StatelessWidget {
   final bool _ticked;
@@ -51,10 +52,12 @@ class _SemesterInputState extends State<SemesterInput> {
       value: "SS",
     ));
 
+    final StringConstants constants = StringConstants(context);
+
     return Container(
       child: Row(
         children: [
-          Text("Term year: "),
+          Text("${constants.TermYear}: "),
           Container(
             width: 50,
             child: TextField(
@@ -62,7 +65,7 @@ class _SemesterInputState extends State<SemesterInput> {
               controller: widget._accesser,
             ),
           ),
-          Text("Winter/Summer term: "),
+          Text("${constants.WinterSummerTerm}: "),
           DropdownButton<String>(
             value: widget._accesser.semester,
             items: semester,

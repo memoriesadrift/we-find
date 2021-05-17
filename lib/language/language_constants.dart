@@ -4,9 +4,9 @@ import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/providers/lang_provider.dart';
 import 'package:we_find/screens/advaned_search_screen.dart';
 
-class LanguageConstatnts {
+class StringConstants {
   final BuildContext _context;
-  LanguageConstatnts(this._context);
+  StringConstants(this._context);
 
   Lang get lang => Provider.of<LangProvider>(_context).currentLang;
   BuildContext get context => _context;
@@ -54,11 +54,11 @@ class LanguageConstatnts {
       lang == Lang.EN ? "Group information" : "Gruppeninformation";
   String get Schedule => lang == Lang.EN ? "Schedule" : "Termine";
   String get MinimumRequierments =>
-      lang == Lang.EN ? "Minumum requirements" : "Minimalen Voraussetzungen";
+      lang == Lang.EN ? "Minumum requirements" : "Mindestanforderungen";
 
   // searchbar
   String get SearchForACourse =>
-      lang == Lang.EN ? "Search for a course" : "Suche nach einen Kurz";
+      lang == Lang.EN ? "Search for a course" : "Suche nach einen Kurs";
 
   // headers
   String get SearchResults =>
@@ -68,6 +68,6 @@ class LanguageConstatnts {
   String get AdvancedSearch =>
       lang == Lang.EN ? "Advanced Search" : "Erweiterte Suche";
   String get FavoriteCourses =>
-      lang == Lang.EN ? "Favorite Courses" : "Lieblings Kurse";
+      lang == Lang.EN ? "Favorite Courses" : "Lieblingskurse";
   String get CourseDetail => lang == Lang.EN ? "Course Detail" : "Kursdetails";
 }

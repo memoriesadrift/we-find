@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/screens/search_results_screen.dart';
 import 'package:we_find/service/ufind_queries.dart';
@@ -21,28 +22,29 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 
   Container _buildAdvancedOptions(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final StringConstants constants = StringConstants(context);
 
     List<Widget> view = [];
-    view.add(CustomCheckbox(
-        _fuzzy, "Fuzzy search", (bool? e) => setState(() => _fuzzy = !_fuzzy)));
-    view.add(CustomCheckbox(_ustream, "Course with stream",
+    view.add(CustomCheckbox(_fuzzy, constants.FuzzySearch,
+        (bool? e) => setState(() => _fuzzy = !_fuzzy)));
+    view.add(CustomCheckbox(_ustream, constants.CourseWithStream,
         (bool? e) => setState(() => _ustream = !_ustream)));
-    view.add(CustomCheckbox(_currentTerm, "Only current term",
+    view.add(CustomCheckbox(_currentTerm, constants.OnlyCurrentTerm,
         (bool? e) => setState(() => _currentTerm = !_currentTerm)));
 
     if (!_currentTerm) {
       view.add(Text(
-        "Search by Term",
+        constants.SearchByTerm,
         style: themeData.textTheme.headline3,
       ));
       view.add(SemesterInput(_onlyInTerm));
       view.add(Divider(color: themeData.colorScheme.primary));
       view.add(Text(
-        "Search by Term Range",
+        constants.SearchByTermRange,
         style: themeData.textTheme.headline3,
       ));
       view.add(Text(
-        "From Term",
+        constants.FromTerm,
         style: themeData.textTheme.headline4,
       ));
       view.add(SemesterInput(_fromTerm));
@@ -50,7 +52,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
         indent: double.infinity,
       ));
       view.add(Text(
-        "To Term",
+        constants.ToTerm,
         style: themeData.textTheme.headline4,
       ));
       view.add(SemesterInput(_toTerm));
@@ -93,6 +95,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final StringConstants constants = StringConstants(context);
     return Container(
       margin: const EdgeInsets.all(15),
       padding: const EdgeInsets.all(15),
@@ -106,7 +109,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
               context,
               MaterialPageRoute<void>(builder: (BuildContext context) {
                 return Scaffold(
-                  appBar: AppBar(title: Text('Search Results')),
+                  appBar: AppBar(title: Text(constants.SearchResults)),
                   body: Center(
                     child: FutureBuilder<List<Course>>(
                       future: queryForCourses(
