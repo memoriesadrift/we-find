@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:we_find/model/model.dart';
@@ -78,99 +76,150 @@ class HomeScreen extends StatelessWidget {
                   alignment: Alignment.center,
                 ),
                 Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
-                // Course directory
-                Align(
-                  child: SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: ElevatedButton(
-                        // inserting this here, if somebody
-                        // wants to offload this somewhere feel free
-                        onPressed: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute<void>(
-                                builder: (BuildContext context) {
-                              return Scaffold(
-                                appBar: AppBar(title: Text('Course Directory')),
-                                body: Center(
-                                  child: FutureBuilder<List<StudyModule>>(
-                                    future: fetchRootStudyModules(),
-                                    builder: (context, snapshot) {
-                                      if (!snapshot.hasData) {
-                                        return CircularProgressIndicator();
-                                      }
-                                      if (snapshot.data != null) {
-                                        return CourseDirectoryScreen(
-                                          snapshot.data!
-                                              .map((e) => StudyModuleWrapped(
-                                                  context, e))
-                                              .toList(),
-                                        );
-                                      }
-                                      throw Exception(
-                                          "don't you dare throw this!");
-                                    },
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  //direction: Axis.horizontal,
+                  // Course directory
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      child: SizedBox(
+                        width: 150,
+                        height: 150,
+                        child: ElevatedButton(
+                          // inserting this here, if somebody
+                          // wants to offload this somewhere feel free
+                          onPressed: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) {
+                                return Scaffold(
+                                  appBar:
+                                      AppBar(title: Text('Course Directory')),
+                                  body: Center(
+                                    child: FutureBuilder<List<StudyModule>>(
+                                      future: fetchRootStudyModules(),
+                                      builder: (context, snapshot) {
+                                        if (!snapshot.hasData) {
+                                          return CircularProgressIndicator();
+                                        }
+                                        if (snapshot.data != null) {
+                                          return CourseDirectoryScreen(
+                                            snapshot.data!
+                                                .map((e) => StudyModuleWrapped(
+                                                    context, e))
+                                                .toList(),
+                                          );
+                                        }
+                                        throw Exception(
+                                            "don't you dare throw this!");
+                                      },
+                                    ),
                                   ),
-                                ),
-                              );
-                            }),
-                          )
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            themeData.primaryColor,
-                          ),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
-                            Align(
-                              child: Icon(
-                                Icons.menu_book,
-                                color: themeData.colorScheme.secondary,
-                                size: 40,
-                              ),
-                              alignment: Alignment.center,
-                            ),
-                            Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
-                            Align(
-                              child: Text(
-                                'Course Directory',
-                                style: themeData.textTheme.button,
-                              ),
-                              alignment: Alignment.center,
+                                );
+                              }),
                             )
-                          ],
-                        ),
-                      )),
-                  alignment: Alignment.center,
-                ),
-                ElevatedButton(
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute<void>(builder: (BuildContext context) {
-                        return Scaffold(
-                          appBar: AppBar(title: Text('Course Detail Screen')),
-                          body: Center(
-                            child: AdvancedSearchScreen(),
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              themeData.primaryColor,
+                            ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
                           ),
-                        );
-                      }),
-                    )
-                  },
-                  child: Text(
-                    "Test advanced search screen",
-                    style: themeData.textTheme.button,
-                  ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
+                              Align(
+                                child: Icon(
+                                  Icons.menu_book,
+                                  color: themeData.colorScheme.secondary,
+                                  size: 40,
+                                ),
+                                alignment: Alignment.center,
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                              Align(
+                                child: Text(
+                                  'Course Directory',
+                                  style: themeData.textTheme.button,
+                                ),
+                                alignment: Alignment.center,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Advanced search
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      child: SizedBox(
+                        width: 150,
+                        height: 150,
+                        child: ElevatedButton(
+                          onPressed: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) {
+                                return Scaffold(
+                                  appBar:
+                                      AppBar(title: Text('Advanced Search')),
+                                  body: Center(
+                                    child: AdvancedSearchScreen(),
+                                  ),
+                                );
+                              }),
+                            )
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              themeData.primaryColor,
+                            ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
+                              Align(
+                                child: Icon(
+                                  Icons.zoom_in,
+                                  color: themeData.colorScheme.secondary,
+                                  size: 40,
+                                ),
+                                alignment: Alignment.center,
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                              Align(
+                                child: Text(
+                                  'Advanced Search',
+                                  style: themeData.textTheme.button,
+                                ),
+                                alignment: Alignment.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                   child: Text(

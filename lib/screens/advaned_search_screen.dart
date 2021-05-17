@@ -101,6 +101,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
         children: [
           SearchBar(
             barWidth: double.infinity,
+            barHeight: 80,
             key: Key('advancedSearchScreenSearchBar'),
             callbackFunction: (String input) => Navigator.push(
               context,
