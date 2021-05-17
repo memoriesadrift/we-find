@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                           appBar: AppBar(title: Text('Course Directory')),
                           body: Center(
                             child: FutureBuilder<List<StudyModule>>(
-                              future: fetchRootStudyModules(null),
+                              future: fetchRootStudyModules(),
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
                                   return CircularProgressIndicator();
