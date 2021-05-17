@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/providers/fav_course_provider.dart';
@@ -67,14 +68,18 @@ class CourseDirectoryStudyModuleRootWidget extends StatelessWidget {
   const CourseDirectoryStudyModuleRootWidget(this._myStudyModule);
 
   String _trimName(String name) {
-    if (name.startsWith("Studienprogrammleitung") ||
-        name.startsWith("Directorate of Studies"))
-      return name.substring(name.indexOf(" ") + 1);
+    if (name.startsWith("Studienprogrammleitung")) {
+      return name.substring("Studienprogrammleitung".length + 1);
+    }
+    if (name.startsWith("Directorate of Studies")) {
+      return name.substring("Directorate of Studies".length + 1);
+    }
     return name;
   }
 
   @override
   Widget build(BuildContext context) {
+    final StringConstants constants = StringConstants(context);
     return Container(
       child: _CourseDirectoryItem(
         _StudyModuleItemWidget(_myStudyModule, _trimName),
@@ -84,7 +89,7 @@ class CourseDirectoryStudyModuleRootWidget extends StatelessWidget {
             MaterialPageRoute<void>(
               builder: (BuildContext context) {
                 return Scaffold(
-                  appBar: AppBar(title: Text('Course Detail Screen')),
+                  appBar: AppBar(title: Text(constants.CourseDirectory)),
                   body: Center(
                     child: FutureBuilder<StudyModule?>(
                       future: fetchStudyModule(_myStudyModule.splNumber),
@@ -125,6 +130,7 @@ class CourseDirectoryStudyModuleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final StringConstants constants = StringConstants(context);
     return Container(
       child: _CourseDirectoryItem(
         _StudyModuleItemWidget(_myStudyModule, _trimName),
@@ -134,7 +140,7 @@ class CourseDirectoryStudyModuleWidget extends StatelessWidget {
             MaterialPageRoute<void>(builder: (BuildContext context) {
               return Scaffold(
                 appBar: AppBar(
-                  title: Text('Course Directory'),
+                  title: Text(constants.CourseDirectory),
                 ),
                 body: Center(
                   child: StudyModuleScreen(_myStudyModule),
@@ -155,6 +161,7 @@ class CourseDirectoryCourseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final StringConstants constants = StringConstants(context);
     return Container(
       child: _CourseDirectoryItem(
         Container(
@@ -171,7 +178,7 @@ class CourseDirectoryCourseWidget extends StatelessWidget {
             MaterialPageRoute<void>(builder: (BuildContext context) {
               return Scaffold(
                 appBar: AppBar(
-                  title: Text('Course Detail'),
+                  title: Text(constants.CourseDetail),
                   actions: <Widget>[
                     IconButton(
                       icon: Icon(

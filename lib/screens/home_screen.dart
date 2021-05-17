@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/providers/fav_course_provider.dart';
@@ -21,7 +22,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-
+    final StringConstants constants = StringConstants(context);
     return Scaffold(
         body: SingleChildScrollView(
       child: Column(
@@ -48,7 +49,8 @@ class HomeScreen extends StatelessWidget {
                         MaterialPageRoute<void>(
                             builder: (BuildContext context) {
                           return Scaffold(
-                            appBar: AppBar(title: Text('Search Results')),
+                            appBar:
+                                AppBar(title: Text(constants.SearchResults)),
                             body: Center(
                               child: FutureBuilder<List<Course>>(
                                 future: fetchCourses(input),
@@ -91,8 +93,8 @@ class HomeScreen extends StatelessWidget {
                               MaterialPageRoute<void>(
                                   builder: (BuildContext context) {
                                 return Scaffold(
-                                  appBar:
-                                      AppBar(title: Text('Course Directory')),
+                                  appBar: AppBar(
+                                      title: Text(constants.CourseDirectory)),
                                   body: Center(
                                     child: FutureBuilder<List<StudyModule>>(
                                       future: fetchRootStudyModules(),
@@ -144,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                                   padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
                               Align(
                                 child: Text(
-                                  'Course Directory',
+                                  constants.CourseDirectory,
                                   style: themeData.textTheme.button,
                                 ),
                                 alignment: Alignment.center,
@@ -167,8 +169,8 @@ class HomeScreen extends StatelessWidget {
                               MaterialPageRoute<void>(
                                   builder: (BuildContext context) {
                                 return Scaffold(
-                                  appBar:
-                                      AppBar(title: Text('Advanced Search')),
+                                  appBar: AppBar(
+                                      title: Text(constants.AdvancedSearch)),
                                   body: Center(
                                     child: AdvancedSearchScreen(),
                                   ),
@@ -203,7 +205,7 @@ class HomeScreen extends StatelessWidget {
                                   padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
                               Align(
                                 child: Text(
-                                  'Advanced Search',
+                                  constants.AdvancedSearch,
                                   style: themeData.textTheme.button,
                                 ),
                                 alignment: Alignment.center,
@@ -218,7 +220,7 @@ class HomeScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                   child: Text(
-                    'Favourite Courses',
+                    constants.FavoriteCourses,
                     style: themeData.textTheme.headline3,
                   ),
                 )

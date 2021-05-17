@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:we_find/exceptions/exceptions.dart';
+import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/providers/lang_provider.dart';
@@ -15,6 +16,9 @@ abstract class BaseWrapped {
   BuildContext get context => _context;
 
   Lang get lang => Provider.of<LangProvider>(_context).currentLang;
+
+  // TODO: Maybe unneccessery to reintialize the object here every time
+  StringConstants get constants => StringConstants(_context);
 }
 
 class CourseWrapped extends BaseWrapped {
@@ -24,15 +28,15 @@ class CourseWrapped extends BaseWrapped {
 
   Course get course => _course;
 
-  String get id => _course.id ?? "Not found";
-  String get offeree => _course.offeredBy?.name ?? "unknown department";
+  String get id => _course.id ?? constants.Unknown;
+  String get offeree => _course.offeredBy?.name ?? constants.UnknownDepartment;
 
   String get typeAbbreviation => _course.courseType?.type ?? "--";
 
-  String get name => _course.longName?.get(lang) ?? "Not found";
+  String get name => _course.longName?.get(lang) ?? constants.NotFound;
 
-  String get ects => _course.ects?.toString() ?? "Not found";
-  String get semester => _course.when ?? "Unknown Semester";
+  String get ects => _course.ects?.toString() ?? constants.NotFound;
+  String get semester => _course.when ?? constants.UnknownSemester;
 
   Course get internalCourse => _course;
 
@@ -48,14 +52,16 @@ class GroupWrapped extends BaseWrapped {
 
   GroupWrapped(BuildContext context, this._group) : super(context);
 
-  String get id => _group.id ?? "Not found";
+  String get id => _group.id ?? constants.NotFound;
 
-  String get maxParticipants => _group.maxParticipants?.toString() ?? "unknown";
+  String get maxParticipants =>
+      _group.maxParticipants?.toString() ?? constants.Unknown;
 
-  String get description => _group.info?.comment?.get(lang) ?? "Not found";
+  String get description =>
+      _group.info?.comment?.get(lang) ?? constants.NotFound;
 
   String get minumumRequirements =>
-      _group.info?.preconditions?.get(lang) ?? "Not found";
+      _group.info?.preconditions?.get(lang) ?? constants.NotFound;
 
   ScheduleWrapped get schedule {
     if (_group.schedule == null)
@@ -81,7 +87,7 @@ class EventWrapped extends BaseWrapped {
   EventWrapped(BuildContext context, this._event) : super(context);
 
   String get date {
-    if (_event.begin == null) return 'unknown';
+    if (_event.begin == null) return constants.Unknown;
     final begin = _event.begin!;
     return [begin.day, begin.month, begin.year]
         .map((e) => e.toString())
@@ -89,20 +95,20 @@ class EventWrapped extends BaseWrapped {
   }
 
   String get beginHour {
-    if (_event.begin == null) return 'unknown';
+    if (_event.begin == null) return constants.Unknown;
     final begin = _event.begin!;
     return [begin.hour, begin.minute].map((e) => e.toString()).join(':');
   }
 
   String get endHour {
-    if (_event.end == null) return 'unknown';
+    if (_event.end == null) return constants.Unknown;
     final end = _event.end!;
     return [end.hour, end.minute].map((e) => e.toString()).join(':');
   }
 
   String get fullEventDate => '$date $beginHour - $endHour';
 
-  String get room => _event.locations?[0].room ?? "unknown";
+  String get room => _event.locations?[0].room ?? constants.Unknown;
 }
 
 class StudyModuleWrapped extends BaseWrapped {
@@ -110,11 +116,11 @@ class StudyModuleWrapped extends BaseWrapped {
 
   StudyModuleWrapped(BuildContext context, this._studyModule) : super(context);
 
-  String get term => _studyModule.when ?? "unknown";
+  String get term => _studyModule.when ?? constants.Unknown;
 
   int get splNumber => _studyModule.spl ?? -1;
 
-  String get title => _studyModule.title?.get(lang) ?? "Title not found";
+  String get title => _studyModule.title?.get(lang) ?? constants.Unknown;
 
   List<CourseWrapped> get courses =>
       _studyModule.courses

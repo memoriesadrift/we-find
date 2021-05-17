@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/widgets/course_directory_widgets.dart';
 
@@ -13,11 +14,11 @@ class CourseDirectoryScreen extends StatefulWidget {
 class _CourseDirectoryScreenState extends State<CourseDirectoryScreen> {
   ListView _buildStudyModuleScreen(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-
+    final StringConstants constants = StringConstants(context);
     List<Widget> view = [];
 
     view.add(Text(
-      "Course Directory", // TODO: LANGUAGE
+      constants.CourseDirectory,
       style: themeData.textTheme.headline2,
     ));
     view.add(Divider());

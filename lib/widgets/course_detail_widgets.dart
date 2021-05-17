@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
+import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/providers/lang_provider.dart';
 
@@ -39,12 +40,13 @@ class _GroupPickerState extends State<GroupPicker> {
 
   @override
   Widget build(BuildContext context) {
+    final StringConstants constants = StringConstants(context);
     return Container(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(children: [
-            Text("Select a group"),
+            Text(constants.SelectAGroup),
             Spacer(),
             _buildDropDownButton()
           ]),
@@ -62,6 +64,7 @@ class GroupDetails extends StatelessWidget {
 
   Column _buildGroupDetails(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final StringConstants constants = StringConstants(context);
     // Access the language set by the user
     final langProvider = Provider.of<LangProvider>(context);
     final currentLang = langProvider.currentLang;
@@ -71,7 +74,7 @@ class GroupDetails extends StatelessWidget {
     // Max participants
     view.add(Padding(
       child: Text(
-        "Max participants: " + _group.maxParticipants,
+        "${constants.MaxParticipants}: " + _group.maxParticipants,
         style: themeData.textTheme.headline4,
       ),
       padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -80,7 +83,7 @@ class GroupDetails extends StatelessWidget {
     // Description
     view.add(Padding(
       child: Text(
-        "Group information:",
+        "${constants.GroupInformation}:",
         style: themeData.textTheme.headline4,
       ),
       padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -94,7 +97,7 @@ class GroupDetails extends StatelessWidget {
     // Dates
     view.add(Padding(
       child: Text(
-        "Schedule:",
+        "${constants.Schedule}:",
         style: themeData.textTheme.headline4,
       ),
       padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -108,7 +111,7 @@ class GroupDetails extends StatelessWidget {
     // Minimum requirements
     view.add(Padding(
       child: Text(
-        "Minumum requierements:",
+        "${constants.MinimumRequierments}:",
         style: themeData.textTheme.headline4,
       ),
       padding: EdgeInsets.fromLTRB(0, 16, 0, 0),

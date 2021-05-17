@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:we_find/language/language_constants.dart';
 
 class SearchBar extends StatefulWidget {
   double barWidth;
@@ -47,6 +48,7 @@ class _SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    final StringConstants constants = StringConstants(context);
     return Container(
       child: Padding(
         padding: EdgeInsets.all(8),
@@ -71,7 +73,7 @@ class _SearchBarState extends State<SearchBar> {
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
-                hintText: 'Search for a course...'),
+                hintText: '${constants.SearchForACourse}...'),
           ),
         ),
       ),

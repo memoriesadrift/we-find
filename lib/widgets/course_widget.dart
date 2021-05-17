@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/screens/course_detail_screen.dart';
 import 'package:we_find/providers/fav_course_provider.dart';
@@ -11,6 +12,7 @@ class CourseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final StringConstants constants = StringConstants(context);
     return Container(
       child: Wrap(
         children: [
@@ -21,7 +23,7 @@ class CourseWidget extends StatelessWidget {
                 MaterialPageRoute<void>(builder: (BuildContext context) {
                   return Scaffold(
                     appBar: AppBar(
-                      title: Text('Course Detail Screen'),
+                      title: Text(constants.CourseDetail),
                       actions: <Widget>[
                         IconButton(
                           icon: Icon(
