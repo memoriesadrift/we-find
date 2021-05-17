@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:we_find/model/model.dart';
@@ -22,10 +20,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String WEFIND_TITLE = 'we:find';
     final ThemeData themeData = Theme.of(context);
-    final langProvider = Provider.of<LangProvider>(context);
-    final currentLang = langProvider.currentLang;
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -35,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                 // Title
                 Align(
                   child: Text(
-                    WEFIND_TITLE,
+                    'we:find',
                     style: themeData.textTheme.headline1,
                   ),
                   alignment: Alignment.center,
