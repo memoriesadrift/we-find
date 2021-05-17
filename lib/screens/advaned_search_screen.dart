@@ -77,7 +77,6 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
     }
     if (_onlyInTerm.text != "") {
       ret.add(InSemester(_onlyInTerm.text + _onlyInTerm.semester));
-      print(_onlyInTerm.text + _onlyInTerm.semester);
     } else if (_fromTerm.text != "") {
       String from = _fromTerm.text + _fromTerm.semester;
       String to;

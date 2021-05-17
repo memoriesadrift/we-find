@@ -26,6 +26,13 @@ class SearchResultsScreen extends StatelessWidget {
       view.add(Divider());
     });
 
+    if (_courses.isEmpty) {
+      view.add(Text(
+        "No results found!",
+        style: themeData.textTheme.headline2,
+      ));
+    }
+
     return ListView(
       children: view,
     );
