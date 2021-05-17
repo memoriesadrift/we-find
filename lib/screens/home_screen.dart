@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/providers/fav_course_provider.dart';
-import 'package:we_find/providers/lang_provider.dart';
+import 'package:we_find/screens/advaned_search_screen.dart';
 import 'package:we_find/screens/course_directory_screen.dart';
 import 'package:we_find/screens/search_results_screen.dart';
 import 'package:we_find/service/ufind_service.dart';
@@ -72,79 +72,148 @@ class HomeScreen extends StatelessWidget {
                   alignment: Alignment.center,
                 ),
                 Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
-                // Course directory
-                Align(
-                  child: SizedBox(
-                      width: 150,
-                      height: 150,
-                      child: ElevatedButton(
-                        // inserting this here, if somebody
-                        // wants to offload this somewhere feel free
-                        onPressed: () => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute<void>(
-                                builder: (BuildContext context) {
-                              return Scaffold(
-                                appBar: AppBar(title: Text('Course Directory')),
-                                body: Center(
-                                  child: FutureBuilder<List<StudyModule>>(
-                                    future: fetchRootStudyModules(),
-                                    builder: (context, snapshot) {
-                                      if (!snapshot.hasData) {
-                                        return CircularProgressIndicator();
-                                      }
-                                      if (snapshot.data != null) {
-                                        return CourseDirectoryScreen(
-                                          snapshot.data!
-                                              .map((e) => StudyModuleWrapped(
-                                                  context, e))
-                                              .toList(),
-                                        );
-                                      }
-                                      throw Exception(
-                                          "don't you dare throw this!");
-                                    },
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  //direction: Axis.horizontal,
+                  // Course directory
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      child: SizedBox(
+                        width: 150,
+                        height: 150,
+                        child: ElevatedButton(
+                          // inserting this here, if somebody
+                          // wants to offload this somewhere feel free
+                          onPressed: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) {
+                                return Scaffold(
+                                  appBar:
+                                      AppBar(title: Text('Course Directory')),
+                                  body: Center(
+                                    child: FutureBuilder<List<StudyModule>>(
+                                      future: fetchRootStudyModules(),
+                                      builder: (context, snapshot) {
+                                        if (!snapshot.hasData) {
+                                          return CircularProgressIndicator();
+                                        }
+                                        if (snapshot.data != null) {
+                                          return CourseDirectoryScreen(
+                                            snapshot.data!
+                                                .map((e) => StudyModuleWrapped(
+                                                    context, e))
+                                                .toList(),
+                                          );
+                                        }
+                                        throw Exception(
+                                            "don't you dare throw this!");
+                                      },
+                                    ),
                                   ),
-                                ),
-                              );
-                            }),
-                          )
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            themeData.primaryColor,
-                          ),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
-                            Align(
-                              child: Icon(
-                                Icons.menu_book,
-                                color: themeData.colorScheme.secondary,
-                                size: 40,
-                              ),
-                              alignment: Alignment.center,
-                            ),
-                            Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
-                            Align(
-                              child: Text(
-                                'Course Directory',
-                                style: themeData.textTheme.button,
-                              ),
-                              alignment: Alignment.center,
+                                );
+                              }),
                             )
-                          ],
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              themeData.primaryColor,
+                            ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
+                              Align(
+                                child: Icon(
+                                  Icons.menu_book,
+                                  color: themeData.colorScheme.secondary,
+                                  size: 40,
+                                ),
+                                alignment: Alignment.center,
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                              Align(
+                                child: Text(
+                                  'Course Directory',
+                                  style: themeData.textTheme.button,
+                                ),
+                                alignment: Alignment.center,
+                              )
+                            ],
+                          ),
                         ),
-                      )),
-                  alignment: Alignment.center,
+                      ),
+                    ),
+                    // Advanced search
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      child: SizedBox(
+                        width: 150,
+                        height: 150,
+                        child: ElevatedButton(
+                          onPressed: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute<void>(
+                                  builder: (BuildContext context) {
+                                return Scaffold(
+                                  appBar:
+                                      AppBar(title: Text('Advanced Search')),
+                                  body: Center(
+                                    child: AdvancedSearchScreen(),
+                                  ),
+                                );
+                              }),
+                            )
+                          },
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              themeData.primaryColor,
+                            ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 40, 0, 0)),
+                              Align(
+                                child: Icon(
+                                  Icons.zoom_in,
+                                  color: themeData.colorScheme.secondary,
+                                  size: 40,
+                                ),
+                                alignment: Alignment.center,
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+                              Align(
+                                child: Text(
+                                  'Advanced Search',
+                                  style: themeData.textTheme.button,
+                                ),
+                                alignment: Alignment.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 20),

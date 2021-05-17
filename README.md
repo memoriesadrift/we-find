@@ -1,16 +1,27 @@
-# we_find
+## Readme - M3
 
-A new Flutter project.
+* Group: 18:00
+* Team-Nr.: 316
+* Projektthema: Mobil optimiertes Vorlesungsverzeichnis u:find
 
-## Getting Started
+### Implementation
 
-This project is a starting point for a Flutter application.
+Framework: Flutter
 
-A few resources to get you started if this is your first Flutter project:
+API-Version: Android API-Level 30
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Devices on which the app was tested:
+Pixel2, iPhone 12 Pro Max
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+External frameworks and libraries:
+
+- provider: ^5.0.0
+- xml: ^5.1.0
+- flutter_html: ^2.0.0
+
+Duration of the development:
+124 hours
+
+Further notes:
+
+The application uses null-safety.

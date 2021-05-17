@@ -29,6 +29,7 @@ class WeFindApp extends StatelessWidget {
       title: 'we:find',
       theme: Theme.lightThemeData,
       home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
