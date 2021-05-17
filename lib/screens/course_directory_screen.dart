@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:we_find/model/model_wrapped.dart';
-import 'package:we_find/widgets/study_module_widget.dart';
+import 'package:we_find/widgets/course_directory_widgets.dart';
 
 class CourseDirectoryScreen extends StatefulWidget {
-  final StudyModuleWrapped _studyModule;
-  const CourseDirectoryScreen(this._studyModule);
+  final List<StudyModuleWrapped> _root;
+  const CourseDirectoryScreen(this._root);
 
   @override
   _CourseDirectoryScreenState createState() => _CourseDirectoryScreenState();
 }
 
 class _CourseDirectoryScreenState extends State<CourseDirectoryScreen> {
-  String _trimName(String name) {
-    if (name.startsWith("Studienprogrammleitung") ||
-        name.startsWith("Directorate of Studies"))
-      return name.substring(name.indexOf(" ") + 1);
-    return name;
-  }
-
   ListView _buildStudyModuleScreen(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
 
@@ -29,9 +22,8 @@ class _CourseDirectoryScreenState extends State<CourseDirectoryScreen> {
     ));
     view.add(Divider());
 
-    for (StudyModuleWrapped eachStudyModule
-        in widget._studyModule.children) {
-      view.add(StudyModuleWidget(eachStudyModule, _trimName));
+    for (StudyModuleWrapped eachStudyModule in widget._root) {
+      view.add(CourseDirectoryStudyModuleRootWidget(eachStudyModule));
       view.add(Divider(
         color: themeData.colorScheme.primary,
       ));

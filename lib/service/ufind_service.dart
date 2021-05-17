@@ -53,7 +53,7 @@ Future<List<Course>> fetchCourses(String query) {
 /// If [when] is not specified, then the current term will be used by default.
 Future<Course> fetchCourseById(String id, [String? when]) {
   when ??= _currentTerm();
-  final url = Uri.https(authority, 'courses/browse/$id/$when');
+  final url = Uri.https(authority, 'courses/$id/$when');
   return _fetchXmlContent(url, (root) => Course.fromXmlTag(root));
 }
 

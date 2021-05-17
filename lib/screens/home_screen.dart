@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:we_find/data/course.dart';
-import 'package:we_find/data/course_dir.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/providers/lang_provider.dart';
@@ -24,11 +23,6 @@ class HomeScreen extends StatelessWidget {
   Future<Course> _getTestCourse() async {
     String res = await Future(getTestCourse);
     return Course.fromXmlTag(parseXmlString(res));
-  }
-
-  Future<StudyModule> _getTestCourseDirectory() async {
-    String res = await Future(getTestCourseDirectory);
-    return StudyModule.fromXmlTag(parseXmlString(res));
   }
 
   void fun(String text) {}
@@ -102,18 +96,19 @@ class HomeScreen extends StatelessWidget {
                         return Scaffold(
                           appBar: AppBar(title: Text('Course Directory')),
                           body: Center(
-                            child: FutureBuilder<StudyModule>(
-                              future: _getTestCourseDirectory(),
+                            child: FutureBuilder<List<StudyModule>>(
+                              future: fetchRootStudyModules(),
                               builder: (context, snapshot) {
                                 if (!snapshot.hasData) {
                                   return CircularProgressIndicator();
                                 }
                                 if (snapshot.data != null) {
                                   return CourseDirectoryScreen(
-                                      StudyModuleWrapped(
-                                    context,
-                                    snapshot.data!,
-                                  ));
+                                    snapshot.data!
+                                        .map((e) =>
+                                            StudyModuleWrapped(context, e))
+                                        .toList(),
+                                  );
                                 }
                                 throw Exception("don't you dare throw this!");
                               },

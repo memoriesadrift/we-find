@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:we_find/model/model_wrapped.dart';
-import 'package:we_find/widgets/study_module_widget.dart';
+import 'package:we_find/widgets/course_directory_widgets.dart';
 
 class StudyModuleScreen extends StatefulWidget {
   final StudyModuleWrapped _studyModule;
@@ -11,13 +11,6 @@ class StudyModuleScreen extends StatefulWidget {
 }
 
 class _StudyModuleScreenState extends State<StudyModuleScreen> {
-  String _trimName(String name) {
-    if (name.endsWith(')')) {
-      return name.substring(0, name.lastIndexOf('('));
-    }
-    return name;
-  }
-
   ListView _buildStudyModuleScreen(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
 
@@ -29,12 +22,20 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
     ));
     view.add(Divider());
 
-    for (StudyModuleWrapped eachStudyModule
-        in widget._studyModule.children) {
-      view.add(StudyModuleWidget(eachStudyModule, _trimName));
-      view.add(Divider(
-        color: themeData.colorScheme.primary,
-      ));
+    if (widget._studyModule.children.isNotEmpty) {
+      for (StudyModuleWrapped eachStudyModule in widget._studyModule.children) {
+        view.add(CourseDirectoryStudyModuleWidget(eachStudyModule));
+        view.add(Divider(
+          color: themeData.colorScheme.primary,
+        ));
+      }
+    } else if (widget._studyModule.courses.isNotEmpty) {
+      for (CourseWrapped eachCourse in widget._studyModule.courses) {
+        view.add(CourseDirectoryCourseWidget(eachCourse));
+        view.add(Divider(
+          color: themeData.colorScheme.primary,
+        ));
+      }
     }
 
     return ListView(
