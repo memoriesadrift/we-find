@@ -6,6 +6,7 @@ import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/providers/fav_course_provider.dart';
 import 'package:we_find/providers/lang_provider.dart';
+import 'package:we_find/screens/advaned_search_screen.dart';
 import 'package:we_find/screens/course_directory_screen.dart';
 import 'package:we_find/screens/search_results_screen.dart';
 import 'package:we_find/service/ufind_service.dart';
@@ -150,6 +151,25 @@ class HomeScreen extends StatelessWidget {
                         ),
                       )),
                   alignment: Alignment.center,
+                ),
+                ElevatedButton(
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(builder: (BuildContext context) {
+                        return Scaffold(
+                          appBar: AppBar(title: Text('Course Detail Screen')),
+                          body: Center(
+                            child: AdvancedSearchScreen(),
+                          ),
+                        );
+                      }),
+                    )
+                  },
+                  child: Text(
+                    "Test advanced search screen",
+                    style: themeData.textTheme.button,
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
