@@ -31,8 +31,8 @@ class StringConstants {
       lang == Lang.EN ? "Search by Term" : "Suche im Semester";
   String get SearchByTermRange =>
       lang == Lang.EN ? "Search by Term Range" : "Suchen in Semesterintervall";
-  String get FromTerm => lang == Lang.EN ? "From Term" : "Von Semester";
-  String get ToTerm => lang == Lang.EN ? "To Term" : "Bis Semester";
+  String get FromTerm => lang == Lang.EN ? "From Term" : "Semester von";
+  String get ToTerm => lang == Lang.EN ? "To Term" : "Semester bis";
 
   // search results
   String get SearchResultsFor =>
