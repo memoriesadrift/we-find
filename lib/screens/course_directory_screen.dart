@@ -17,7 +17,7 @@ class _CourseDirectoryScreenState extends State<CourseDirectoryScreen> {
     List<Widget> view = [];
 
     view.add(Text(
-      "Course Directory", // TODO: LANGUAGE
+      "Course Directory",
       style: themeData.textTheme.headline2,
     ));
     view.add(Divider());
