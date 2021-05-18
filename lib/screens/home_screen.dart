@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:we_find/language/language_constants.dart';
+import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/providers/fav_course_provider.dart';
+import 'package:we_find/providers/lang_provider.dart';
 import 'package:we_find/screens/advaned_search_screen.dart';
 import 'package:we_find/screens/course_directory_screen.dart';
 import 'package:we_find/screens/search_results_screen.dart';
@@ -50,7 +52,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final StringConstants constants = StringConstants(context);
+    final LangProvider langProvider = Provider.of<LangProvider>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => langProvider.changeLang(
+            langProvider.currentLang == Lang.EN ? Lang.DE : Lang.EN),
+        child: Icon(Icons.language),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
