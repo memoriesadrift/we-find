@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:provider/provider.dart';
 import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/model_wrapped.dart';
-import 'package:we_find/providers/lang_provider.dart';
 
 class GroupPicker extends StatefulWidget {
   final List<GroupWrapped> _groups;
@@ -65,9 +63,6 @@ class GroupDetails extends StatelessWidget {
   Column _buildGroupDetails(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final StringConstants constants = StringConstants(context);
-    // Access the language set by the user
-    final langProvider = Provider.of<LangProvider>(context);
-    final currentLang = langProvider.currentLang;
 
     List<Widget> view = [];
 
@@ -90,9 +85,16 @@ class GroupDetails extends StatelessWidget {
     ));
     // has to be wrapped in html widget,
     // as it can contain html tags
-    view.add(Html(
-      data: _group.description,
-    ));
+    view.add(
+      Html(
+        data: _group.description,
+        style: {
+          "body": Style(
+            fontSize: FontSize(18),
+          )
+        },
+      ),
+    );
 
     // Dates
     view.add(Padding(
@@ -127,9 +129,6 @@ class GroupDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(15),
-      padding: const EdgeInsets.all(15),
-      //height: 1000,
       child: _buildGroupDetails(context),
     );
   }
@@ -142,15 +141,23 @@ class EventCalendar extends StatelessWidget {
 
   Row _eventToWidget(EventWrapped event) {
     return Row(
-      children: [Text(event.fullEventDate), Spacer(), Text(event.room)],
+      children: [
+        Expanded(
+          child: Text(event.fullEventDate),
+        ),
+        Expanded(
+          child: Text(event.room),
+        )
+      ],
     );
   }
 
   Column _buildEventCalendar() {
-    List<Row> view = [];
+    List<Widget> view = [];
 
     for (EventWrapped event in _schedule.events) {
       view.add(_eventToWidget(event));
+      view.add(Divider());
     }
 
     return Column(
