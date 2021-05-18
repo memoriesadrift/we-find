@@ -7,6 +7,7 @@ import 'package:we_find/providers/fav_course_provider.dart';
 import 'package:we_find/screens/course_detail_screen.dart';
 import 'package:we_find/screens/study_module_screen.dart';
 import 'package:we_find/service/ufind_service.dart';
+import 'package:we_find/widgets/favorite_widgets.dart';
 
 // This widget handles the actual rendering of the data.
 // If you want to customize what it shows you can change the widget argument
@@ -179,22 +180,7 @@ class CourseDirectoryCourseWidget extends StatelessWidget {
               return Scaffold(
                 appBar: AppBar(
                   title: Text(constants.CourseDetail),
-                  actions: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Provider.of<FavCourseProvider>(context)
-                                .courses
-                                .contains(_myCourse.internalCourse)
-                            ? Icons.favorite
-                            : Icons.favorite_outline,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Provider.of<FavCourseProvider>(context, listen: false)
-                            .toggleCourseAsFav(_myCourse.internalCourse);
-                      },
-                    )
-                  ],
+                  actions: [HeartIcon(_myCourse.course)],
                 ),
                 body: Center(
                   child: FutureBuilder<Course?>(
