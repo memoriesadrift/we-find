@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:we_find/model/model.dart';
@@ -96,12 +94,10 @@ class FavoriteTile extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.all(5),
-                      child: Flexible(
-                        child: Text(
-                          _wrappedCourse.name,
-                          style: themeData.textTheme.button,
-                          textAlign: TextAlign.center,
-                        ),
+                      child: Text(
+                        _wrappedCourse.name,
+                        style: themeData.textTheme.button,
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ],
