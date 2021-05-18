@@ -73,10 +73,17 @@ class StudyModuleLevel {
         title = tag.toI18NString("title");
 }
 
+class CourseID {
+  final String? id;
+  const CourseID(this.id);
+
+  bool operator ==(Object other) =>
+      identical(this, other) || other is CourseID && id == other.id;
+}
+
 /// Representation of a [course] tag
 /// [course] tags are direct descendants of the 'result' root-tag.
-class Course {
-  final String? id;
+class Course extends CourseID {
   final String? when;
   final DateTime? version;
   final I18NString? longName;
@@ -89,8 +96,7 @@ class Course {
   final ProgrammeOferee? offeredBy;
 
   Course.fromXmlTag(XmlElement tag)
-      : id = tag.getAttribute("id"),
-        when = tag.getAttribute("when"),
+      : when = tag.getAttribute("when"),
         version = tag.attrToDateTime("version"),
         longName = tag.toI18NString("longname"),
         courseType = tag.mapDescendant("type", (e) => CourseType.fromXmlTag(e)),
@@ -104,7 +110,8 @@ class Course {
             .getElement("groups")
             ?.mapDescendants("group", (e) => Group.fromXmlTag(e)),
         offeredBy = tag.mapDescendant(
-            "offeredby", (e) => ProgrammeOferee.fromXmlTag(e));
+            "offeredby", (e) => ProgrammeOferee.fromXmlTag(e)),
+        super(tag.getAttribute("id"));
 
   @override
   bool operator ==(Object other) =>
