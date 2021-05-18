@@ -37,13 +37,34 @@ MultiProvider appProvider(Widget appRoot, Set<CourseID> favs) => MultiProvider(
     );
 
 class WeFindApp extends StatelessWidget {
+  FavCourseProvider? _favCourses;
+
   @override
   Widget build(BuildContext context) {
+    _favCourses = Provider.of<FavCourseProvider>(context);
     return MaterialApp(
       title: 'we:find',
       theme: Theme.lightThemeData,
       home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
+  }
+
+  @override
+  void detached() async {
+    if (_favCourses == null) return;
+
+    String ret = "";
+    bool first = true;
+    for (CourseID eachCourseID in _favCourses!.courses) {
+      if (!first) {
+        ret += ",";
+      }
+      ret += eachCourseID.id!;
+      first = false;
+    }
+
+    final prefs = await SharedPreferences.getInstance();
+    print(await prefs.setString("favorites", ret));
   }
 }
