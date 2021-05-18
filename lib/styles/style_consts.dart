@@ -16,6 +16,7 @@ class Colors {
   static const Color titleColor = const Color(0xFF5A606B);
   static const Color textColor = const Color(0xFF5A606B);
   static const Color accentColor = const Color(0xFFB01005);
+  static const Color subheadingColor = const Color(0xFF75746e);
 }
 
 class Fonts {
@@ -67,5 +68,10 @@ class Text {
     fontWeight: FontWeight.w500,
     fontSize: 22,
     color: Colors.textColor,
+  );
+  static const TextStyle heading6Style = const TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+    color: Colors.subheadingColor,
   );
 }
