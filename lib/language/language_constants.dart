@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:we_find/model/i18n_string.dart';
 import 'package:we_find/providers/lang_provider.dart';
-import 'package:we_find/screens/advaned_search_screen.dart';
 
 class StringConstants {
   final BuildContext _context;
@@ -64,7 +63,7 @@ class StringConstants {
   String get SearchResults =>
       lang == Lang.EN ? "Search Results" : "Such Ergebnisse";
   String get CourseDirectory =>
-      lang == Lang.EN ? "Course Directory" : "Kursverzeichnis";
+      lang == Lang.EN ? "Course Directory" : "Vorlesungsverzeichnis";
   String get AdvancedSearch =>
       lang == Lang.EN ? "Advanced Search" : "Erweiterte Suche";
   String get FavoriteCourses =>
