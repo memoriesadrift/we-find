@@ -27,17 +27,17 @@ class HomeScreen extends StatelessWidget {
             style: themeData.textTheme.headline3,
           ),
           Container(
-            margin: EdgeInsets.all(20),
+            margin: EdgeInsets.all(50),
             height: 500,
             child: GridView.count(
               //childAspectRatio: 1.5,
               crossAxisSpacing: 3,
               mainAxisSpacing: 4,
               shrinkWrap: true,
-              crossAxisCount: 3,
+              crossAxisCount: 2,
               children: Provider.of<FavCourseProvider>(context)
                   .courses
-                  .map((Course course) => FavouriteTile(context, course))
+                  .map((CourseID course) => FavoriteTile(context, course))
                   .toList(),
             ),
           ),
