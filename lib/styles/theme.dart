@@ -22,6 +22,7 @@ const TextTheme textTheme = TextTheme(
   headline2: StyleConsts.Text.heading2Style,
   headline3: StyleConsts.Text.heading3Style,
   headline4: StyleConsts.Text.heading4Style,
+  headline6: StyleConsts.Text.heading6Style,
   button: StyleConsts.Text.buttonAccentTextStyle,
   bodyText1: StyleConsts.Text.textStyle,
 );

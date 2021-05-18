@@ -24,10 +24,13 @@ class _StudyModuleScreenState extends State<StudyModuleScreen> {
 
     if (widget._studyModule.children.isNotEmpty) {
       for (StudyModuleWrapped eachStudyModule in widget._studyModule.children) {
-        view.add(CourseDirectoryStudyModuleWidget(eachStudyModule));
-        view.add(Divider(
-          color: themeData.colorScheme.primary,
-        ));
+        if (eachStudyModule.children.isNotEmpty ||
+            eachStudyModule.courses.isNotEmpty) {
+          view.add(CourseDirectoryStudyModuleWidget(eachStudyModule));
+          view.add(Divider(
+            color: themeData.colorScheme.primary,
+          ));
+        }
       }
     } else if (widget._studyModule.courses.isNotEmpty) {
       for (CourseWrapped eachCourse in widget._studyModule.courses) {
