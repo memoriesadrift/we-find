@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/model.dart';
 import 'package:we_find/model/model_wrapped.dart';
-import 'package:we_find/providers/fav_course_provider.dart';
 import 'package:we_find/screens/course_detail_screen.dart';
 import 'package:we_find/screens/study_module_screen.dart';
 import 'package:we_find/service/ufind_service.dart';
@@ -186,7 +184,6 @@ class CourseDirectoryCourseWidget extends StatelessWidget {
                   child: FutureBuilder<Course?>(
                     future: fetchCourseById(_myCourse.id),
                     builder: (context, snapshot) {
-                      print(_myCourse.id);
                       if (!snapshot.hasData) {
                         return CircularProgressIndicator();
                       }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:we_find/language/language_constants.dart';
 import 'package:we_find/model/model_wrapped.dart';
 import 'package:we_find/screens/course_detail_screen.dart';
-import 'package:we_find/providers/fav_course_provider.dart';
+import 'package:we_find/widgets/favorite_widgets.dart';
 
 class CourseWidget extends StatelessWidget {
   final CourseWrapped _myCourse;
@@ -24,23 +23,7 @@ class CourseWidget extends StatelessWidget {
                   return Scaffold(
                     appBar: AppBar(
                       title: Text(constants.CourseDetail),
-                      actions: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            Provider.of<FavCourseProvider>(context)
-                                    .courses
-                                    .contains(_myCourse.internalCourse)
-                                ? Icons.favorite
-                                : Icons.favorite_outline,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            Provider.of<FavCourseProvider>(context,
-                                    listen: false)
-                                .toggleCourseAsFav(_myCourse.internalCourse);
-                          },
-                        )
-                      ],
+                      actions: [HeartIcon(_myCourse.course)],
                     ),
                     body: Center(
                       child: CourseDetailScreen(_myCourse),

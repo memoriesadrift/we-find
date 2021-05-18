@@ -17,7 +17,7 @@ class SearchResultsScreen extends StatelessWidget {
     List<Widget> view = [];
 
     view.add(Text(
-      "${constants.SearchResultsFor}: $_searchQuery", // TODO: LANGUAGE
+      "${constants.SearchResultsFor}: $_searchQuery",
       style: themeData.textTheme.headline2,
     ));
     view.add(Divider());
