@@ -25,12 +25,19 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
     final StringConstants constants = StringConstants(context);
 
     List<Widget> view = [];
-    view.add(CustomCheckbox(_fuzzy, constants.FuzzySearch,
-        (bool? e) => setState(() => _fuzzy = !_fuzzy)));
-    view.add(CustomCheckbox(_ustream, constants.CourseWithStream,
-        (bool? e) => setState(() => _ustream = !_ustream)));
-    view.add(CustomCheckbox(_currentTerm, constants.OnlyCurrentTerm,
-        (bool? e) => setState(() => _currentTerm = !_currentTerm)));
+    view.add(CustomCheckboxRow(
+      CustomCheckbox(_fuzzy, constants.FuzzySearch,
+          (bool? e) => setState(() => _fuzzy = !_fuzzy)),
+      constants.FuzzySearchInfo,
+    ));
+    view.add(CustomCheckboxRow(
+        CustomCheckbox(_ustream, constants.CourseWithStream,
+            (bool? e) => setState(() => _ustream = !_ustream)),
+        constants.CourseWithStreamInfo));
+    view.add(CustomCheckboxRow(
+        CustomCheckbox(_currentTerm, constants.OnlyCurrentTerm,
+            (bool? e) => setState(() => _currentTerm = !_currentTerm)),
+        constants.OnlyCurrentTermInfo));
 
     if (!_currentTerm) {
       view.add(Text(

@@ -69,4 +69,9 @@ class StringConstants {
   String get FavoriteCourses =>
       lang == Lang.EN ? "Favorite Courses" : "Lieblingskurse";
   String get CourseDetail => lang == Lang.EN ? "Course Detail" : "Kursdetails";
+
+  // Tooltips
+  String get FuzzySearchInfo => lang == Lang.EN ? "Fuzzy en" : "Fuzzy de";
+  String get CourseWithStreamInfo => lang == Lang.EN ? "Stream en" : "Stream de";
+  String get OnlyCurrentTermInfo => lang == Lang.EN ? "Only current en" : "Only current de";
 }
