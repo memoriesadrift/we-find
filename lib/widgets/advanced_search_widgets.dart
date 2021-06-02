@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:we_find/language/language_constants.dart';
+import 'package:we_find/widgets/info_tooltip.dart';
+
+class CustomCheckboxRow extends StatelessWidget {
+  final CustomCheckbox _customCheckbox;
+  final String _info;
+
+  CustomCheckboxRow(this._customCheckbox, this._info);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [_customCheckbox, InfoTooltip(_info)],
+    );
+  }
+}
 
 class CustomCheckbox extends StatelessWidget {
   final bool _ticked;
@@ -31,6 +47,7 @@ class SemesterInputAccesser extends TextEditingController {
 
 class SemesterInput extends StatefulWidget {
   final SemesterInputAccesser _accesser;
+
   const SemesterInput(this._accesser);
 
   @override
