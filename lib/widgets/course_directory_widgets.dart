@@ -7,6 +7,14 @@ import 'package:we_find/screens/study_module_screen.dart';
 import 'package:we_find/service/ufind_service.dart';
 import 'package:we_find/widgets/favorite_widgets.dart';
 
+class _helper {
+  static void popAll(BuildContext context) {
+    while (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
+  }
+}
+
 // This widget handles the actual rendering of the data.
 // If you want to customize what it shows you can change the widget argument
 class _CourseDirectoryItem extends StatelessWidget {
@@ -88,6 +96,10 @@ class CourseDirectoryStudyModuleRootWidget extends StatelessWidget {
             MaterialPageRoute<void>(
               builder: (BuildContext context) {
                 return Scaffold(
+                  floatingActionButton: FloatingActionButton(
+                    onPressed: () => _helper.popAll(context),
+                    child: Icon(Icons.home),
+                  ),
                   appBar: AppBar(title: Text(constants.CourseDirectory)),
                   body: Center(
                     child: FutureBuilder<StudyModule?>(
@@ -138,6 +150,10 @@ class CourseDirectoryStudyModuleWidget extends StatelessWidget {
             context,
             MaterialPageRoute<void>(builder: (BuildContext context) {
               return Scaffold(
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () => _helper.popAll(context),
+                  child: Icon(Icons.home),
+                ),
                 appBar: AppBar(
                   title: Text(constants.CourseDirectory),
                 ),
@@ -176,6 +192,10 @@ class CourseDirectoryCourseWidget extends StatelessWidget {
             context,
             MaterialPageRoute<void>(builder: (BuildContext context) {
               return Scaffold(
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () => _helper.popAll(context),
+                  child: Icon(Icons.home),
+                ),
                 appBar: AppBar(
                   title: Text(constants.CourseDetail),
                   actions: [HeartIcon(_myCourse.course)],
