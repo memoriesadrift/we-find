@@ -7,9 +7,7 @@ class Colors {
   const Colors();
   // (2bytes) alpha (2bytes) red (2bytes) green (2bytes) blue
   static const Color primaryColor = const Color(0xFFB80C09);
-  static const Color primaryColorVariant = const Color(0xFFD2605F);
-  static const Color secondaryColor = const Color(0xFFFFAE03);
-  static const Color secondaryColorVariant = const Color(0xFFDBBC77);
+  static const Color secondaryColor = const Color(0xFFFFFFFF);
   static const Color surfaceColor = const Color(0xFFFFFFFF);
   static const Color backgroundColor = const Color(0xFFFFFFFF);
   static const Color errorColor = const Color(0xFFFFd60A);
@@ -45,7 +43,7 @@ class Text {
     color: Colors.textColor,
   );
   static const TextStyle buttonAccentTextStyle = const TextStyle(
-    fontWeight: FontWeight.w200,
+    fontWeight: FontWeight.w300,
     fontSize: 16,
     color: Colors.secondaryColor,
   );

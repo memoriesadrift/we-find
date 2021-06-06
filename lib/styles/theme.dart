@@ -3,9 +3,9 @@ import 'package:we_find/styles/style_consts.dart' as StyleConsts;
 
 const ColorScheme colorScheme = ColorScheme(
   primary: StyleConsts.Colors.primaryColor,
-  primaryVariant: StyleConsts.Colors.primaryColorVariant,
+  primaryVariant: StyleConsts.Colors.primaryColor,
   secondary: StyleConsts.Colors.secondaryColor,
-  secondaryVariant: StyleConsts.Colors.secondaryColorVariant,
+  secondaryVariant: StyleConsts.Colors.secondaryColor,
   surface: StyleConsts.Colors.surfaceColor,
   background: StyleConsts.Colors.backgroundColor,
   error: StyleConsts.Colors.errorColor,
