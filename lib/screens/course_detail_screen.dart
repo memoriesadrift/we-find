@@ -18,9 +18,32 @@ class CourseDetailScreen extends StatelessWidget {
     ));
 
     // ECTS amount
-    view.add(Text(
-      "ECTS: " + _course.ects,
-      style: themeData.textTheme.headline2,
+    view.add(
+      Padding(
+        padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+        child: Row(
+          children: [
+            Text(
+              "ECTS: " + _course.ects,
+              style: themeData.textTheme.headline2,
+            ),
+            Spacer(),
+            Text(
+              _course.internalCourse.when ?? "",
+              style: themeData.textTheme.headline2,
+            ),
+          ],
+        ),
+      ),
+    );
+
+    // SPL
+    view.add(Padding(
+      child: Text(
+        _course.offeree,
+        style: themeData.textTheme.headline3,
+      ),
+      padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
     ));
 
     // Groups
