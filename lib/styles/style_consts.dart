@@ -7,7 +7,7 @@ class Colors {
   const Colors();
   // (2bytes) alpha (2bytes) red (2bytes) green (2bytes) blue
   static const Color primaryColor = const Color(0xFFB80C09);
-  static const Color secondaryColor = const Color(0xFFFFFFFF);
+  static const Color secondaryColor = const Color(0xFFFFd60A);
   static const Color surfaceColor = const Color(0xFFFFFFFF);
   static const Color backgroundColor = const Color(0xFFFFFFFF);
   static const Color errorColor = const Color(0xFFFFd60A);
