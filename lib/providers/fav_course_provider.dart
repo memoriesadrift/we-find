@@ -1,11 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:we_find/model/model.dart';
-import 'package:we_find/model/model_wrapped.dart';
 
 /// Provider that keeps track of the [Course] instances
 /// that were marked as favourite by the user
 class FavCourseProvider with ChangeNotifier {
-  final Set<CourseID> _courses = {};
+  final Set<CourseID> _courses;
+
+  FavCourseProvider(this._courses);
 
   Set<CourseID> get courses => _courses;
 
